@@ -166,38 +166,38 @@ class AppLightColors extends AppColors {
   Color get successColor0 => const Color(0xFF000000);
 
   @override
-  Color get successColor10 => throw UnimplementedError();
+  Color get successColor10 => const Color(0xFF002202);
 
   @override
-  Color get successColor20 => throw UnimplementedError();
+  Color get successColor20 => const Color(0xFF003A06);
 
   @override
-  Color get successColor30 => throw UnimplementedError();
+  Color get successColor30 => const Color(0xFF00530C);
 
   @override
-  Color get successColor40 => throw UnimplementedError();
+  Color get successColor40 => const Color(0xFF006E13);
 
   @override
-  Color get successColor50 => throw UnimplementedError();
+  Color get successColor50 => const Color(0xFF008B1B);
 
   @override
-  Color get successColor60 => throw UnimplementedError();
+  Color get successColor60 => const Color(0xFF23B131);
 
   @override
-  Color get successColor70 => throw UnimplementedError();
+  Color get successColor70 => const Color(0xFF36C43D);
 
   @override
-  Color get successColor80 => throw UnimplementedError();
+  Color get successColor80 => const Color(0xFF57E156);
 
   @override
-  Color get successColor90 => throw UnimplementedError();
+  Color get successColor90 => const Color(0xFFB8F1AC);
 
   @override
-  Color get successColor95 => throw UnimplementedError();
+  Color get successColor95 => const Color(0xFFC9FFBD);
 
   @override
-  Color get successColor99 => throw UnimplementedError();
+  Color get successColor99 => const Color(0xFFF6FFEF);
 
   @override
-  Color get successColor100 => throw UnimplementedError();
+  Color get successColor100 => const Color(0xFFFFFFFF);
 }
