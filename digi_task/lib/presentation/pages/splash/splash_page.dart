@@ -1,5 +1,7 @@
+import 'package:digi_task/core/constants/path/image_paths.dart';
 import 'package:digi_task/core/constants/strings/splash_strings.dart';
 import 'package:digi_task/core/constants/theme/theme_ext.dart';
+import 'package:digi_task/core/utility/extension/image_path_ext.dart';
 import 'package:flutter/material.dart';
 
 class SplashPage extends StatefulWidget {
@@ -20,7 +22,7 @@ class _SplashPageState extends State<SplashPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset('assets/images/im_logo.png'),
+              Image.asset(ImagePath.logo.toPathPng),
               const SizedBox(height: 24),
               Text(
                 SplashStrings.splashTitle,

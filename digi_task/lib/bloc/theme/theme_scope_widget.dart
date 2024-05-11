@@ -291,6 +291,7 @@ class ThemeScopeWidgetState extends State<ThemeScopeWidget> {
           fontSize: 22,
           height: 28 / 22,
           fontWeight: FontWeight.w700,
+            color: Colors.black
         ),
         subtitle2Light: TextStyle(
           fontFamily: montserratFontFamily,
