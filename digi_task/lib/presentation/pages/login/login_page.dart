@@ -40,7 +40,9 @@ class _LoginPageState extends State<LoginPage> {
                 icon: Icons.key_outlined,
               ),
               const Spacer(),
-              const LoginButton(),
+              LoginButton(
+                onPressed: () {},
+              ),
               TextButton(
                 onPressed: () {},
                 child: Text(

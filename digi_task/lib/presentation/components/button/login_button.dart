@@ -6,7 +6,9 @@ import '../../../core/constants/strings/onboarding_strings.dart';
 class LoginButton extends StatelessWidget {
   const LoginButton({
     super.key,
+    required this.onPressed,
   });
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,7 @@ class LoginButton extends StatelessWidget {
           return context.colors.primaryColor50;
         }),
       ),
-      onPressed: () {},
+      onPressed: onPressed,
       child: Center(
         child: Text(
           OnboardingStrings.login,

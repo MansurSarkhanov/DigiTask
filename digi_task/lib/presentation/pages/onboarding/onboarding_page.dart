@@ -1,6 +1,8 @@
+import 'package:digi_task/core/constants/routes.dart';
 import 'package:digi_task/core/constants/strings/onboarding_strings.dart';
 import 'package:digi_task/core/constants/theme/theme_ext.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../components/button/login_button.dart';
 import '../../components/logo_widget.dart';
@@ -48,7 +50,11 @@ class OnboardingPage extends StatelessWidget {
                 ),
               ),
               const Spacer(),
-              const LoginButton(),
+              LoginButton(
+                onPressed: () {
+                  context.goNamed(AppRoutes.login.name);
+                },
+              ),
               const SizedBox(
                 height: 72,
               )

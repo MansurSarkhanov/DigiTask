@@ -1,6 +1,6 @@
+import 'package:digi_task/app_router.dart';
 import 'package:digi_task/bloc/theme/theme_scope.dart';
 import 'package:digi_task/bloc/theme/theme_scope_widget.dart';
-import 'package:digi_task/presentation/pages/login/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -23,11 +23,11 @@ class MyApp extends StatelessWidget {
       systemNavigationBarColor: Colors.transparent, // navigation bar color
       statusBarColor: Colors.transparent, // status bar color
     ));
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Digi Task',
       theme: ThemeData(extensions: extensions),
-      home: const LoginPage(),
+      routerConfig: appRouter,
     );
   }
 }
