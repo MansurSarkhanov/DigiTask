@@ -1,24 +1,33 @@
+import 'package:digi_task/bloc/theme/theme_scope.dart';
+import 'package:digi_task/bloc/theme/theme_scope_widget.dart';
+import 'package:digi_task/presentation/pages/splash/splash_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
-  runApp(const MyApp());
-} 
+  runApp(
+    const ThemeScopeWidget(
+      child: MyApp(),
+    ),
+  );
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final theme = ThemeScope.of(context);
+    final extensions = <ThemeExtension<dynamic>>[theme.appColors, theme.appTypography];
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      systemNavigationBarColor: Colors.transparent, // navigation bar color
+      statusBarColor: Colors.transparent, // status bar color
+    ));
     return MaterialApp(
-      title: 'Material App',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Material App Bar'),
-        ),
-        body: const Center(
-          child: Text('Hello World'),
-        ),
-      ),
+      debugShowCheckedModeBanner: false,
+      title: 'Digi Task',
+      theme: ThemeData(extensions: extensions),
+      home: const SplashPage(),
     );
   }
 }

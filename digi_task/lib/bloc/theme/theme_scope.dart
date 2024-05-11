@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../core/constants/app_typography.dart';
 import '../../core/constants/theme/app_colors.dart';
+import '../../core/constants/theme/app_typography.dart';
 
 class ThemeScope extends InheritedWidget {
   const ThemeScope({

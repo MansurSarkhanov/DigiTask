@@ -1,8 +1,8 @@
 import 'package:digi_task/bloc/theme/theme_scope.dart';
-import 'package:digi_task/core/constants/theme/theme_colors.dart';
 import 'package:flutter/material.dart';
 
-import '../../core/constants/app_typography.dart';
+import '../../core/constants/theme/app_colors.dart';
+import '../../core/constants/theme/app_typography.dart';
 
 class ThemeScopeWidget extends StatefulWidget {
   const ThemeScopeWidget({
@@ -26,6 +26,7 @@ class ThemeScopeWidgetState extends State<ThemeScopeWidget> {
   @override
   Widget build(BuildContext context) {
     final appColors = AppLightColors();
+    
     final appTypography = AppTypography(
         body1Light: TextStyle(
           fontFamily: nunitoFontFamily,
