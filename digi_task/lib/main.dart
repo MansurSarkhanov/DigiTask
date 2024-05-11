@@ -1,9 +1,8 @@
 import 'package:digi_task/bloc/theme/theme_scope.dart';
 import 'package:digi_task/bloc/theme/theme_scope_widget.dart';
+import 'package:digi_task/presentation/pages/login/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import 'presentation/pages/onboarding/onboarding_page.dart';
 
 void main() {
   runApp(
@@ -28,7 +27,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Digi Task',
       theme: ThemeData(extensions: extensions),
-      home: const OnboardingPage(),
+      home: const LoginPage(),
     );
   }
 }
