@@ -9,4 +9,10 @@ enum IconPath {
   selectprofile,
   selecttask,
   selectperformance,
+  voice,
+  tv,
+  internet,
+  phone,
+  location,
+  clock
 }
