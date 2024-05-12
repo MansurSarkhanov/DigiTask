@@ -1,3 +1,4 @@
 enum ImagePath {
   logo,
+  cardinfo
 }

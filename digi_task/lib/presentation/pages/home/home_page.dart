@@ -34,6 +34,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         actions: const [NotificationIcon()],
       ),
       body: TabBarView(
+        physics: const NeverScrollableScrollPhysics(),
         controller: tabController,
         children: const [
           HomeTaView(),

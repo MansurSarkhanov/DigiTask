@@ -21,7 +21,7 @@ class _ContinueTasksState extends State<ContinueTasks> {
           children: [
             Text(
               'Davam edən tasklar',
-              style: context.typography.subtitle2SemiBold,
+              style: context.typography.subtitle2Medium,
             ),
             const Icon(Icons.arrow_forward_ios_rounded)
           ],
@@ -62,8 +62,8 @@ class _ContinueTasksState extends State<ContinueTasks> {
                   children: [
                     SvgPicture.asset(
                       IconPath.location.toPathSvg,
-                      height: 20,
-                      width: 20,
+                      height: 18,
+                      width: 18,
                     ),
                     const SizedBox(
                       width: 8,
@@ -81,8 +81,8 @@ class _ContinueTasksState extends State<ContinueTasks> {
                   children: [
                     SvgPicture.asset(
                       IconPath.clock.toPathSvg,
-                      height: 20,
-                      width: 20,
+                      height: 18,
+                      width: 18,
                     ),
                     const SizedBox(
                       width: 8,
@@ -101,8 +101,8 @@ class _ContinueTasksState extends State<ContinueTasks> {
                   children: [
                     SvgPicture.asset(
                       IconPath.phone.toPathSvg,
-                      height: 20,
-                      width: 20,
+                      height: 18,
+                      width: 18,
                     ),
                     const SizedBox(
                       width: 8,
