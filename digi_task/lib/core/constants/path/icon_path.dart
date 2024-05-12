@@ -4,4 +4,9 @@ enum IconPath {
   profile,
   task,
   performance,
+  selecthome,
+  selectnotification,
+  selectprofile,
+  selecttask,
+  selectperformance,
 }
