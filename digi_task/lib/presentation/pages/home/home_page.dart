@@ -2,6 +2,7 @@ import 'package:digi_task/core/constants/theme/theme_ext.dart';
 import 'package:digi_task/presentation/pages/home/widgets/bottom_navbar.dart';
 import 'package:flutter/material.dart';
 
+import 'view/home_tab.dart';
 import 'widgets/notification_icon.dart';
 
 class HomePage extends StatefulWidget {
@@ -31,6 +32,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           style: context.typography.h5Medium,
         ),
         actions: const [NotificationIcon()],
+      ),
+      body: TabBarView(
+        controller: tabController,
+        children: const [
+          HomeTaView(),
+          HomeTaView(),
+          HomeTaView(),
+          HomeTaView(),
+        ],
       ),
     );
   }
