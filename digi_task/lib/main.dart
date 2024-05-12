@@ -20,8 +20,8 @@ class MyApp extends StatelessWidget {
     final theme = ThemeScope.of(context);
     final extensions = <ThemeExtension<dynamic>>[theme.appColors, theme.appTypography];
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      systemNavigationBarColor: Colors.transparent, // navigation bar color
-      statusBarColor: Colors.transparent, // status bar color
+      systemNavigationBarColor: Colors.transparent,
+      statusBarColor: Colors.transparent, 
     ));
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,

@@ -1,8 +1,10 @@
+import 'package:digi_task/core/constants/routes.dart';
 import 'package:digi_task/core/constants/theme/theme_ext.dart';
 import 'package:digi_task/presentation/components/button/login_button.dart';
 import 'package:digi_task/presentation/components/input/custom_form_filed.dart';
 import 'package:digi_task/presentation/components/logo_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -44,7 +46,9 @@ class _LoginPageState extends State<LoginPage> {
                 onPressed: () {},
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.goNamed(AppRoutes.resetPassword.name);
+                },
                 child: Text(
                   "Şifrəni unutmusunuz?",
                   style: context.typography.body2Regular.copyWith(
