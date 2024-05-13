@@ -19,6 +19,26 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     tabController = TabController(length: 4, vsync: this);
+
+    tabController.addListener(() {
+      setState(() {});
+    });
+  }
+
+  String currentSectionText() {
+    switch (tabController.index) {
+      case 0:
+        return "Xoş gəlmisən, Vahid !";
+      case 1:
+        return "Performans";
+
+      case 2:
+        return "Tasklar";
+      case 3:
+        return "Profil";
+      default:
+        return "Error";
+    }
   }
 
   @override
@@ -29,8 +49,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       appBar: AppBar(
         backgroundColor: context.colors.neutralColor100,
         title: Text(
-          'Xoş gəlmisiniz !',
-          style: context.typography.h5Medium,
+          currentSectionText(),
+          style: context.typography.subtitle1Medium,
         ),
         actions: const [NotificationIcon()],
       ),

@@ -26,9 +26,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
         color: context.colors.neutralColor100,
         child: TabBar(
           onTap: (value) {
-            currentIndex = value;
+            widget.tabController.index = value;
+            print(widget.tabController.index);
             setState(() {});
-            print(currentIndex);
           },
           dividerColor: Colors.transparent,
           indicatorColor: Colors.transparent,
@@ -41,7 +41,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
             Tab(
               text: "Ana səhifə",
               icon: SvgPicture.asset(
-                currentIndex == 0 ? IconPath.selecthome.toPathSvg : IconPath.home.toPathSvg,
+                widget.tabController.index == 0 ? IconPath.selecthome.toPathSvg : IconPath.home.toPathSvg,
                 height: 22,
                 width: 22,
               ),
@@ -49,7 +49,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
             Tab(
               text: "Performans",
               icon: SvgPicture.asset(
-                currentIndex == 1 ? IconPath.selectperformance.toPathSvg : IconPath.performance.toPathSvg,
+                widget.tabController.index == 1 ? IconPath.selectperformance.toPathSvg : IconPath.performance.toPathSvg,
                 height: 22,
                 width: 22,
               ),
@@ -57,7 +57,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
             Tab(
               text: "Tasklar",
               icon: SvgPicture.asset(
-                currentIndex == 2 ? IconPath.selecttask.toPathSvg : IconPath.task.toPathSvg,
+                widget.tabController.index == 2 ? IconPath.selecttask.toPathSvg : IconPath.task.toPathSvg,
                 height: 22,
                 width: 22,
               ),
@@ -65,7 +65,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
             Tab(
               text: "Profil",
               icon: SvgPicture.asset(
-                currentIndex == 3 ? IconPath.selectprofile.toPathSvg : IconPath.profile.toPathSvg,
+                widget.tabController.index == 3 ? IconPath.selectprofile.toPathSvg : IconPath.profile.toPathSvg,
                 height: 22,
                 width: 22,
               ),

@@ -47,8 +47,64 @@ class _PerformanceTabState extends State<PerformanceTab> with TickerProviderStat
             child: TabBarView(
               controller: tabController,
               children: [
-                Container(
-                  color: Colors.red,
+                Column(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                          color: context.colors.primaryColor50,
+                          borderRadius:
+                              const BorderRadius.only(topLeft: Radius.circular(16), topRight: Radius.circular(16))),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('Ad', style: context.typography.subtitle2SemiBold.copyWith(color: Colors.white)),
+                            Text('Qrup', style: context.typography.subtitle2SemiBold.copyWith(color: Colors.white)),
+                            Text('Tasklar', style: context.typography.subtitle2SemiBold.copyWith(color: Colors.white)),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        margin: const EdgeInsets.only(bottom: 40),
+                        color: Colors.white,
+                        child: ListView.builder(
+                          itemCount: 5,
+                          itemBuilder: (context, index) {
+                            return Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 16.0, right: 40, top: 10),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        'Faiq Ə.',
+                                        style: context.typography.subtitle2Regular
+                                            .copyWith(color: context.colors.primaryColor50),
+                                      ),
+                                      Text(
+                                        'Yasamal',
+                                        style: context.typography.subtitle2Regular,
+                                      ),
+                                      Text(
+                                        '36',
+                                        style: context.typography.subtitle2SemiBold
+                                            .copyWith(color: context.colors.primaryColor50),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const Divider()
+                              ],
+                            );
+                          },
+                        ),
+                      ),
+                    )
+                  ],
                 ),
                 Container(
                   color: Colors.green,
