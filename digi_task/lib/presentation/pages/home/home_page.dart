@@ -3,6 +3,7 @@ import 'package:digi_task/presentation/pages/home/widgets/bottom_navbar.dart';
 import 'package:flutter/material.dart';
 
 import 'view/home_tab.dart';
+import 'view/performance_tab.dart';
 import 'widgets/notification_icon.dart';
 
 class HomePage extends StatefulWidget {
@@ -37,7 +38,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         physics: const NeverScrollableScrollPhysics(),
         controller: tabController,
         children: const [
-          HomeTaView(),
+          PerformanceTab(),
           HomeTaView(),
           HomeTaView(),
           HomeTaView(),

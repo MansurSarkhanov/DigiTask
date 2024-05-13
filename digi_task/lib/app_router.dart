@@ -1,5 +1,6 @@
 import 'package:digi_task/core/constants/routes.dart';
 import 'package:digi_task/presentation/pages/login/login_page.dart';
+import 'package:digi_task/presentation/pages/splash/splash_page.dart';
 import 'package:go_router/go_router.dart';
 
 import 'presentation/pages/home/home_page.dart';
@@ -11,7 +12,7 @@ final appRouter = GoRouter(
     GoRoute(
       path: AppRoutes.splash.path,
       name: AppRoutes.splash.name,
-      builder: (context, state) => const HomePage(),
+      builder: (context, state) => const SplashPage(),
     ),
     GoRoute(
       path: AppRoutes.onboarding.path,

@@ -11,11 +11,14 @@ class HomeTaView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 24.0, left: 16, right: 16),
+      padding: const EdgeInsets.only(left: 16, right: 16),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const SizedBox(
+              height: 24,
+            ),
             Text(
               "12 May",
               style: context.typography.subtitle2SemiBold,

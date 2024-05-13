@@ -43,7 +43,9 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const Spacer(),
               LoginButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.goNamed(AppRoutes.home.name);
+                },
               ),
               TextButton(
                 onPressed: () {
