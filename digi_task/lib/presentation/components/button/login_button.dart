@@ -14,12 +14,12 @@ class LoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ButtonStyle(
-        padding: MaterialStateProperty.all(const EdgeInsets.symmetric(vertical: 15)),
-        shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+        padding: WidgetStateProperty.all(const EdgeInsets.symmetric(vertical: 15)),
+        shape: WidgetStatePropertyAll(RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         )),
-        backgroundColor: MaterialStateProperty.resolveWith((states) {
-          if (states.contains(MaterialState.pressed)) {
+        backgroundColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.pressed)) {
             return context.colors.primaryColor70;
           }
           return context.colors.primaryColor50;

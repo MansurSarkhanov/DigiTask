@@ -1,0 +1,3 @@
+final class AppKeys {
+  static const String token = 'token';
+}
