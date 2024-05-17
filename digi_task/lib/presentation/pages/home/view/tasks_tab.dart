@@ -1,4 +1,5 @@
 import 'package:digi_task/core/constants/theme/theme_ext.dart';
+import 'package:digi_task/presentation/pages/home/widgets/user_task_card.dart';
 import 'package:flutter/material.dart';
 
 class TasksTab extends StatefulWidget {
@@ -37,15 +38,13 @@ class _TasksTabState extends State<TasksTab> with TickerProviderStateMixin {
             ],
           ),
         ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(
-              height: 24,
+        const SizedBox(
+          height: 20,
             ),
             SizedBox(
               height: 60,
               child: ListView.builder(
+
                 padding: const EdgeInsets.only(left: 16),
                 scrollDirection: Axis.horizontal,
                 itemCount: 4,
@@ -66,26 +65,21 @@ class _TasksTabState extends State<TasksTab> with TickerProviderStateMixin {
                   );
                 },
               ),
-            ),
-            SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(
-                    height: 24,
-                  ),
-                  Text(
-                    "12 May",
-                    style: context.typography.subtitle2SemiBold,
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                ],
-              ),
-            ),
-          ],
         ),
+        const SizedBox(
+          height: 20,
+        ),
+        Expanded(
+          child: ListView.builder(
+            itemCount: 5,
+            itemBuilder: (context, index) {
+              return const Padding(
+                padding: EdgeInsets.only(left: 16, right: 16, bottom: 24),
+                child: UserTaskCard(),
+              );
+            },
+          ),
+        )
       ],
     );
   }

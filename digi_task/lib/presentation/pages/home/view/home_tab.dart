@@ -2,8 +2,8 @@ import 'package:digi_task/core/constants/theme/theme_ext.dart';
 import 'package:digi_task/presentation/pages/home/widgets/tasks_card.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/continue_tasks.dart';
 import '../widgets/organizations_card.dart';
+import '../widgets/user_task_card.dart';
 
 class HomeTaView extends StatelessWidget {
   const HomeTaView({super.key});
@@ -30,7 +30,20 @@ class HomeTaView extends StatelessWidget {
             const SizedBox(
               height: 24,
             ),
-            const ContinueTasks(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Davam edən tasklar',
+                  style: context.typography.subtitle2Medium,
+                ),
+                const Icon(Icons.arrow_forward_ios_rounded)
+              ],
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            const UserTaskCard(),
             const SizedBox(
               height: 24,
             ),
