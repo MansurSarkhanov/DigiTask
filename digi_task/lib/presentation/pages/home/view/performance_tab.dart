@@ -97,7 +97,9 @@ class _PerformanceTabState extends State<PerformanceTab> with TickerProviderStat
                                     ],
                                   ),
                                 ),
-                                const Divider()
+                                Divider(
+                                  color: context.colors.neutralColor90,
+                                )
                               ],
                             );
                           },

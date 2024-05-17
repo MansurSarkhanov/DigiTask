@@ -1,4 +1,5 @@
 import 'package:digi_task/core/constants/theme/theme_ext.dart';
+import 'package:digi_task/presentation/pages/home/view/tasks_tab.dart';
 import 'package:digi_task/presentation/pages/home/widgets/bottom_navbar.dart';
 import 'package:flutter/material.dart';
 
@@ -47,19 +48,23 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       backgroundColor: context.colors.backgroundColor,
       bottomNavigationBar: BottomNavBar(tabController: tabController),
       appBar: AppBar(
+        
         backgroundColor: context.colors.neutralColor100,
         title: Text(
           currentSectionText(),
           style: context.typography.subtitle1Medium,
         ),
         actions: const [NotificationIcon()],
+        
       ),
+      
       body: TabBarView(
         physics: const NeverScrollableScrollPhysics(),
         controller: tabController,
         children: const [
+          TasksTab(),
           PerformanceTab(),
-          HomeTaView(),
+
           HomeTaView(),
           HomeTaView(),
         ],
