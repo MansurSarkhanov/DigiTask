@@ -2,6 +2,7 @@ import 'package:digi_task/data/model/failure/auth_login_failure.dart';
 import 'package:digi_task/data/model/response/user_login_response_model.dart';
 import 'package:digi_task/data/services/network/auth_service.dart';
 import 'package:digi_task/injection.dart';
+import 'package:dio/dio.dart';
 import 'package:multiple_result/multiple_result.dart';
 
 abstract interface class IAuthRepository {
@@ -17,8 +18,11 @@ class AuthRepository implements IAuthRepository {
       final result = await _authDataSource.login(email: email, password: password);
 
       return Result.success(result!);
+    } on DioException catch (_) {
+      return Result.error(AuthLoginFailure(detail: 'Invalid credentials. Please try again.'));
     } catch (e) {
       return Result.error(AuthLoginFailure(detail: e.toString()));
+
     }
   }
 }

@@ -2,11 +2,12 @@ import 'package:digi_task/core/constants/theme/theme_ext.dart';
 import 'package:flutter/material.dart';
 
 class CustomFormField extends StatelessWidget {
-  const CustomFormField({super.key, required this.title, required this.icon, required this.hintText});
+  const CustomFormField(
+      {super.key, required this.title, required this.icon, required this.hintText, required this.controller});
   final String title;
   final IconData icon;
   final String hintText;
-
+final TextEditingController controller;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -22,6 +23,7 @@ class CustomFormField extends StatelessWidget {
           height: 6,
         ),
         TextFormField(
+          controller: controller,
           style: context.typography.body2SemiBold.copyWith(
             color: context.colors.neutralColor30,
           ),

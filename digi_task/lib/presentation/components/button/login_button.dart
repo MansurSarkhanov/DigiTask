@@ -7,8 +7,10 @@ class LoginButton extends StatelessWidget {
   const LoginButton({
     super.key,
     required this.onPressed,
+    this.isLoading = false,
   });
   final VoidCallback onPressed;
+  final bool? isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,11 @@ class LoginButton extends StatelessWidget {
       ),
       onPressed: onPressed,
       child: Center(
-        child: Text(
+        child: isLoading == true
+            ? const CircularProgressIndicator(
+                color: Colors.white,
+              )
+            : Text(
           OnboardingStrings.login,
           style: context.typography.captionRegular.copyWith(color: Colors.white),
         ),

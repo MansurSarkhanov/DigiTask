@@ -6,10 +6,10 @@ part 'user_login_response_model.g.dart';
 @JsonSerializable()
 class UserLoginResponseModel extends Equatable {
   final String? email;
-  final String? accessToken;
-  final String? refreshToken;
+  final String? access_token;
+  final String? refresh_token;
 
-  const UserLoginResponseModel({this.email, this.accessToken, this.refreshToken});
+  const UserLoginResponseModel({this.email, this.access_token, this.refresh_token});
 
   factory UserLoginResponseModel.fromJson(Map<String, dynamic> json) {
     return _$UserLoginResponseModelFromJson(json);
@@ -20,5 +20,5 @@ class UserLoginResponseModel extends Equatable {
   }
 
   @override
-  List<Object?> get props => [email, accessToken, refreshToken];
+  List<Object?> get props => [email, access_token, refresh_token];
 }

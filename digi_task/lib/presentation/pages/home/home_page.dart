@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'view/home_tab.dart';
 import 'view/performance_tab.dart';
+import 'view/profile_tab.dart';
 import 'widgets/notification_icon.dart';
 
 class HomePage extends StatefulWidget {
@@ -62,11 +63,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         physics: const NeverScrollableScrollPhysics(),
         controller: tabController,
         children: const [
-          TasksTab(),
+          HomeTaView(),
           PerformanceTab(),
+          TasksTab(),
+          ProfileTab(),
 
-          HomeTaView(),
-          HomeTaView(),
+
         ],
       ),
     );

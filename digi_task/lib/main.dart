@@ -4,7 +4,11 @@ import 'package:digi_task/bloc/theme/theme_scope_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'injection.dart';
+
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  init();
   runApp(
     const ThemeScopeWidget(
       child: MyApp(),
@@ -21,7 +25,7 @@ class MyApp extends StatelessWidget {
     final extensions = <ThemeExtension<dynamic>>[theme.appColors, theme.appTypography];
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       systemNavigationBarColor: Colors.transparent,
-      statusBarColor: Colors.transparent, 
+      statusBarColor: Colors.transparent,
     ));
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,

@@ -27,7 +27,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
         child: TabBar(
           onTap: (value) {
             widget.tabController.index = value;
-            print(widget.tabController.index);
             setState(() {});
           },
           dividerColor: Colors.transparent,

@@ -1,3 +1,4 @@
+import 'package:digi_task/bloc/auth/login/login_notifier.dart';
 import 'package:digi_task/core/constants/routes.dart';
 import 'package:digi_task/core/constants/theme/theme_ext.dart';
 import 'package:digi_task/presentation/components/button/login_button.dart';
@@ -5,6 +6,10 @@ import 'package:digi_task/presentation/components/input/custom_form_filed.dart';
 import 'package:digi_task/presentation/components/logo_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+
+import '../../../bloc/auth/login/login_state.dart';
+import '../../components/flushbar.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -14,6 +19,22 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordlController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<LoginNotifier>().addListener(() {
+      final loginState = context.read<LoginNotifier>().state;
+      if (loginState is LoginSuccess) {
+        context.goNamed(AppRoutes.home.name);
+      } else if (loginState is LoginFailure) {
+        openFlushbar(context, loginState);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +49,8 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(
                 height: 24,
               ),
-              const CustomFormField(
+              CustomFormField(
+                controller: emailController,
                 title: 'Mail adresiniz',
                 hintText: "Mail adresiniz",
                 icon: Icons.mail_outline,
@@ -36,15 +58,22 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(
                 height: 16,
               ),
-              const CustomFormField(
+              CustomFormField(
+                controller: passwordlController,
                 title: 'Şifrəniz',
                 hintText: "*****",
                 icon: Icons.key_outlined,
               ),
               const Spacer(),
-              LoginButton(
-                onPressed: () {
-                  context.goNamed(AppRoutes.home.name);
+              Consumer<LoginNotifier>(
+                builder: (context, notifier, child) {
+                  return LoginButton(
+                    isLoading: (notifier.state is LoginProgress) ? true : false,
+                    onPressed: () {
+                      FocusManager.instance.primaryFocus!.unfocus();
+                      notifier.loginUser(email: emailController.text, password: passwordlController.text);
+                    },
+                  );
                 },
               ),
               TextButton(

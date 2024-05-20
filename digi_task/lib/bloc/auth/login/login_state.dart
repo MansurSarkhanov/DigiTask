@@ -11,4 +11,7 @@ class LoginProgress extends LoginState {}
 
 class LoginSuccess extends LoginState {}
 
-class LoginFailure extends LoginState {}
+class LoginFailure extends LoginState {
+  final String message;
+  LoginFailure({required this.message});
+}

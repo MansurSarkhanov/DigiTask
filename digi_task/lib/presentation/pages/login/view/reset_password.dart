@@ -3,9 +3,15 @@ import 'package:digi_task/presentation/components/button/login_button.dart';
 import 'package:digi_task/presentation/components/input/custom_form_filed.dart';
 import 'package:flutter/material.dart';
 
-class ResetPassword extends StatelessWidget {
+class ResetPassword extends StatefulWidget {
   const ResetPassword({super.key});
 
+  @override
+  State<ResetPassword> createState() => _ResetPasswordState();
+}
+
+class _ResetPasswordState extends State<ResetPassword> {
+  final TextEditingController emailController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +38,11 @@ class ResetPassword extends StatelessWidget {
                 style: context.typography.subtitle2Medium.copyWith(color: context.colors.neutralColor40),
               ),
               const SizedBox(height: 24),
-              const CustomFormField(title: 'Mail adresiniz', icon: Icons.mail_outline, hintText: 'Mail adresiniz'),
+              CustomFormField(
+                  controller: emailController,
+                  title: 'Mail adresiniz',
+                  icon: Icons.mail_outline,
+                  hintText: 'Mail adresiniz'),
               const SizedBox(height: 80),
               LoginButton(
                 onPressed: () {},

@@ -14,5 +14,10 @@ enum IconPath {
   internet,
   phone,
   location,
-  clock
+  clock,
+  info,
+  logout,
+  more,
+  pencil,
+  profnoti,
 }

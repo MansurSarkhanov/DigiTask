@@ -10,14 +10,14 @@ UserLoginResponseModel _$UserLoginResponseModelFromJson(
         Map<String, dynamic> json) =>
     UserLoginResponseModel(
       email: json['email'] as String?,
-      accessToken: json['accessToken'] as String?,
-      refreshToken: json['refreshToken'] as String?,
+      access_token: json['access_token'] as String?,
+      refresh_token: json['refresh_token'] as String?,
     );
 
 Map<String, dynamic> _$UserLoginResponseModelToJson(
         UserLoginResponseModel instance) =>
     <String, dynamic>{
       'email': instance.email,
-      'accessToken': instance.accessToken,
-      'refreshToken': instance.refreshToken,
+      'access_token': instance.access_token,
+      'refresh_token': instance.refresh_token,
     };
