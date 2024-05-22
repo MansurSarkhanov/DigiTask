@@ -29,36 +29,36 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     });
   }
 
-  String currentSectionText(String userName) {
-    switch (tabController.index) {
-      case 0:
-        return userName;
-      case 1:
-        return "Performans";
-
-      case 2:
-        return "Tasklar";
-      case 3:
-        return "Profil";
-      default:
-        return "Error";
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    String currentSectionText() {
+      switch (tabController.index) {
+        case 0:
+          return "Xoş gəlmisən, ${context.watch<HomeNotifier>().userTaskModel.firstName} !";
+        case 1:
+          return "Performans";
+
+        case 2:
+          return "Tasklar";
+        case 3:
+          return "Profil";
+        default:
+          return "Error";
+      }
+    }
+
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          context.read<HomeNotifier>().fetchUserTask();
-        },
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     context.read<HomeNotifier>().fetchUserTask();
+      //   },
+      // ),
       backgroundColor: context.colors.backgroundColor,
       bottomNavigationBar: BottomNavBar(tabController: tabController),
       appBar: AppBar(
         backgroundColor: context.colors.neutralColor100,
         title: Text(
-          currentSectionText("Xoş gəlmisən, ${context.read<HomeNotifier>().userTaskModel.firstName} !"),
+          currentSectionText(),
           style: context.typography.subtitle1Medium,
         ),
         actions: const [NotificationIcon()],

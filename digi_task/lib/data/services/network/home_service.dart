@@ -12,12 +12,3 @@ final class HomeService {
     return null;
   }
 }
-  //  dio.get(
-    //   'services/mainpage/',
-    //   options: Options(
-    //     headers: {
-    //       'Authorization':
-    //           'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE2MjMzNjIxLCJpYXQiOjE3MTYyMzMwMjEsImp0aSI6IjI0NGJkZWFiMGU3NTRkMTdiMDdhYTg0MWIxNDQzMGFlIiwidXNlcl9pZCI6MX0.tRksqWkxAaNwIQ-nHB9S55OYe8963QQI05NyJ7ernOg',
-    //     },
-    //   ),
-    // );

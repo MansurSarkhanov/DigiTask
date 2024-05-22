@@ -10,7 +10,6 @@ class JwtInterceptor extends Interceptor {
     final token = await _secureStorage.token;
     if (token != null) {
       options.headers['Authorization'] = 'Bearer $token';
-      super.onRequest(options, handler);
     }
     handler.next(options);
   }

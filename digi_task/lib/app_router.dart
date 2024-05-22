@@ -40,7 +40,10 @@ final appRouter = GoRouter(
     GoRoute(
       path: AppRoutes.home.path,
       name: AppRoutes.home.name,
-      builder: (context, state) => ChangeNotifierProvider(create: (context) => HomeNotifier(), child: const HomePage()),
+      builder: (context, state) => ChangeNotifierProvider(
+        create: (context) => HomeNotifier()..fetchUserTask(),
+        child: const HomePage(),
+      ),
     ),
   ],
 );
