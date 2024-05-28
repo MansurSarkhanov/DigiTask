@@ -1,4 +1,4 @@
-import 'package:digi_task/bloc/home/home_state.dart';
+import 'package:digi_task/bloc/home/main/main_state.dart';
 import 'package:digi_task/core/constants/theme/theme_ext.dart';
 import 'package:digi_task/presentation/pages/home/widgets/tasks_card.dart';
 import 'package:flutter/material.dart';
@@ -9,13 +9,13 @@ import '../widgets/user_task_card.dart';
 class HomeTabView extends StatelessWidget {
   const HomeTabView({super.key, required this.state});
 
-  final HomeState state;
+  final MainState state;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 16, right: 16),
-      child: (state is HomeLoading)
+      child: (state is MainLoading)
           ? const Center(
               child: CircularProgressIndicator(),
             )
@@ -54,6 +54,19 @@ class HomeTabView extends StatelessWidget {
             const SizedBox(
               height: 24,
             ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Tədbirlər',
+                        style: context.typography.subtitle2Medium,
+                      ),
+                      const Icon(Icons.arrow_forward_ios_rounded),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
             const OrganizationsCard()
           ],
         ),

@@ -1,6 +1,7 @@
 import 'package:digi_task/core/constants/theme/theme_ext.dart';
 import 'package:digi_task/presentation/components/button/login_button.dart';
 import 'package:digi_task/presentation/components/input/custom_form_filed.dart';
+import 'package:digi_task/presentation/pages/login/view/send_code_view.dart';
 import 'package:flutter/material.dart';
 
 class ResetPassword extends StatefulWidget {
@@ -15,7 +16,9 @@ class _ResetPasswordState extends State<ResetPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: context.colors.neutralColor100,
       appBar: AppBar(
+        backgroundColor: context.colors.neutralColor100,
         leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
@@ -45,7 +48,15 @@ class _ResetPasswordState extends State<ResetPassword> {
                   hintText: 'Mail adresiniz'),
               const SizedBox(height: 80),
               LoginButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) {
+                      return SendCodeView(
+                        emailAdress: emailController.text,
+                      );
+                    },
+                  ));
+                },
               )
             ],
           ),

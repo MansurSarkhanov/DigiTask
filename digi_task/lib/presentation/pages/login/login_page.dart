@@ -20,7 +20,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordlController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   void initState() {
@@ -38,6 +38,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: context.colors.neutralColor100,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -59,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
                 height: 16,
               ),
               CustomFormField(
-                controller: passwordlController,
+                controller: passwordController,
                 title: 'Şifrəniz',
                 hintText: "*****",
                 icon: Icons.key_outlined,
@@ -71,7 +72,7 @@ class _LoginPageState extends State<LoginPage> {
                     isLoading: (notifier.state is LoginProgress) ? true : false,
                     onPressed: () {
                       FocusManager.instance.primaryFocus!.unfocus();
-                      notifier.loginUser(email: emailController.text, password: passwordlController.text);
+                      notifier.loginUser(email: emailController.text, password: passwordController.text);
                     },
                   );
                 },

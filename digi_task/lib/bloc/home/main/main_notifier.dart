@@ -1,27 +1,30 @@
-import 'package:digi_task/bloc/home/home_state.dart';
+import 'package:digi_task/bloc/home/main/main_state.dart';
+import 'package:digi_task/data/model/response/performance_model.dart';
 import 'package:digi_task/data/model/response/user_task_model.dart';
 import 'package:digi_task/data/repository/home_repository.dart';
 import 'package:flutter/foundation.dart';
 
-class HomeNotifier extends ChangeNotifier {
-  HomeState homeState = HomeInitial();
+class MainNotifier extends ChangeNotifier {
+  MainState homeState = MainInitial();
   final HomeRepository _homeRepository = HomeRepository();
-  UserTaskModel userTaskModel = UserTaskModel();
+  List<PerformanceModel>? performanceModel;
+
+  UserTaskModel? userTaskModel;
 
   Future<void> fetchUserTask() async {
-    homeState = HomeLoading();
+    homeState = MainLoading();
     notifyListeners();
     final result = await _homeRepository.fetchUserTaskData();
 
     if (result.isSuccess()) {
-      userTaskModel = result.tryGetSuccess()!;
-      homeState = HomeSuccess();
+      userTaskModel = result.tryGetSuccess();
+      homeState = MainSuccess();
       notifyListeners();
     } else if (result.isError()) {
-      homeState = HomeError();
+      homeState = MainError();
       notifyListeners();
     } else {
-      homeState = HomeError();
+      homeState = MainError();
       notifyListeners();
     }
   }

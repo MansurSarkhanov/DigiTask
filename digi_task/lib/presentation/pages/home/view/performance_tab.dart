@@ -1,5 +1,10 @@
+import 'package:digi_task/bloc/home/performance/performance_notifier.dart';
 import 'package:digi_task/core/constants/theme/theme_ext.dart';
+import 'package:digi_task/presentation/pages/home/widgets/select_time_card.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../bloc/home/performance/performance_state.dart';
 
 class PerformanceTab extends StatefulWidget {
   const PerformanceTab({super.key});
@@ -23,21 +28,15 @@ class _PerformanceTabState extends State<PerformanceTab> with TickerProviderStat
       child: Column(
         children: [
           const SizedBox(
-            height: 4,
+            height: 12,
           ),
-          TabBar(
-            labelColor: context.colors.primaryColor50,
-            labelStyle: context.typography.subtitle2Medium,
-            controller: tabController,
-            indicatorSize: TabBarIndicatorSize.tab,
-            dividerColor: context.colors.neutralColor80,
-            indicatorColor: context.colors.primaryColor50,
-            tabs: const [
-              Tab(
-                text: "Aylıq",
+          const Row(
+            children: [
+              SelectTimeCard(),
+              SizedBox(
+                width: 16,
               ),
-              Tab(text: "Son 3 ay"),
-              Tab(text: "Son 6 ay"),
+              SelectTimeCard(),
             ],
           ),
           const SizedBox(
@@ -66,45 +65,55 @@ class _PerformanceTabState extends State<PerformanceTab> with TickerProviderStat
                         ),
                       ),
                     ),
-                    Expanded(
-                      child: Container(
-                        margin: const EdgeInsets.only(bottom: 40),
-                        color: Colors.white,
-                        child: ListView.builder(
-                          itemCount: 5,
-                          itemBuilder: (context, index) {
-                            return Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 16.0, right: 40, top: 10),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    Consumer<PerformanceNotifier>(
+                      builder: (context, notifier, child) {
+                        if (notifier.state is PerformanceLoading) {
+                          return const Center(child: CircularProgressIndicator());
+                        } else if (notifier.state is PerformanceSuccess) {
+                          final performance = (notifier.state as PerformanceSuccess).performanceList;
+                          return Expanded(
+                            child: Container(
+                              margin: const EdgeInsets.only(bottom: 40),
+                              color: Colors.white,
+                              child: ListView.builder(
+                                itemCount: performance?.length,
+                                itemBuilder: (context, index) {
+                                  return Column(
                                     children: [
-                                      Text(
-                                        'Faiq Ə.',
-                                        style: context.typography.subtitle2Regular
-                                            .copyWith(color: context.colors.primaryColor50),
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 16.0, right: 40, top: 10),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              "${performance?[index].firstName}",
+                                              style: context.typography.subtitle2Regular
+                                                  .copyWith(color: context.colors.primaryColor50),
+                                            ),
+                                            Text(
+                                              "${performance?[index].group?.group}",
+                                              style: context.typography.subtitle2Regular,
+                                            ),
+                                            Text(
+                                              "${performance?[index].taskCount?.total}",
+                                              style: context.typography.subtitle2SemiBold
+                                                  .copyWith(color: context.colors.primaryColor50),
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                      Text(
-                                        'Yasamal',
-                                        style: context.typography.subtitle2Regular,
-                                      ),
-                                      Text(
-                                        '36',
-                                        style: context.typography.subtitle2SemiBold
-                                            .copyWith(color: context.colors.primaryColor50),
-                                      ),
+                                      Divider(
+                                        color: context.colors.neutralColor90,
+                                      )
                                     ],
-                                  ),
-                                ),
-                                Divider(
-                                  color: context.colors.neutralColor90,
-                                )
-                              ],
-                            );
-                          },
-                        ),
-                      ),
+                                  );
+                                },
+                              ),
+                            ),
+                          );
+                        }
+                        return const SizedBox.shrink();
+                      },
                     )
                   ],
                 ),

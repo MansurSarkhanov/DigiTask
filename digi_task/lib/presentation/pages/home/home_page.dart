@@ -1,5 +1,7 @@
-import 'package:digi_task/bloc/home/home_notifier.dart';
+import 'package:digi_task/bloc/home/main/main_notifier.dart';
+import 'package:digi_task/core/constants/path/icon_path.dart';
 import 'package:digi_task/core/constants/theme/theme_ext.dart';
+import 'package:digi_task/core/utility/extension/icon_path_ext.dart';
 import 'package:digi_task/presentation/pages/home/view/tasks_tab.dart';
 import 'package:digi_task/presentation/pages/home/widgets/bottom_navbar.dart';
 import 'package:flutter/material.dart';
@@ -34,12 +36,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     String currentSectionText() {
       switch (tabController.index) {
         case 0:
-          return "Xoş gəlmisən, ${context.watch<HomeNotifier>().userTaskModel.firstName} !";
+          return "Xoş gəlmisən, ${context.watch<MainNotifier>().userTaskModel?.firstName} !";
         case 1:
           return "Performans";
 
         case 2:
-          return "Tasklar";
+          return "Tapşırıq";
         case 3:
           return "Profil";
         default:
@@ -61,9 +63,18 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           currentSectionText(),
           style: context.typography.subtitle1Medium,
         ),
-        actions: const [NotificationIcon()],
+        actions: [
+          AppBarIcon(iconPath: IconPath.message.toPathSvg),
+          const SizedBox(
+            width: 14,
+          ),
+          AppBarIcon(iconPath: IconPath.notification.toPathSvg),
+          const SizedBox(
+            width: 16,
+          )
+        ],
       ),
-      body: Consumer<HomeNotifier>(
+      body: Consumer<MainNotifier>(
         builder: (context, notifier, child) {
           return TabBarView(
             physics: const NeverScrollableScrollPhysics(),

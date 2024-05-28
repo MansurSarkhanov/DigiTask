@@ -107,6 +107,7 @@ class OngoingTasks {
   String? location;
   String? note;
   String? date;
+  String? time;
   String? status;
   bool? isVoice;
   bool? isInternet;
@@ -125,6 +126,7 @@ class OngoingTasks {
       this.location,
       this.note,
       this.date,
+      this.time,
       this.status,
       this.isVoice,
       this.isInternet,
@@ -148,6 +150,7 @@ class OngoingTasks {
     location = json['location'];
     note = json['note'];
     date = json['date'];
+    time = json['time'];
     status = json['status'];
     isVoice = json['is_voice'];
     isInternet = json['is_internet'];
@@ -170,6 +173,7 @@ class OngoingTasks {
     data['location'] = location;
     data['note'] = note;
     data['date'] = date;
+    data['time'] = time;
     data['status'] = status;
     data['is_voice'] = isVoice;
     data['is_internet'] = isInternet;
