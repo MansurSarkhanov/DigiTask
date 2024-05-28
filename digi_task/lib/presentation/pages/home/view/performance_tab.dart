@@ -13,13 +13,8 @@ class PerformanceTab extends StatefulWidget {
   State<PerformanceTab> createState() => _PerformanceTabState();
 }
 
-class _PerformanceTabState extends State<PerformanceTab> with TickerProviderStateMixin {
-  late final TabController tabController;
-  @override
-  void initState() {
-    super.initState();
-    tabController = TabController(length: 3, vsync: this);
-  }
+class _PerformanceTabState extends State<PerformanceTab> {
+  
 
   @override
   Widget build(BuildContext context) {
@@ -43,10 +38,7 @@ class _PerformanceTabState extends State<PerformanceTab> with TickerProviderStat
             height: 12,
           ),
           Expanded(
-            child: TabBarView(
-              controller: tabController,
-              children: [
-                Column(
+            child: Column(
                   children: [
                     Container(
                       decoration: BoxDecoration(
@@ -115,14 +107,6 @@ class _PerformanceTabState extends State<PerformanceTab> with TickerProviderStat
                         return const SizedBox.shrink();
                       },
                     )
-                  ],
-                ),
-                Container(
-                  color: Colors.green,
-                ),
-                Container(
-                  color: Colors.blue,
-                ),
               ],
             ),
           ),

@@ -1,6 +1,13 @@
+import 'package:digi_task/bloc/home/task/task_notifier.dart';
+import 'package:digi_task/bloc/home/task/task_state.dart';
 import 'package:digi_task/core/constants/theme/theme_ext.dart';
+import 'package:digi_task/core/utility/extension/icon_path_ext.dart';
 import 'package:digi_task/presentation/pages/home/widgets/user_task_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../core/constants/path/icon_path.dart';
 
 class TasksTab extends StatefulWidget {
   const TasksTab({super.key});
@@ -40,45 +47,104 @@ class _TasksTabState extends State<TasksTab> with TickerProviderStateMixin {
         ),
         const SizedBox(
           height: 20,
-            ),
-            SizedBox(
-              height: 60,
-              child: ListView.builder(
-
-                padding: const EdgeInsets.only(left: 16),
-                scrollDirection: Axis.horizontal,
-                itemCount: 4,
-                itemBuilder: (context, index) {
-                  final texts = ['Hamisi', 'Gözləmədə olan', 'Qəbul edilən', 'Keçmiş'];
-                  return Padding(
-                    padding: const EdgeInsets.only(right: 8),
-                    child: RawChip(
-                        showCheckmark: false,
-                        label: Text(texts[index]),
-                        labelStyle: context.typography.overlineSemiBold
-                            .copyWith(color: index == 0 ? Colors.white : context.colors.primaryColor50),
-                        labelPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                        backgroundColor: Colors.white,
-                        selectedColor: context.colors.primaryColor50,
-                        selected: index == 0 ? true : false,
-                        shape: const StadiumBorder(side: BorderSide(color: Colors.transparent))),
-                  );
-                },
-              ),
+        ),
+        SizedBox(
+          height: 60,
+          child: ListView.builder(
+            padding: const EdgeInsets.only(left: 16),
+            scrollDirection: Axis.horizontal,
+            itemCount: 4,
+            itemBuilder: (context, index) {
+              final texts = ['Hamisi', 'Gözləmədə olan', 'Qəbul edilən', 'Keçmiş'];
+              return Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: RawChip(
+                    showCheckmark: false,
+                    label: Text(texts[index]),
+                    labelStyle: context.typography.overlineSemiBold
+                        .copyWith(color: index == 0 ? Colors.white : context.colors.primaryColor50),
+                    labelPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                    backgroundColor: Colors.white,
+                    selectedColor: context.colors.primaryColor50,
+                    selected: index == 0 ? true : false,
+                    shape: const StadiumBorder(side: BorderSide(color: Colors.transparent))),
+              );
+            },
+          ),
         ),
         const SizedBox(
           height: 20,
         ),
-        Expanded(
-          child: ListView.builder(
-            itemCount: 5,
-            itemBuilder: (context, index) {
-              return const Padding(
-                padding: EdgeInsets.only(left: 16, right: 16, bottom: 24),
-                child: UserTaskCard(),
+        Consumer<TaskNotifier>(
+          builder: (context, notifier, child) {
+            if (notifier.state is TasksLoading) {
+              return const Center(
+                child: CircularProgressIndicator(),
               );
-            },
-          ),
+            } else if (notifier.state is TasksSuccess) {
+              final taskNotifier = notifier.state as TasksSuccess;
+              return Expanded(
+                child: ListView.builder(
+                  itemCount: taskNotifier.tasks?.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                        padding: const EdgeInsets.only(left: 16, right: 16, bottom: 24),
+                        child: UserTaskCard(
+                            iconRow: Row(
+                              children: [
+                                if (taskNotifier.tasks?[index].isInternet == true) ...[
+                                  SizedBox(
+                                    height: 40,
+                                    width: 110,
+                                    child: SvgPicture.asset(
+                                      IconPath.internet.toPathSvg,
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 4,
+                                  )
+                                ],
+                                if (taskNotifier.tasks?[index].isTv == true) ...[
+                                  SizedBox(
+                                    height: 40,
+                                    width: 70,
+                                    child: SvgPicture.asset(
+                                      IconPath.tv.toPathSvg,
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 4,
+                                  )
+                                ],
+                                if (taskNotifier.tasks?[index].isVoice == true) ...[
+                                  SizedBox(
+                                    height: 40,
+                                    width: 70,
+                                    child: SvgPicture.asset(
+                                      IconPath.voice.toPathSvg,
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 4,
+                                  )
+                                ]
+                              ],
+                            ),
+                            name: "Test",
+                            time: taskNotifier.tasks?[index].date ?? '',
+                            location: taskNotifier.tasks?[index].location ?? '',
+                            number: taskNotifier.tasks?[index].contactNumber ?? '',
+                            status: taskNotifier.tasks?[index].status ?? '',
+                            notifier: notifier));
+                  },
+                ),
+              );
+            }
+            return const SizedBox.shrink();
+          },
         )
       ],
     );

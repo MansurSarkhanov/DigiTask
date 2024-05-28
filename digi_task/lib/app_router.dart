@@ -1,5 +1,6 @@
 import 'package:digi_task/bloc/home/main/main_notifier.dart';
 import 'package:digi_task/bloc/home/performance/performance_notifier.dart';
+import 'package:digi_task/bloc/home/task/task_notifier.dart';
 import 'package:digi_task/core/constants/routes.dart';
 import 'package:digi_task/presentation/pages/login/login_page.dart';
 import 'package:digi_task/presentation/pages/splash/splash_page.dart';
@@ -46,8 +47,12 @@ final appRouter = GoRouter(
           ChangeNotifierProvider(
             create: (context) => MainNotifier()..fetchUserTask(),
           ),
+          
           ChangeNotifierProvider(
             create: (context) => PerformanceNotifier()..fetchPerfomance(),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => TaskNotifier()..fetchTasks(),
           ),
         ],
         // ..fetchPerfomance(),
