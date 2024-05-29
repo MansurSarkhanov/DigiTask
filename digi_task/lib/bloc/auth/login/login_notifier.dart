@@ -6,6 +6,7 @@ import 'login_state.dart';
 class LoginNotifier extends ChangeNotifier {
   LoginState state = LoginInitial();
   final AuthRepository _authRepository = AuthRepository();
+  
 
   Future<void> loginUser({required String email, required String password}) async {
     state = LoginProgress();

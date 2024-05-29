@@ -50,9 +50,9 @@ class _PerformanceTabState extends State<PerformanceTab> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('Ad', style: context.typography.subtitle2SemiBold.copyWith(color: Colors.white)),
-                            Text('Qrup', style: context.typography.subtitle2SemiBold.copyWith(color: Colors.white)),
-                            Text('Tasklar', style: context.typography.subtitle2SemiBold.copyWith(color: Colors.white)),
+                        Text('Ad     ', style: context.typography.subtitle2SemiBold.copyWith(color: Colors.white)),
+                        Text('Qrup   ', style: context.typography.subtitle2SemiBold.copyWith(color: Colors.white)),
+                        Text('Tasklar', style: context.typography.subtitle2SemiBold.copyWith(color: Colors.white)),
                           ],
                         ),
                       ),
@@ -77,14 +77,19 @@ class _PerformanceTabState extends State<PerformanceTab> {
                                         child: Row(
                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Text(
-                                              "${performance?[index].firstName}",
-                                              style: context.typography.subtitle2Regular
-                                                  .copyWith(color: context.colors.primaryColor50),
-                                            ),
-                                            Text(
-                                              "${performance?[index].group?.group}",
-                                              style: context.typography.subtitle2Regular,
+                                        Expanded(
+                                          child: Text(
+                                            "${performance?[index].firstName}",
+                                            maxLines: 1,
+                                            style: context.typography.subtitle2Regular
+                                                .copyWith(color: context.colors.primaryColor50),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            "${performance?[index].group?.group}",
+                                            style: context.typography.subtitle2Regular,
+                                          ),
                                             ),
                                             Text(
                                               "${performance?[index].taskCount?.total}",

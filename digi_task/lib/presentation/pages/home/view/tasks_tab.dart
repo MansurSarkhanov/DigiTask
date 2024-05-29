@@ -5,6 +5,7 @@ import 'package:digi_task/core/utility/extension/icon_path_ext.dart';
 import 'package:digi_task/presentation/pages/home/widgets/user_task_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/constants/path/icon_path.dart';
@@ -83,10 +84,15 @@ class _TasksTabState extends State<TasksTab> with TickerProviderStateMixin {
               );
             } else if (notifier.state is TasksSuccess) {
               final taskNotifier = notifier.state as TasksSuccess;
+
               return Expanded(
                 child: ListView.builder(
                   itemCount: taskNotifier.tasks?.length,
                   itemBuilder: (context, index) {
+                    final nowDateTime = DateTime.now();
+                    final dateTime = DateTime.parse(taskNotifier.tasks?[index].date ?? '');
+                    String formattedDate = DateFormat('MMM d').format(dateTime);
+                    String nowFormattedDate = DateFormat('MMM d').format(nowDateTime);
                     return Padding(
                         padding: const EdgeInsets.only(left: 16, right: 16, bottom: 24),
                         child: UserTaskCard(
@@ -108,7 +114,7 @@ class _TasksTabState extends State<TasksTab> with TickerProviderStateMixin {
                                 if (taskNotifier.tasks?[index].isTv == true) ...[
                                   SizedBox(
                                     height: 40,
-                                    width: 70,
+                                    width: 80,
                                     child: SvgPicture.asset(
                                       IconPath.tv.toPathSvg,
                                       fit: BoxFit.fill,
@@ -121,7 +127,7 @@ class _TasksTabState extends State<TasksTab> with TickerProviderStateMixin {
                                 if (taskNotifier.tasks?[index].isVoice == true) ...[
                                   SizedBox(
                                     height: 40,
-                                    width: 70,
+                                    width: 80,
                                     child: SvgPicture.asset(
                                       IconPath.voice.toPathSvg,
                                       fit: BoxFit.fill,
@@ -134,7 +140,9 @@ class _TasksTabState extends State<TasksTab> with TickerProviderStateMixin {
                               ],
                             ),
                             name: "Test",
-                            time: taskNotifier.tasks?[index].date ?? '',
+                            time: formattedDate == nowFormattedDate
+                                ? 'Bu gün, ${taskNotifier.tasks?[index].time}'
+                                : '$formattedDate, ${taskNotifier.tasks?[index].time}',
                             location: taskNotifier.tasks?[index].location ?? '',
                             number: taskNotifier.tasks?[index].contactNumber ?? '',
                             status: taskNotifier.tasks?[index].status ?? '',

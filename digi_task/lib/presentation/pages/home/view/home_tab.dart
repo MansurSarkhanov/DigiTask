@@ -6,6 +6,7 @@ import 'package:digi_task/core/utility/extension/icon_path_ext.dart';
 import 'package:digi_task/presentation/pages/home/widgets/tasks_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../widgets/organizations_card.dart';
@@ -56,7 +57,13 @@ class HomeTabView extends StatelessWidget {
               height: 16,
             ),
                   Consumer<MainNotifier>(builder: (context, notifier, child) {
-                    return UserTaskCard(
+                      if (notifier.userTaskModel?.ongoingTasks?.isNotEmpty ?? false) {
+                        final nowDateTime = DateTime.now();
+                        final dateTime = DateTime.parse(notifier.userTaskModel?.ongoingTasks?.first.date ?? '');
+                        String formattedDate = DateFormat('MMM d').format(dateTime);
+                        String nowFormattedDate = DateFormat('MMM d').format(nowDateTime);
+                      
+                        return UserTaskCard(
                       iconRow: Row(
                         children: [
                           if (notifier.userTaskModel?.ongoingTasks?.first.isInternet == true) ...[
@@ -104,10 +111,15 @@ class HomeTabView extends StatelessWidget {
                       name: '',
                       number: notifier.userTaskModel?.ongoingTasks?.first.contactNumber ?? '',
                       status: notifier.userTaskModel?.ongoingTasks?.first.status ?? '',
-                      time: notifier.userTaskModel?.ongoingTasks?.first.time ?? '',
+                          time: formattedDate == nowFormattedDate
+                              ? "Bu gün, ${notifier.userTaskModel?.ongoingTasks?.first.time ?? ''}"
+                              : "$formattedDate, ${notifier.userTaskModel?.ongoingTasks?.first.time ?? ''}",
                       notifier: notifier,
                     );
-                  }),
+                      }
+                      return const SizedBox.shrink();
+                    },
+                  ),
             const SizedBox(
               height: 24,
             ),
@@ -124,7 +136,10 @@ class HomeTabView extends StatelessWidget {
                   const SizedBox(
                     height: 16,
                   ),
-            const OrganizationsCard()
+                  const OrganizationsCard(),
+                  const SizedBox(
+                    height: 24,
+                  ),
           ],
         ),
       ),
