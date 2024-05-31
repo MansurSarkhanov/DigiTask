@@ -24,8 +24,13 @@ final class HomeService {
     return null;
   }
 
-  Future<List<TasksModel>?> fetchTasks() async {
-    final response = await baseDio.get('services/status/');
+  Future<List<TasksModel>?> fetchTasks({String? query}) async {
+    final response = query == null
+        ? await baseDio.get('services/status/')
+        : await baseDio.get(
+            'services/status/',
+            queryParameters: {'status': query},
+          );
     if (response.statusCode! >= 200 && response.statusCode! <= 299) {
       final tasks = response.data;
       print("Tasks: $tasks");

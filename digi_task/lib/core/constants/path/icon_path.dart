@@ -20,7 +20,10 @@ enum IconPath {
   more,
   pencil,
   profnoti,
-  right,
   message,
-  date
+  date,
+  menu,
+  arrowleft,
+  arrowright,
+
 }

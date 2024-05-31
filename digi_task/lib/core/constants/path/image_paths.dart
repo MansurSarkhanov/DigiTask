@@ -1,4 +1,4 @@
 enum ImagePath {
   logo,
-  cardinfo
+  cardinfo, emptynotification
 }

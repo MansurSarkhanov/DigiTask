@@ -7,10 +7,10 @@ class TaskNotifier extends ChangeNotifier {
   TasksState state = TasksInitial();
   final _homeRepository = HomeRepository();
 
-  Future<void> fetchTasks() async {
+  Future<void> fetchTasks({String? query}) async {
     state = TasksLoading();
     notifyListeners();
-    final result = await _homeRepository.fetchTasks();
+    final result = await _homeRepository.fetchTasks(queryTask: query);
     if (result.isSuccess()) {
       final tasks = result.tryGetSuccess();
       state = TasksSuccess(tasks: tasks);

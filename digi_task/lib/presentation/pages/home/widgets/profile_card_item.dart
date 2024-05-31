@@ -11,6 +11,7 @@ class ProfileCardItem extends StatelessWidget {
     this.trailingIcon,
     this.isNotification = false,
     required this.onPressed,
+    this.isExit = false,
   });
   final String title;
   final String? subtitle;
@@ -19,6 +20,7 @@ class ProfileCardItem extends StatelessWidget {
   final String? trailingIcon;
   final bool? isNotification;
   final VoidCallback onPressed;
+  final bool? isExit;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,9 @@ class ProfileCardItem extends StatelessWidget {
           title,
           style: subtitle != null
               ? context.typography.subtitle1SemiBold
-              : context.typography.subtitle2Medium.copyWith(color: context.colors.neutralColor50),
+                  
+              : context.typography.subtitle2Medium
+                  .copyWith(color: isExit == true ? context.colors.errorColor50 : context.colors.neutralColor50),
         ),
         subtitle: subtitle != null
             ? Text(

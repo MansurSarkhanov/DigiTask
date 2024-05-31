@@ -5,8 +5,10 @@ import 'package:digi_task/core/utility/extension/icon_path_ext.dart';
 import 'package:digi_task/presentation/pages/home/view/tasks_tab.dart';
 import 'package:digi_task/presentation/pages/home/widgets/bottom_navbar.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/constants/routes.dart';
 import 'view/home_tab.dart';
 import 'view/performance_tab.dart';
 import 'view/profile_tab.dart';
@@ -50,11 +52,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     }
 
     return Scaffold(
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-      //     context.read<HomeNotifier>().fetchUserTask();
-      //   },
-      // ),
       backgroundColor: context.colors.backgroundColor,
       bottomNavigationBar: BottomNavBar(tabController: tabController),
       appBar: AppBar(
@@ -64,11 +61,17 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           style: context.typography.subtitle1Medium,
         ),
         actions: [
-          AppBarIcon(iconPath: IconPath.message.toPathSvg),
+          AppBarIcon(
+            iconPath: IconPath.message.toPathSvg,
+            onTap: () {},
+          ),
           const SizedBox(
             width: 14,
           ),
-          AppBarIcon(iconPath: IconPath.notification.toPathSvg),
+          AppBarIcon(
+            iconPath: IconPath.notification.toPathSvg,
+            onTap: () => context.goNamed(AppRoutes.notification.name),
+          ),
           const SizedBox(
             width: 16,
           )

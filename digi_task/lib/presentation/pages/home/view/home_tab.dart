@@ -25,124 +25,130 @@ class HomeTabView extends StatelessWidget {
           ? const Center(
               child: CircularProgressIndicator(),
             )
-          : SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(
-              height: 24,
-            ),
-            Text(
-              "12 May",
-              style: context.typography.subtitle2SemiBold,
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            const TasksCard(),
-            const SizedBox(
-              height: 24,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Davam edən tasklar',
-                  style: context.typography.subtitle2Medium,
+          : RefreshIndicator(
+              onRefresh: () async {
+                await context.read<MainNotifier>().fetchUserTask();
+              },
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    Text(
+                      "12 May",
+                      style: context.typography.subtitle2SemiBold,
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    const TasksCard(),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Davam edən tasklar',
+                          style: context.typography.subtitle2Medium,
+                        ),
+                        const Icon(Icons.arrow_forward_ios_rounded)
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Consumer<MainNotifier>(
+                      builder: (context, notifier, child) {
+                        if (notifier.userTaskModel?.ongoingTasks?.isNotEmpty ?? false) {
+                          final nowDateTime = DateTime.now();
+                          final dateTime = DateTime.parse(notifier.userTaskModel?.ongoingTasks?.first.date ?? '');
+                          String formattedDate = DateFormat('MMM d').format(dateTime);
+                          String nowFormattedDate = DateFormat('MMM d').format(nowDateTime);
+
+                          return UserTaskCard(
+                            iconRow: Row(
+                              children: [
+                                if (notifier.userTaskModel?.ongoingTasks?.first.isInternet == true) ...[
+                                  SizedBox(
+                                    height: 40,
+                                    width: 110,
+                                    child: SvgPicture.asset(
+                                      IconPath.internet.toPathSvg,
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 4,
+                                  )
+                                ],
+                                if (notifier.userTaskModel?.ongoingTasks?.first.isTv == true) ...[
+                                  SizedBox(
+                                    height: 40,
+                                    width: 70,
+                                    child: SvgPicture.asset(
+                                      IconPath.tv.toPathSvg,
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 4,
+                                  )
+                                ],
+                                if (notifier.userTaskModel?.ongoingTasks?.first.isVoice == true) ...[
+                                  SizedBox(
+                                    height: 40,
+                                    width: 70,
+                                    child: SvgPicture.asset(
+                                      IconPath.voice.toPathSvg,
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 4,
+                                  )
+                                ]
+                              ],
+                            ),
+                            location: notifier.userTaskModel?.ongoingTasks?.first.location ?? '',
+                            name: '',
+                            number: notifier.userTaskModel?.ongoingTasks?.first.contactNumber ?? '',
+                            status: notifier.userTaskModel?.ongoingTasks?.first.status ?? '',
+                            time: formattedDate == nowFormattedDate
+                                ? "Bu gün, ${notifier.userTaskModel?.ongoingTasks?.first.time ?? ''}"
+                                : "$formattedDate, ${notifier.userTaskModel?.ongoingTasks?.first.time ?? ''}",
+                            notifier: notifier,
+                          );
+                        }
+                        return const SizedBox.shrink();
+                      },
+                    ),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Tədbirlər',
+                          style: context.typography.subtitle2Medium,
+                        ),
+                        const Icon(Icons.arrow_forward_ios_rounded),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    const OrganizationsCard(),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                  ],
                 ),
-                const Icon(Icons.arrow_forward_ios_rounded)
-              ],
+              ),
             ),
-            const SizedBox(
-              height: 16,
-            ),
-                  Consumer<MainNotifier>(builder: (context, notifier, child) {
-                      if (notifier.userTaskModel?.ongoingTasks?.isNotEmpty ?? false) {
-                        final nowDateTime = DateTime.now();
-                        final dateTime = DateTime.parse(notifier.userTaskModel?.ongoingTasks?.first.date ?? '');
-                        String formattedDate = DateFormat('MMM d').format(dateTime);
-                        String nowFormattedDate = DateFormat('MMM d').format(nowDateTime);
-                      
-                        return UserTaskCard(
-                      iconRow: Row(
-                        children: [
-                          if (notifier.userTaskModel?.ongoingTasks?.first.isInternet == true) ...[
-                            SizedBox(
-                              height: 40,
-                              width: 110,
-                              child: SvgPicture.asset(
-                                IconPath.internet.toPathSvg,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 4,
-                            )
-                          ],
-                          if (notifier.userTaskModel?.ongoingTasks?.first.isTv == true) ...[
-                            SizedBox(
-                              height: 40,
-                              width: 70,
-                              child: SvgPicture.asset(
-                                IconPath.tv.toPathSvg,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 4,
-                            )
-                          ],
-                          if (notifier.userTaskModel?.ongoingTasks?.first.isVoice == true) ...[
-                            SizedBox(
-                              height: 40,
-                              width: 70,
-                              child: SvgPicture.asset(
-                                IconPath.voice.toPathSvg,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 4,
-                            )
-                          ]
-                        ],
-                      ),
-                      location: notifier.userTaskModel?.ongoingTasks?.first.location ?? '',
-                      name: '',
-                      number: notifier.userTaskModel?.ongoingTasks?.first.contactNumber ?? '',
-                      status: notifier.userTaskModel?.ongoingTasks?.first.status ?? '',
-                          time: formattedDate == nowFormattedDate
-                              ? "Bu gün, ${notifier.userTaskModel?.ongoingTasks?.first.time ?? ''}"
-                              : "$formattedDate, ${notifier.userTaskModel?.ongoingTasks?.first.time ?? ''}",
-                      notifier: notifier,
-                    );
-                      }
-                      return const SizedBox.shrink();
-                    },
-                  ),
-            const SizedBox(
-              height: 24,
-            ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Tədbirlər',
-                        style: context.typography.subtitle2Medium,
-                      ),
-                      const Icon(Icons.arrow_forward_ios_rounded),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  const OrganizationsCard(),
-                  const SizedBox(
-                    height: 24,
-                  ),
-          ],
-        ),
-      ),
     );
   }
 }

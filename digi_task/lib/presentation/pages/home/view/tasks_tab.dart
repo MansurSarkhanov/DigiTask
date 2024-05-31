@@ -25,6 +25,7 @@ class _TasksTabState extends State<TasksTab> with TickerProviderStateMixin {
     tabController = TabController(length: 2, vsync: this);
   }
 
+  int selecteIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -60,14 +61,33 @@ class _TasksTabState extends State<TasksTab> with TickerProviderStateMixin {
               return Padding(
                 padding: const EdgeInsets.only(right: 8),
                 child: RawChip(
+                    onPressed: () {
+                      setState(() {
+                        selecteIndex = index;
+                      });
+                      switch (index) {
+                        case 0:
+                          context.read<TaskNotifier>().fetchTasks();
+                          break;
+                        case 1:
+                          context.read<TaskNotifier>().fetchTasks(query: "waiting");
+                          break;
+                        case 2:
+                          context.read<TaskNotifier>().fetchTasks(query: "inprogress");
+                          break;
+                        case 3:
+                          context.read<TaskNotifier>().fetchTasks(query: "completed");
+                          break;
+                      }
+                    },
                     showCheckmark: false,
                     label: Text(texts[index]),
                     labelStyle: context.typography.overlineSemiBold
-                        .copyWith(color: index == 0 ? Colors.white : context.colors.primaryColor50),
+                        .copyWith(color: selecteIndex == index ? Colors.white : context.colors.primaryColor50),
                     labelPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                     backgroundColor: Colors.white,
                     selectedColor: context.colors.primaryColor50,
-                    selected: index == 0 ? true : false,
+                    selected: selecteIndex == index,
                     shape: const StadiumBorder(side: BorderSide(color: Colors.transparent))),
               );
             },

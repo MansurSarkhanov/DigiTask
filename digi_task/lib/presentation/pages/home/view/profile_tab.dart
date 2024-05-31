@@ -25,26 +25,32 @@ class _ProfileTabState extends State<ProfileTab> {
             subtitle: 'texnik@gmail.com',
             trailingIcon: IconPath.pencil.toPathSvg,
           ),
+          const SizedBox(
+            height: 16,
+          ),
           ProfileCardItem(
             onPressed: () {},
             title: "Bildirişlər",
             isNotification: true,
             leadingIcon: IconPath.profnoti.toPathSvg,
-            trailingIcon: IconPath.right.toPathSvg,
+            trailingIcon: IconPath.arrowright.toPathSvg,
           ),
           ProfileCardItem(
             onPressed: () {},
             title: "Dəstək",
             leadingIcon: IconPath.more.toPathSvg,
-            trailingIcon: IconPath.right.toPathSvg,
+            trailingIcon: IconPath.arrowright.toPathSvg,
           ),
           ProfileCardItem(
             onPressed: () {},
             title: "Haqqında",
             leadingIcon: IconPath.info.toPathSvg,
-            trailingIcon: IconPath.right.toPathSvg,
+            trailingIcon: IconPath.arrowright.toPathSvg,
           ),
           ProfileCardItem(
+            isExit: true,
+            title: "Çıxış et",
+            leadingIcon: IconPath.logout.toPathSvg,
             onPressed: () {
               showDialog(
                 context: context,
@@ -137,8 +143,7 @@ class _ProfileTabState extends State<ProfileTab> {
                 },
               );
             },
-            title: "Çıxış et",
-            leadingIcon: IconPath.logout.toPathSvg,
+           
           ),
         ],
       ),

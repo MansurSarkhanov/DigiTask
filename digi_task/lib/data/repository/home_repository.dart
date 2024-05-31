@@ -41,9 +41,9 @@ final class HomeRepository implements IHomeRepository {
   }
   
   @override
-  Future<Result<List<TasksModel>, EmptyPerformanceFailure>> fetchTasks() async {
+  Future<Result<List<TasksModel>, EmptyPerformanceFailure>> fetchTasks({String? queryTask}) async {
     try {
-      final result = await _homeDataSource.fetchTasks();
+      final result = await _homeDataSource.fetchTasks(query: queryTask);
       return Result.success(result!);
     } catch (e) {
       return Result.error(EmptyPerformanceFailure());
