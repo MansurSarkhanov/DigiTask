@@ -1,4 +1,4 @@
-import 'package:digi_task/data/model/response/tasks_model.dart';
+import 'package:digi_task/features/tasks/data/model/tasks_model.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class TasksState extends Equatable {

@@ -1,7 +1,7 @@
 import 'package:digi_task/data/model/response/performance_model.dart';
-import 'package:digi_task/data/model/response/tasks_model.dart';
 import 'package:digi_task/data/model/response/user_task_model.dart';
 import 'package:digi_task/data/services/jwt/dio_configuration.dart';
+import 'package:digi_task/features/tasks/data/model/task_model.dart';
 
 final class HomeService {
   Future<UserTaskModel?> fetcUserTaskData() async {
@@ -24,7 +24,7 @@ final class HomeService {
     return null;
   }
 
-  Future<List<TasksModel>?> fetchTasks({String? query}) async {
+  Future<List<TaskModel>?> fetchTasks({String? query}) async {
     final response = query == null
         ? await baseDio.get('services/status/')
         : await baseDio.get(
@@ -35,7 +35,7 @@ final class HomeService {
       final tasks = response.data;
       print("Tasks: $tasks");
       if (tasks is List) {
-        return tasks.map((e) => TasksModel.fromJson(e)).toList();
+        return tasks.map((e) => TaskModel.fromJson(e)).toList();
       }
     }
     return null;

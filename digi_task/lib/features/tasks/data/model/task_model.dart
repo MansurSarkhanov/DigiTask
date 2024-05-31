@@ -1,4 +1,4 @@
-class TasksModel {
+class TaskModel {
   int? id;
   List<Group>? group;
   String? createdAt;
@@ -17,7 +17,7 @@ class TasksModel {
   bool? isTv;
   int? user;
 
-  TasksModel(
+  TaskModel(
       {this.id,
       this.group,
       this.createdAt,
@@ -36,7 +36,7 @@ class TasksModel {
       this.isTv,
       this.user});
 
-  TasksModel.fromJson(Map<String, dynamic> json) {
+  TaskModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     if (json['group'] != null) {
       group = <Group>[];
