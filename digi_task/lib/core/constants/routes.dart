@@ -4,7 +4,9 @@ enum AppRoutes {
   login(path: '/login', name: 'login'),
   home(path: '/home', name: 'home'),
   resetPassword(path: 'resetPassword', name: 'resetPassword'),
-  notification(path: 'notification', name: 'notification');
+  notification(path: 'notification', name: 'notification'),
+  profileEdit(path: 'profileEdit', name: 'profileEdit');
+
 
 
   const AppRoutes({required this.path, required this.name});

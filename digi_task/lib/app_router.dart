@@ -1,7 +1,9 @@
 import 'package:digi_task/bloc/home/main/main_notifier.dart';
 import 'package:digi_task/bloc/home/performance/performance_notifier.dart';
-import 'package:digi_task/bloc/home/task/task_notifier.dart';
 import 'package:digi_task/core/constants/routes.dart';
+import 'package:digi_task/features/profile/presentation/bloc/profile_notifier.dart';
+import 'package:digi_task/features/profile/presentation/view/profile_edit_view.dart';
+import 'package:digi_task/features/tasks/presentation/bloc/task_notifier.dart';
 import 'package:digi_task/presentation/pages/login/login_page.dart';
 import 'package:digi_task/presentation/pages/notification/notification_page.dart';
 import 'package:digi_task/presentation/pages/splash/splash_page.dart';
@@ -48,16 +50,17 @@ final appRouter = GoRouter(
         providers: [
           ChangeNotifierProvider(
             create: (context) => MainNotifier()..fetchUserTask(),
-          ),
-          
+                ),
           ChangeNotifierProvider(
             create: (context) => PerformanceNotifier()..fetchPerfomance(),
           ),
           ChangeNotifierProvider(
             create: (context) => TaskNotifier()..fetchTasks(),
           ),
-        ],
-        // ..fetchPerfomance(),
+                ChangeNotifierProvider(
+                  create: (context) => ProfileNotifier()..getUserInformation(),
+                ),
+              ],
         child: const HomePage(),
       ),
         routes: [
@@ -65,6 +68,11 @@ final appRouter = GoRouter(
             path: AppRoutes.notification.path,
             name: AppRoutes.notification.name,
             builder: (context, state) => const NotificationPage(),
+          ),
+          GoRoute(
+            path: AppRoutes.profileEdit.path,
+            name: AppRoutes.profileEdit.name,
+            builder: (context, state) => const ProfileEditView(),
           ),
         ]
     ),

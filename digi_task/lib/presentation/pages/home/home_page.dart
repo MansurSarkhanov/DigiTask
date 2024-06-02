@@ -2,16 +2,16 @@ import 'package:digi_task/bloc/home/main/main_notifier.dart';
 import 'package:digi_task/core/constants/path/icon_path.dart';
 import 'package:digi_task/core/constants/theme/theme_ext.dart';
 import 'package:digi_task/core/utility/extension/icon_path_ext.dart';
-import 'package:digi_task/presentation/pages/home/view/tasks_tab.dart';
+import 'package:digi_task/features/tasks/presentation/view/tasks_tab.dart';
 import 'package:digi_task/presentation/pages/home/widgets/bottom_navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/constants/routes.dart';
+import '../../../features/profile/presentation/view/profile_tab.dart';
 import 'view/home_tab.dart';
 import 'view/performance_tab.dart';
-import 'view/profile_tab.dart';
 import 'widgets/notification_icon.dart';
 
 class HomePage extends StatefulWidget {
@@ -58,7 +58,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         backgroundColor: context.colors.neutralColor100,
         title: Text(
           currentSectionText(),
-          style: context.typography.subtitle1Medium,
+          style: context.typography.subtitle2Medium,
         ),
         actions: [
           AppBarIcon(

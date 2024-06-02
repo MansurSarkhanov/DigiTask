@@ -1,7 +1,6 @@
 import 'package:digi_task/data/model/failure/user_task_failure.dart';
 import 'package:digi_task/data/model/response/user_task_model.dart';
 import 'package:digi_task/data/services/network/home_service.dart';
-import 'package:digi_task/features/tasks/data/model/task_model.dart';
 import 'package:digi_task/injection.dart';
 import 'package:multiple_result/multiple_result.dart';
 
@@ -11,7 +10,6 @@ import '../model/response/performance_model.dart';
 abstract interface class IHomeRepository {
   Future<Result<UserTaskModel, UserTaskFailure>> fetchUserTaskData();
   Future<Result<List<PerformanceModel>, EmptyPerformanceFailure>> fetchPerformances();
-  Future<Result<List<TaskModel>, EmptyPerformanceFailure>> fetchTasks();
 
 
 
@@ -40,13 +38,4 @@ final class HomeRepository implements IHomeRepository {
     }
   }
   
-  @override
-  Future<Result<List<TaskModel>, EmptyPerformanceFailure>> fetchTasks({String? queryTask}) async {
-    try {
-      final result = await _homeDataSource.fetchTasks(query: queryTask);
-      return Result.success(result!);
-    } catch (e) {
-      return Result.error(EmptyPerformanceFailure());
-    }
-  }
 }

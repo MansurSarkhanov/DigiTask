@@ -13,8 +13,11 @@ final class TaskNetworkService implements ITaskNetworkService {
       final response = query != null
           ? await baseDio.get('services/status/', queryParameters: {"status": query})
           : await baseDio.get('services/status/');
-      final tasks = response.data;
-      return tasks.map((e) => TaskModel.fromJson(e)).toList();
+      final tasks = response.data as List;
+      print(tasks);
+
+      final taskList = tasks.map((e) => TaskModel.fromJson(e)).toList();
+      return taskList;
     } catch (e, s) {
       return Error.throwWithStackTrace(e, s);
     }

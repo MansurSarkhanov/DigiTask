@@ -1,6 +1,8 @@
 class TaskModel {
   int? id;
   List<Group>? group;
+  String? firstName;
+  String? lastName;
   String? createdAt;
   String? updatedAt;
   String? taskType;
@@ -20,6 +22,8 @@ class TaskModel {
   TaskModel(
       {this.id,
       this.group,
+      this.firstName,
+      this.lastName,
       this.createdAt,
       this.updatedAt,
       this.taskType,
@@ -44,6 +48,8 @@ class TaskModel {
         group!.add(Group.fromJson(v));
       });
     }
+    firstName = json['first_name'];
+    lastName = json['last_name'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     taskType = json['task_type'];
@@ -67,6 +73,8 @@ class TaskModel {
     if (group != null) {
       data['group'] = group!.map((v) => v.toJson()).toList();
     }
+    data['first_name'] = firstName;
+    data['last_name'] = lastName;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
     data['task_type'] = taskType;

@@ -1,3 +1,8 @@
+import 'package:digi_task/features/tasks/data/model/task_model.dart';
+import 'package:multiple_result/multiple_result.dart';
+
+import '../../../../data/model/failure/empty_task_model.dart';
+
 abstract interface class ITaskRepository {
-  void getTasks() {}
+  Future<Result<List<TaskModel>?, EmptyTaskModel>> getTasks({String? query});
 }

@@ -19,10 +19,12 @@ class AuthRepository implements IAuthRepository {
       {required String email, required String password}) async {
     try {
       final result = await _authDataSource.login(email: email, password: password);
-      print(result!.access_token);
-      print(result.refresh_token);
+      print(result!.accessToken);
+      print(result.refreshToken);
       print(result.email);
-      await _secureStorage.saveToken(result.access_token ?? '');
+      await _secureStorage.saveAccessToken(result.accessToken ?? '');
+      await _secureStorage.saveRefresToken(result.refreshToken ?? '');
+
       return Result.success(result);
     } on DioException catch (_) {
       return Result.error(AuthLoginFailure(detail: 'Invalid credentials. Please try again.'));

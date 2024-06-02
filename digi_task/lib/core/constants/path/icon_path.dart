@@ -1,6 +1,8 @@
 enum IconPath {
   home,
   notification,
+  notification_outline,
+
   profile,
   task,
   performance,

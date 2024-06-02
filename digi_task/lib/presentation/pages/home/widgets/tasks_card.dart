@@ -1,11 +1,18 @@
 import 'package:digi_task/core/constants/theme/theme_ext.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../data/model/response/user_task_model.dart';
+
 class TasksCard extends StatelessWidget {
-  const TasksCard({super.key});
+  const TasksCard({
+    super.key,
+    required this.taskDetails,
+  });
+  final TaskDetails? taskDetails;
 
   @override
   Widget build(BuildContext context) {
+    final taskCount = (taskDetails?.connectionCount ?? 0) + (taskDetails?.problemCount ?? 0);
     return Container(
       decoration: BoxDecoration(color: context.colors.neutralColor100, borderRadius: BorderRadius.circular(12)),
       child: Padding(
@@ -22,7 +29,7 @@ class TasksCard extends StatelessWidget {
                     alignment: FractionalOffset.center,
                     transform: Matrix4.identity()..rotateZ(90 * 3.1415927 / 180),
                     child: CircularProgressIndicator(
-                      value: 0.5,
+                      value: (taskDetails?.problemCount ?? 0) / taskCount,
                       strokeWidth: 20,
                       color: context.colors.primaryColor50,
                       backgroundColor: context.colors.secondaryColor80,
@@ -32,7 +39,7 @@ class TasksCard extends StatelessWidget {
                 Column(
                   children: [
                     Text(
-                      '32 task',
+                      '$taskCount task',
                       style: context.typography.h6SemiBold,
                     ),
                     Text(
@@ -61,7 +68,7 @@ class TasksCard extends StatelessWidget {
                         child: SizedBox(width: 10),
                       ),
                       TextSpan(
-                        text: '12',
+                        text: taskDetails?.connectionCount.toString(),
                         style: context.typography.subtitle2SemiBold.copyWith(color: context.colors.secondaryColor70),
                       ),
                     ],
@@ -79,7 +86,7 @@ class TasksCard extends StatelessWidget {
                         child: SizedBox(width: 10),
                       ),
                       TextSpan(
-                        text: '20',
+                        text: taskDetails?.problemCount.toString(),
                         style: context.typography.subtitle2SemiBold.copyWith(color: context.colors.primaryColor50),
                       ),
                     ],

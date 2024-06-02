@@ -16,7 +16,7 @@ class MainNotifier extends ChangeNotifier {
 
     if (result.isSuccess()) {
       userTaskModel = result.tryGetSuccess();
-      homeState = MainSuccess();
+      homeState = MainSuccess(taskDetails: userTaskModel?.taskDetails);
       notifyListeners();
     } else if (result.isError()) {
       homeState = MainError();

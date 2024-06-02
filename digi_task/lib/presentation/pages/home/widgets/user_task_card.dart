@@ -37,7 +37,7 @@ class UserTaskCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Ayxan O.',
+                  name,
                   style: context.typography.subtitle1SemiBold,
                 ),
                 iconRow
@@ -74,13 +74,14 @@ class UserTaskCard extends StatelessWidget {
                   IconPath.clock.toPathSvg,
                   height: 18,
                   width: 18,
+                  color: context.colors.neutralColor50,
                 ),
                 const SizedBox(
                   width: 8,
                 ),
                 Text(
                   time,
-                  style: context.typography.body1SemiBold,
+                  style: context.typography.body1SemiBold.copyWith(color: context.colors.neutralColor50),
                 ),
               ],
             ),

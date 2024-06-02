@@ -74,23 +74,20 @@ class Group {
 }
 
 class TaskDetails {
-  int? tvCount;
-  int? internetCount;
-  int? voiceCount;
+  int? problemCount;
+  int? connectionCount;
 
-  TaskDetails({this.tvCount, this.internetCount, this.voiceCount});
+  TaskDetails({this.problemCount, this.connectionCount});
 
   TaskDetails.fromJson(Map<String, dynamic> json) {
-    tvCount = json['tv_count'];
-    internetCount = json['internet_count'];
-    voiceCount = json['voice_count'];
+    problemCount = json['problem_count'];
+    connectionCount = json['connection_count'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['tv_count'] = tvCount;
-    data['internet_count'] = internetCount;
-    data['voice_count'] = voiceCount;
+    data['problem_count'] = problemCount;
+    data['connection_count'] = connectionCount;
     return data;
   }
 }
@@ -98,6 +95,8 @@ class TaskDetails {
 class OngoingTasks {
   int? id;
   List<Group>? group;
+  String? firstName;
+  String? lastName;
   String? createdAt;
   String? updatedAt;
   String? taskType;
@@ -117,6 +116,8 @@ class OngoingTasks {
   OngoingTasks(
       {this.id,
       this.group,
+      this.firstName,
+      this.lastName,
       this.createdAt,
       this.updatedAt,
       this.taskType,
@@ -141,6 +142,8 @@ class OngoingTasks {
         group!.add(Group.fromJson(v));
       });
     }
+    firstName = json['first_name'];
+    lastName = json['last_name'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     taskType = json['task_type'];
@@ -164,6 +167,8 @@ class OngoingTasks {
     if (group != null) {
       data['group'] = group!.map((v) => v.toJson()).toList();
     }
+    data['first_name'] = firstName;
+    data['last_name'] = lastName;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
     data['task_type'] = taskType;

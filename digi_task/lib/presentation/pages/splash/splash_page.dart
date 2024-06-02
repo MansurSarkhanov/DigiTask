@@ -30,19 +30,19 @@ class _SplashPageState extends State<SplashPage> {
     return Scaffold(
       backgroundColor: context.colors.primaryColor60,
       body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(90.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(ImagePath.logo.toPathPng),
-              const SizedBox(height: 24),
-              Text(
-                SplashStrings.splashTitle,
-                style: context.typography.h4SemiBold.copyWith(color: Colors.white),
-              ),
-            ],
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 90),
+              child: Image.asset(ImagePath.logo.toPathPng),
+            ),
+            const SizedBox(height: 24),
+            Text(
+              SplashStrings.splashTitle,
+              style: context.typography.h4Medium.copyWith(color: Colors.white),
+            ),
+          ],
         ),
       ),
     );

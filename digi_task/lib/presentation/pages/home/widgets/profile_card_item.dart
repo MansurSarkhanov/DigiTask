@@ -12,6 +12,7 @@ class ProfileCardItem extends StatelessWidget {
     this.isNotification = false,
     required this.onPressed,
     this.isExit = false,
+    this.onTap,
   });
   final String title;
   final String? subtitle;
@@ -20,6 +21,8 @@ class ProfileCardItem extends StatelessWidget {
   final String? trailingIcon;
   final bool? isNotification;
   final VoidCallback onPressed;
+  final VoidCallback? onTap;
+
   final bool? isExit;
 
   @override
@@ -43,14 +46,14 @@ class ProfileCardItem extends StatelessWidget {
         ),
         subtitle: subtitle != null
             ? Text(
-                'texnik@gmail.com',
+                subtitle!,
                 style: context.typography.body1Regular,
               )
             : null,
         leading: subtitle != null ? null : SvgPicture.asset(leadingIcon!),
         trailing: trailingIcon != null
             ? (isNotification == false
-                ? SvgPicture.asset(trailingIcon!)
+                ? InkWell(onTap: onTap, child: SvgPicture.asset(trailingIcon!))
                 : Theme(
                     data: ThemeData(useMaterial3: false),
                     child: Switch(

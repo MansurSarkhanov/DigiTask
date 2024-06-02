@@ -1,25 +1,25 @@
+import 'package:digi_task/features/tasks/data/repository/task_repository_impl.dart';
 import 'package:flutter/material.dart';
 
-import '../../../data/repository/home_repository.dart';
 import 'task_state.dart';
 
 class TaskNotifier extends ChangeNotifier {
-  TasksState state = TasksInitial();
-  final _homeRepository = HomeRepository();
+  TaskState state = TaskInitial();
+  final _taskRepository = TaskRepositoryImpl();
 
   Future<void> fetchTasks({String? query}) async {
-    state = TasksLoading();
+    state = TaskProgress();
     notifyListeners();
-    final result = await _homeRepository.fetchTasks(queryTask: query);
+    final result = await _taskRepository.getTasks(query: query);
     if (result.isSuccess()) {
       final tasks = result.tryGetSuccess();
-      state = TasksSuccess(tasks: tasks);
+      state = TaskSuccess(tasks: tasks);
       notifyListeners();
     } else if (result.isError()) {
-      state = TasksError();
+      state = TaskFailure();
       notifyListeners();
     } else {
-      state = TasksError();
+      state = TaskFailure();
       notifyListeners();
     }
   }

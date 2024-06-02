@@ -3,9 +3,9 @@ import 'package:digi_task/bloc/home/main/main_state.dart';
 import 'package:digi_task/core/constants/path/icon_path.dart';
 import 'package:digi_task/core/constants/theme/theme_ext.dart';
 import 'package:digi_task/core/utility/extension/icon_path_ext.dart';
+import 'package:digi_task/features/tasks/presentation/view/tasks_tab.dart';
 import 'package:digi_task/presentation/pages/home/widgets/tasks_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -21,11 +21,14 @@ class HomeTabView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 16, right: 16),
-      child: (state is MainLoading)
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
-          : RefreshIndicator(
+      child: switch (state) {
+        MainLoading() => const Center(child: CircularProgressIndicator()),
+        MainError() => const Center(
+            child: Text("Error"),
+          ),
+        MainSuccess() => Builder(builder: (_) {
+            final successState = state as MainSuccess;
+            return RefreshIndicator(
               onRefresh: () async {
                 await context.read<MainNotifier>().fetchUserTask();
               },
@@ -43,7 +46,9 @@ class HomeTabView extends StatelessWidget {
                     const SizedBox(
                       height: 16,
                     ),
-                    const TasksCard(),
+                    TasksCard(
+                      taskDetails: successState.taskDetails,
+                    ),
                     const SizedBox(
                       height: 24,
                     ),
@@ -72,48 +77,27 @@ class HomeTabView extends StatelessWidget {
                             iconRow: Row(
                               children: [
                                 if (notifier.userTaskModel?.ongoingTasks?.first.isInternet == true) ...[
-                                  SizedBox(
-                                    height: 40,
-                                    width: 110,
-                                    child: SvgPicture.asset(
-                                      IconPath.internet.toPathSvg,
-                                      fit: BoxFit.fill,
-                                    ),
+                                  ServiceType(
+                                    image: IconPath.internet.toPathSvg,
+                                    title: "Internet",
                                   ),
-                                  const SizedBox(
-                                    width: 4,
-                                  )
                                 ],
                                 if (notifier.userTaskModel?.ongoingTasks?.first.isTv == true) ...[
-                                  SizedBox(
-                                    height: 40,
-                                    width: 70,
-                                    child: SvgPicture.asset(
-                                      IconPath.tv.toPathSvg,
-                                      fit: BoxFit.fill,
-                                    ),
+                                  ServiceType(
+                                    image: IconPath.tv.toPathSvg,
+                                    title: "Tv",
                                   ),
-                                  const SizedBox(
-                                    width: 4,
-                                  )
                                 ],
                                 if (notifier.userTaskModel?.ongoingTasks?.first.isVoice == true) ...[
-                                  SizedBox(
-                                    height: 40,
-                                    width: 70,
-                                    child: SvgPicture.asset(
-                                      IconPath.voice.toPathSvg,
-                                      fit: BoxFit.fill,
-                                    ),
+                                  ServiceType(
+                                    image: IconPath.voice.toPathSvg,
+                                    title: "Voice",
                                   ),
-                                  const SizedBox(
-                                    width: 4,
-                                  )
                                 ]
                               ],
                             ),
                             location: notifier.userTaskModel?.ongoingTasks?.first.location ?? '',
-                            name: '',
+                            name: notifier.userTaskModel?.ongoingTasks?.first.firstName ?? '',
                             number: notifier.userTaskModel?.ongoingTasks?.first.contactNumber ?? '',
                             status: notifier.userTaskModel?.ongoingTasks?.first.status ?? '',
                             time: formattedDate == nowFormattedDate
@@ -148,7 +132,10 @@ class HomeTabView extends StatelessWidget {
                   ],
                 ),
               ),
-            ),
+            );
+          }),
+        _ => const SizedBox.shrink()
+      },
     );
   }
 }
