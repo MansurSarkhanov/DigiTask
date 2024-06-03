@@ -5,7 +5,7 @@ abstract interface class ISharedPreferenceService {
   void saveBool(String key, bool value);
   void saveInt(String key, int value);
   String readString(String key);
-  bool readBool(String key);
+  bool? readBool(String key);
   int readInt(String key);
   void clear();
 }
@@ -43,7 +43,7 @@ final class SharedPreferenceService implements ISharedPreferenceService {
   }
 
   @override
-  bool readBool(String key) {
+  bool? readBool(String key) {
     return _prefsInstance?.getBool(key) ?? false;
   }
 

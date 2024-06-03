@@ -8,8 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
+import '../../../bloc/auth/auth_notifier.dart';
 import '../../../bloc/auth/login/login_state.dart';
-import '../../components/flushbar.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -22,17 +22,44 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   context.read<LoginNotifier>().addListener(() {
+  //     final loginState = context.read<LoginNotifier>().state;
+  //     if (loginState is LoginSuccess) {
+  //       context.goNamed(AppRoutes.home.name);
+  //     } else if (loginState is LoginFailure) {
+  //       openFlushbar(context, loginState);
+  //     }
+  //   });
+  // }
+
+  late LoginNotifier _loginNotifier;
+
   @override
   void initState() {
     super.initState();
-    context.read<LoginNotifier>().addListener(() {
-      final loginState = context.read<LoginNotifier>().state;
-      if (loginState is LoginSuccess) {
-        context.goNamed(AppRoutes.home.name);
-      } else if (loginState is LoginFailure) {
-        openFlushbar(context, loginState);
-      }
-    });
+
+    _loginNotifier = context.read<LoginNotifier>();
+
+    _loginNotifier.addListener(
+      () {
+        final loginState = _loginNotifier.state;
+
+        if (loginState is LoginSuccess) {
+          context.read<AuthNotifier>().userLogged();
+        } else if (loginState is LoginFailure) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                loginState.message,
+              ),
+            ),
+          );
+        }
+      },
+    );
   }
 
   @override

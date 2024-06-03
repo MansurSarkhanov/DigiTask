@@ -9,6 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../features/performance/presentation/bloc/performance_notifier.dart';
+import '../../../../features/performance/presentation/bloc/performance_state.dart';
+import '../widgets/component_title.dart';
 import '../widgets/organizations_card.dart';
 import '../widgets/user_task_card.dart';
 
@@ -52,15 +55,9 @@ class HomeTabView extends StatelessWidget {
                     const SizedBox(
                       height: 24,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Davam edən tasklar',
-                          style: context.typography.subtitle2Medium,
-                        ),
-                        const Icon(Icons.arrow_forward_ios_rounded)
-                      ],
+                    ComponentTitle(
+                      title: 'Davam edən tasklar',
+                      onPressed: () {},
                     ),
                     const SizedBox(
                       height: 16,
@@ -112,15 +109,9 @@ class HomeTabView extends StatelessWidget {
                     const SizedBox(
                       height: 24,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Tədbirlər',
-                          style: context.typography.subtitle2Medium,
-                        ),
-                        const Icon(Icons.arrow_forward_ios_rounded),
-                      ],
+                    ComponentTitle(
+                      title: 'Tədbirlər',
+                      onPressed: () {},
                     ),
                     const SizedBox(
                       height: 16,
@@ -129,6 +120,95 @@ class HomeTabView extends StatelessWidget {
                     const SizedBox(
                       height: 24,
                     ),
+                    if (context.watch<MainNotifier>().isAdmin) ...[
+                      ComponentTitle(
+                        title: 'Texniklərin performansı',
+                        onPressed: () {},
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      Consumer<PerformanceNotifier>(
+                        builder: (context, notifier, child) {
+                          if (notifier.state is PerformanceLoading) {
+                            return const Center(child: CircularProgressIndicator());
+                          } else if (notifier.state is PerformanceSuccess) {
+                            final performance = (notifier.state as PerformanceSuccess).performanceList;
+                            return Container(
+                                margin: const EdgeInsets.only(bottom: 24),
+                                color: Colors.white,
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          color: context.colors.primaryColor50,
+                                          borderRadius: const BorderRadius.only(
+                                              topLeft: Radius.circular(16), topRight: Radius.circular(16))),
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text('Ad     ',
+                                                style:
+                                                    context.typography.subtitle2SemiBold.copyWith(color: Colors.white)),
+                                            Text('Qrup   ',
+                                                style:
+                                                    context.typography.subtitle2SemiBold.copyWith(color: Colors.white)),
+                                            Text('Tasklar',
+                                                style:
+                                                    context.typography.subtitle2SemiBold.copyWith(color: Colors.white)),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    Column(
+                                        children: performance!
+                                            .map(
+                                              (e) => Column(
+                                                children: [
+                                                  Padding(
+                                                    padding: const EdgeInsets.only(left: 16.0, right: 40, top: 10),
+                                                    child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                      children: [
+                                                        Expanded(
+                                                          child: Text(
+                                                            "${e.firstName}",
+                                                            maxLines: 1,
+                                                            style: context.typography.subtitle2Regular
+                                                                .copyWith(color: context.colors.primaryColor50),
+                                                          ),
+                                                        ),
+                                                        Expanded(
+                                                          child: Text(
+                                                            "${e.group?.group}",
+                                                            style: context.typography.subtitle2Regular,
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          "${e.taskCount?.total}",
+                                                          style: context.typography.subtitle2SemiBold
+                                                              .copyWith(color: context.colors.primaryColor50),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Divider(
+                                                    color: context.colors.neutralColor90,
+                                                    height: 12,
+                                                  )
+                                                ],
+                                              ),
+                                            )
+                                            .toList()),
+                                  ],
+                                ));
+                          }
+                          return const SizedBox.shrink();
+                        },
+                      )
+                    ]
                   ],
                 ),
               ),
@@ -139,3 +219,4 @@ class HomeTabView extends StatelessWidget {
     );
   }
 }
+

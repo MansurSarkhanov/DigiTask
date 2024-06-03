@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../data/model/response/performance_model.dart';
+import '../../data/model/performance_model.dart';
 
 abstract class PerformanceState extends Equatable {
   @override

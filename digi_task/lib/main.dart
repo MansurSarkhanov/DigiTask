@@ -1,17 +1,27 @@
 import 'package:digi_task/app_router.dart';
+import 'package:digi_task/bloc/auth/auth_notifier.dart';
 import 'package:digi_task/bloc/theme/theme_scope.dart';
 import 'package:digi_task/bloc/theme/theme_scope_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get_it/get_it.dart';
+import 'package:provider/provider.dart';
 
 import 'injection.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  init();
+  await init();
   runApp(
-    const ThemeScopeWidget(
-      child: MyApp(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => GetIt.instance<AuthNotifier>(),
+        )
+      ],
+      child: const ThemeScopeWidget(
+        child: MyApp(),
+      ),
     ),
   );
 }
@@ -34,7 +44,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         extensions: extensions,
       ),
-      routerConfig: appRouter,
+      routerConfig: GetIt.instance.get<AppRouter>().instance,
     );
   }
 }

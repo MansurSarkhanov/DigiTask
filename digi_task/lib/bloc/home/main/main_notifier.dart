@@ -1,12 +1,16 @@
 import 'package:digi_task/bloc/home/main/main_state.dart';
+import 'package:digi_task/core/constants/app_keys.dart';
 import 'package:digi_task/data/model/response/user_task_model.dart';
 import 'package:digi_task/data/repository/home_repository.dart';
+import 'package:digi_task/data/services/local/shared_service.dart';
+import 'package:digi_task/injection.dart';
 import 'package:flutter/foundation.dart';
 
 class MainNotifier extends ChangeNotifier {
   MainState homeState = MainInitial();
   final HomeRepository _homeRepository = HomeRepository();
-
+  final preference = getIt.get<SharedPreferenceService>();
+  bool isAdmin = false;
   UserTaskModel? userTaskModel;
 
   Future<void> fetchUserTask() async {
@@ -25,5 +29,11 @@ class MainNotifier extends ChangeNotifier {
       homeState = MainError();
       notifyListeners();
     }
+  }
+
+  void checkAdmin() {
+    isAdmin = preference.readBool(AppKeys.isAdmin) ?? false;
+    print(isAdmin);
+    notifyListeners();
   }
 }

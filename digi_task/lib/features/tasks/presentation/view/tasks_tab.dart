@@ -178,13 +178,14 @@ class ServiceType extends StatelessWidget {
                 image,
                 height: 16,
                 width: 16,
+                color: context.colors.neutralColor40,
               ),
               const SizedBox(
                 width: 4,
               ),
               Text(
                 title,
-                style: context.typography.overlineSemiBold,
+                style: context.typography.overlineSemiBold.copyWith(color: context.colors.neutralColor40),
               )
             ],
           ),

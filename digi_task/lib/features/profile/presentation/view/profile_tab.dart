@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../bloc/auth/auth_notifier.dart';
 import '../../../../presentation/pages/home/widgets/profile_card_item.dart';
 
 class ProfileTab extends StatefulWidget {
@@ -143,8 +144,12 @@ class _ProfileTabState extends State<ProfileTab> {
                                             BorderSide(color: context.colors.errorColor50),
                                           ),
                                         ),
-                                        onPressed: () {},
-                                        child: Text(
+                                        onPressed: context.read<AuthNotifier>().logOut,
+                                        child: context.watch<AuthNotifier>().authState == AuthState.progress
+                                            ? const Center(
+                                                child: CircularProgressIndicator(),
+                                              )
+                                            : Text(
                                           'Çıxış et',
                                           style: context.typography.body2SemiBold
                                               .copyWith(color: context.colors.neutralColor100),

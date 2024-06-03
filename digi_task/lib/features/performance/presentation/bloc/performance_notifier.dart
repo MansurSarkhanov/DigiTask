@@ -1,15 +1,14 @@
-import 'package:digi_task/bloc/home/performance/performance_state.dart';
+import 'package:digi_task/features/performance/data/repository/performance_repository_impl.dart';
+import 'package:digi_task/features/performance/presentation/bloc/performance_state.dart';
 import 'package:flutter/material.dart';
-
-import '../../../data/repository/home_repository.dart';
 
 class PerformanceNotifier extends ChangeNotifier {
   PerformanceState state = PerformanceInitial();
-  final HomeRepository _homeRepository = HomeRepository();
+  final _performanceRepository = PerformanceRepositoryImpl();
   Future<void> fetchPerfomance() async {
     state = PerformanceLoading();
     notifyListeners();
-    final result = await _homeRepository.fetchPerformances();
+    final result = await _performanceRepository.getPerformance();
     if (result.isSuccess()) {
       final performanceModel = result.tryGetSuccess();
       state = PerformanceSuccess(performanceList: performanceModel);

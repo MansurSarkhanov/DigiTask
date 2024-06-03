@@ -1,10 +1,8 @@
 import 'package:digi_task/core/constants/path/image_paths.dart';
-import 'package:digi_task/core/constants/routes.dart';
 import 'package:digi_task/core/constants/strings/splash_strings.dart';
 import 'package:digi_task/core/constants/theme/theme_ext.dart';
 import 'package:digi_task/core/utility/extension/image_path_ext.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -14,16 +12,7 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  @override
-  void initState() {
-    super.initState();
-    Future.delayed(
-      const Duration(seconds: 3),
-      () {
-        context.goNamed(AppRoutes.onboarding.name);
-      },
-    );
-  }
+
 
   @override
   Widget build(BuildContext context) {

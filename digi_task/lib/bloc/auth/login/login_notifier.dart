@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'login_state.dart';
 
 class LoginNotifier extends ChangeNotifier {
+  LoginNotifier(this.authRepository);
   LoginState state = LoginInitial();
-  final AuthRepository _authRepository = AuthRepository();
-  
+  final IAuthRepository authRepository;
 
   Future<void> loginUser({required String email, required String password}) async {
     state = LoginProgress();
     notifyListeners();
-    final result = await _authRepository.login(email: email, password: password);
+    final result = await authRepository.login(email: email, password: password);
 
     if (result.isSuccess()) {
       state = LoginSuccess();

@@ -5,13 +5,14 @@ import 'package:digi_task/core/utility/extension/icon_path_ext.dart';
 import 'package:digi_task/features/tasks/presentation/view/tasks_tab.dart';
 import 'package:digi_task/presentation/pages/home/widgets/bottom_navbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/constants/routes.dart';
+import '../../../features/performance/presentation/view/performance_tab.dart';
 import '../../../features/profile/presentation/view/profile_tab.dart';
 import 'view/home_tab.dart';
-import 'view/performance_tab.dart';
 import 'widgets/notification_icon.dart';
 
 class HomePage extends StatefulWidget {
@@ -23,9 +24,11 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   late final TabController tabController;
+  late final bool isAdmin;
   @override
   void initState() {
     super.initState();
+
     tabController = TabController(length: 4, vsync: this);
 
     tabController.addListener(() {
@@ -53,6 +56,17 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
     return Scaffold(
       backgroundColor: context.colors.backgroundColor,
+      floatingActionButton: context.watch<MainNotifier>().isAdmin
+          ? Theme(
+              data: ThemeData(useMaterial3: false),
+              child: FloatingActionButton(
+                backgroundColor: context.colors.primaryColor50,
+                child: SvgPicture.asset(IconPath.add.toPathSvg),
+                onPressed: () {},
+              ),
+            )
+          : null,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomNavBar(tabController: tabController),
       appBar: AppBar(
         backgroundColor: context.colors.neutralColor100,
