@@ -17,6 +17,11 @@ class _ProfileEditViewState extends State<ProfileEditView> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController regionController = TextEditingController();
   final TextEditingController qrupController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController mailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -35,28 +40,57 @@ class _ProfileEditViewState extends State<ProfileEditView> {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            ProfileField(
-              title: "Ad Soyad",
-              controller: nameController..text = 'Texnik',
-            ),
-            const SizedBox(
-              height: 12,
-            ),
-            ProfileField(
-              title: "Region",
-              controller: regionController..text = 'Region',
-            ),
-            const SizedBox(
-              height: 12,
-            ),
-            ProfileField(
-              title: "Qrup",
-              controller: qrupController..text = "Qrup",
-            )
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              ProfileField(
+                title: "Ad Soyad",
+                controller: nameController..text = 'Texnik',
+              ),
+              const SizedBox(
+                height: 12,
+              ),
+              ProfileField(
+                title: "Region",
+                controller: regionController..text = 'Region',
+              ),
+              const SizedBox(
+                height: 12,
+              ),
+              ProfileField(
+                title: "Qrup",
+                controller: qrupController..text = "Qrup",
+              ),
+              const SizedBox(
+                height: 32,
+              ),
+              ProfileField(
+                title: "Əlaqə nömrəsi",
+                controller: phoneController..text = "(051) 555-5555",
+                isWithIcon: true,
+                iconPath: IconPath.phoneblue.toPathSvg,
+              ),
+              const SizedBox(
+                height: 12,
+              ),
+              ProfileField(
+                title: "Mail adresi",
+                controller: mailController..text = "texnik@gmail.com",
+                isWithIcon: true,
+                iconPath: IconPath.mail.toPathSvg,
+              ),
+              const SizedBox(
+                height: 12,
+              ),
+              ProfileField(
+                title: "Şifrə",
+                controller: passwordController..text = "Şifrəni dəyiş",
+                isWithIcon: true,
+                iconPath: IconPath.key.toPathSvg,
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -92,7 +92,7 @@ class UserTaskCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SvgPicture.asset(
-                  IconPath.phone.toPathSvg,
+                  IconPath.phonegreen.toPathSvg,
                   height: 18,
                   width: 18,
                 ),
