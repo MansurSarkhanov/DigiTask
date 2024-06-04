@@ -51,7 +51,7 @@ class OnboardingPage extends StatelessWidget {
                 ),
               ),
               const Spacer(),
-              LoginButton(
+              ActionButton(
                 onPressed: () {
                   context.goNamed(AppRoutes.login.name);
                 },

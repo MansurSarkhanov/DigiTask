@@ -47,7 +47,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                   icon: Icons.mail_outline,
                   hintText: 'Mail adresiniz'),
               const SizedBox(height: 80),
-              LoginButton(
+              ActionButton(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) {

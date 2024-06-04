@@ -1,7 +1,7 @@
 import 'package:digi_task/core/constants/path/icon_path.dart';
 import 'package:digi_task/core/constants/theme/theme_ext.dart';
 import 'package:digi_task/core/utility/extension/icon_path_ext.dart';
-import 'package:digi_task/presentation/components/input/profile_field.dart';
+import 'package:digi_task/presentation/components/input/app_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
@@ -50,28 +50,28 @@ class _ProfileEditViewState extends State<ProfileEditView> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              ProfileField(
+              AppField(
                 title: "Ad Soyad",
                 controller: nameController..text = "${userModel.firstName} ${userModel.lastName}",
               ),
               const SizedBox(
                 height: 12,
               ),
-              ProfileField(
+              AppField(
                 title: "Region",
                 controller: regionController..text = "${userModel.group?.region}",
               ),
               const SizedBox(
                 height: 12,
               ),
-              ProfileField(
+              AppField(
                 title: "Qrup",
                 controller: qrupController..text = "${userModel.group?.group}",
               ),
               const SizedBox(
                 height: 32,
               ),
-              ProfileField(
+              AppField(
                 title: "Əlaqə nömrəsi",
                 controller: phoneController..text = "${userModel.phone}",
                 isWithIcon: true,
@@ -80,7 +80,7 @@ class _ProfileEditViewState extends State<ProfileEditView> {
               const SizedBox(
                 height: 12,
               ),
-              ProfileField(
+              AppField(
                 title: "Mail adresi",
                 controller: mailController..text = "${userModel.email}",
                 isWithIcon: true,
@@ -89,7 +89,7 @@ class _ProfileEditViewState extends State<ProfileEditView> {
               const SizedBox(
                 height: 12,
               ),
-              ProfileField(
+              AppField(
                 title: "Şifrə",
                 controller: passwordController..text = "Şifrəni dəyiş",
                 isWithIcon: true,

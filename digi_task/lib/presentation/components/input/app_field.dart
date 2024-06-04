@@ -4,18 +4,26 @@ import 'package:digi_task/core/utility/extension/icon_path_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class ProfileField extends StatelessWidget {
-  const ProfileField({
+class AppField extends StatelessWidget {
+  const AppField({
     super.key,
     required this.title,
     required this.controller,
     this.isWithIcon = false,
     this.iconPath,
+    this.filledColor,
+    this.isProfileView = true,
+    this.hintText,
+    this.minLine = 1,
   });
   final String title;
   final TextEditingController controller;
   final bool? isWithIcon;
   final String? iconPath;
+  final Color? filledColor;
+  final bool? isProfileView;
+  final String? hintText;
+  final int? minLine;
 
   @override
   Widget build(BuildContext context) {
@@ -24,13 +32,17 @@ class ProfileField extends StatelessWidget {
       children: [
         Text(
           title,
-          style: context.typography.body2SemiBold.copyWith(color: context.colors.neutralColor10),
+          style: context.typography.body2SemiBold
+              .copyWith(color: isProfileView == true ? context.colors.neutralColor10 : context.colors.neutralColor60),
         ),
         const SizedBox(
           height: 8,
         ),
         TextFormField(
-          style: context.typography.body2Regular.copyWith(color: context.colors.neutralColor40),
+          minLines: minLine,
+          maxLines: 3,
+          style: context.typography.body2Regular
+              .copyWith(color: isProfileView == true ? context.colors.neutralColor40 : context.colors.neutralColor10),
           controller: controller,
           decoration: InputDecoration(
             suffixIcon: isWithIcon == true
@@ -50,9 +62,13 @@ class ProfileField extends StatelessWidget {
                   )
                 : null,
             filled: true,
-            fillColor: context.colors.neutralColor100,
-            enabledBorder: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.circular(24)),
-            focusedBorder: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.circular(24)),
+            hintText: isProfileView == true ? null : hintText,
+            hintStyle: context.typography.body2Regular.copyWith(color: context.colors.neutralColor10),
+            fillColor: filledColor ?? context.colors.neutralColor100,
+            enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide.none, borderRadius: BorderRadius.circular(isProfileView == true ? 24 : 5)),
+            focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide.none, borderRadius: BorderRadius.circular(isProfileView == true ? 24 : 5)),
           ),
         ),
       ],

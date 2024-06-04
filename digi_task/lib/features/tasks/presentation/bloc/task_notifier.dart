@@ -1,16 +1,21 @@
-import 'package:digi_task/features/tasks/data/repository/task_repository_impl.dart';
+import 'package:digi_task/features/tasks/presentation/bloc/task_create_state.dart';
 import 'package:flutter/material.dart';
 
+import '../../data/model/create_task_model.dart';
+import '../../domain/repository/task_repository.dart';
 import 'task_state.dart';
 
 class TaskNotifier extends ChangeNotifier {
+  TaskNotifier(this.taskRepository);
+  final ITaskRepository taskRepository;
+
   TaskState state = TaskInitial();
-  final _taskRepository = TaskRepositoryImpl();
+  TaskCreateState createState = TaskCreateInitial();
 
   Future<void> fetchTasks({String? query}) async {
     state = TaskProgress();
     notifyListeners();
-    final result = await _taskRepository.getTasks(query: query);
+    final result = await taskRepository.getTasks(query: query);
     if (result.isSuccess()) {
       final tasks = result.tryGetSuccess();
       state = TaskSuccess(tasks: tasks);
@@ -20,6 +25,22 @@ class TaskNotifier extends ChangeNotifier {
       notifyListeners();
     } else {
       state = TaskFailure();
+      notifyListeners();
+    }
+  }
+
+  Future<void> createTask(CreateTaskModel model) async {
+    createState = TaskCreateProgress();
+    final result = await taskRepository.createTask(model: model);
+    if (result.isSuccess()) {
+      createState = TaskCreateSuccess();
+
+      notifyListeners();
+    } else if (result.isError()) {
+      createState = TaskCreateFailure();
+      notifyListeners();
+    } else {
+      createState = TaskCreateFailure();
       notifyListeners();
     }
   }

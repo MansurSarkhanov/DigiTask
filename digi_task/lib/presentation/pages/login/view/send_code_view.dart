@@ -79,7 +79,7 @@ class SendCodeView extends StatelessWidget {
                 ],
               ),
               const Spacer(),
-              LoginButton(onPressed: () {}),
+              ActionButton(onPressed: () {}),
               const SizedBox(
                 height: 72,
               )

@@ -6,6 +6,7 @@ import 'package:digi_task/features/performance/presentation/bloc/performance_not
 import 'package:digi_task/features/profile/presentation/bloc/profile_notifier.dart';
 import 'package:digi_task/features/profile/presentation/view/profile_edit_view.dart';
 import 'package:digi_task/features/tasks/presentation/bloc/task_notifier.dart';
+import 'package:digi_task/features/tasks/presentation/view/create_task_view.dart';
 import 'package:digi_task/presentation/pages/login/login_page.dart';
 import 'package:digi_task/presentation/pages/notification/notification_page.dart';
 import 'package:digi_task/presentation/pages/splash/splash_page.dart';
@@ -97,7 +98,7 @@ final class AppRouter {
                       create: (context) => PerformanceNotifier()..fetchPerfomance(),
                     ),
                     ChangeNotifierProvider(
-                      create: (context) => TaskNotifier()..fetchTasks(),
+                      create: (context) => GetIt.instance<TaskNotifier>()..fetchTasks(),
                     ),
                     ChangeNotifierProvider(
                       create: (context) => GetIt.instance<ProfileNotifier>()..getUserInformation(),
@@ -110,6 +111,12 @@ final class AppRouter {
                 path: AppRoutes.notification.path,
                 name: AppRoutes.notification.name,
                 builder: (context, state) => const NotificationPage(),
+              ),
+              GoRoute(
+                path: AppRoutes.createTask.path,
+                name: AppRoutes.createTask.name,
+                builder: (context, state) => ChangeNotifierProvider(
+                    create: (context) => GetIt.instance<TaskNotifier>(), child: const CreateTaskView()),
               ),
               GoRoute(
                 path: AppRoutes.profileEdit.path,

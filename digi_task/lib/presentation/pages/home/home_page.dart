@@ -63,7 +63,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               child: FloatingActionButton(
                 backgroundColor: context.colors.primaryColor50,
                 child: SvgPicture.asset(IconPath.add.toPathSvg),
-                onPressed: () {},
+                onPressed: () {
+                  context.goNamed(AppRoutes.createTask.name);
+                },
               ),
             )
           : null,

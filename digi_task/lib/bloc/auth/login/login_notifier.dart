@@ -18,6 +18,7 @@ class LoginNotifier extends ChangeNotifier {
       notifyListeners();
     } else {
       final errorMessage = result.tryGetError()!.detail ?? 'Failed to login';
+      print(errorMessage);
       state = LoginFailure(message: errorMessage);
       notifyListeners();
     }

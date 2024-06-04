@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../features/performance/presentation/bloc/performance_notifier.dart';
 import '../../../../features/performance/presentation/bloc/performance_state.dart';
+import '../../../components/custom_progress_indicator.dart';
 import '../../../components/service_type.dart';
 import '../widgets/component_title.dart';
 import '../widgets/organizations_card.dart';
@@ -25,7 +26,7 @@ class HomeTabView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 16, right: 16),
       child: switch (state) {
-        MainLoading() => const Center(child: CircularProgressIndicator()),
+        MainLoading() => const Center(child: CustomProgressIndicator()),
         MainError() => const Center(
             child: Text("Error"),
           ),

@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../presentation/components/custom_progress_indicator.dart';
 import '../../../../presentation/components/service_type.dart';
 
 class TasksTab extends StatefulWidget {
@@ -100,7 +101,7 @@ class _TasksTabState extends State<TasksTab> with TickerProviderStateMixin {
           builder: (context, notifier, child) {
             if (notifier.state is TaskProgress) {
               return const Center(
-                child: CircularProgressIndicator(),
+                child: CustomProgressIndicator(),
               );
             } else if (notifier.state is TaskSuccess) {
               final taskNotifier = notifier.state as TaskSuccess;

@@ -1,16 +1,16 @@
 import 'package:digi_task/core/constants/theme/theme_ext.dart';
 import 'package:flutter/material.dart';
 
-import '../../../core/constants/strings/onboarding_strings.dart';
-
-class LoginButton extends StatelessWidget {
-  const LoginButton({
+class ActionButton extends StatelessWidget {
+  const ActionButton({
     super.key,
     required this.onPressed,
     this.isLoading = false,
+    this.title = "Daxil ol",
   });
   final VoidCallback onPressed;
   final bool? isLoading;
+  final String? title;
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +34,9 @@ class LoginButton extends StatelessWidget {
                 color: Colors.white,
               )
             : Text(
-          OnboardingStrings.login,
-          style: context.typography.captionRegular.copyWith(color: Colors.white),
-        ),
+                title ?? "Daxil ol",
+                style: context.typography.captionRegular.copyWith(color: Colors.white),
+              ),
       ),
     );
   }

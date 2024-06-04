@@ -17,3 +17,4 @@ final class TaskSuccess extends TaskState {
 final class TaskFailure extends TaskState {}
 
 final class TaskProgress extends TaskState {}
+

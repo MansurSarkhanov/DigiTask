@@ -4,6 +4,7 @@ import 'package:digi_task/core/constants/theme/theme_ext.dart';
 import 'package:digi_task/core/utility/extension/icon_path_ext.dart';
 import 'package:digi_task/features/profile/presentation/bloc/profile_notifier.dart';
 import 'package:digi_task/features/profile/presentation/bloc/profile_state.dart';
+import 'package:digi_task/presentation/components/custom_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -26,7 +27,7 @@ class _ProfileTabState extends State<ProfileTab> {
       child: Consumer<ProfileNotifier>(builder: (context, notifier, child) {
         if (notifier.state is ProfileProgress) {
           return const Center(
-            child: CircularProgressIndicator(),
+            child: CustomProgressIndicator(),
           );
         } else if (notifier.state is ProfileFailure) {
           const Center(
@@ -148,7 +149,7 @@ class _ProfileTabState extends State<ProfileTab> {
                                           onPressed: context.read<AuthNotifier>().logOut,
                                           child: context.watch<AuthNotifier>().authState == AuthState.progress
                                               ? const Center(
-                                                  child: CircularProgressIndicator(),
+                                                  child: CustomProgressIndicator(),
                                                 )
                                               : Text(
                                                   'Çıxış et',

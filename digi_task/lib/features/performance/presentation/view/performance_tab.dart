@@ -1,5 +1,6 @@
 import 'package:digi_task/core/constants/theme/theme_ext.dart';
 import 'package:digi_task/features/performance/presentation/bloc/performance_notifier.dart';
+import 'package:digi_task/presentation/components/custom_progress_indicator.dart';
 import 'package:digi_task/presentation/pages/home/widgets/select_time_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -58,7 +59,7 @@ class _PerformanceTabState extends State<PerformanceTab> {
                 Consumer<PerformanceNotifier>(
                   builder: (context, notifier, child) {
                     if (notifier.state is PerformanceLoading) {
-                      return const Center(child: CircularProgressIndicator());
+                      return const Center(child: CustomProgressIndicator());
                     } else if (notifier.state is PerformanceSuccess) {
                       final performance = (notifier.state as PerformanceSuccess).performanceList;
                       return Expanded(
