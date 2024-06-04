@@ -20,7 +20,6 @@ import 'bloc/auth/login/login_notifier.dart';
 import 'core/constants/path/icon_path.dart';
 import 'features/profile/presentation/view/profile_tab.dart';
 import 'presentation/pages/home/home_page.dart';
-import 'presentation/pages/login/view/reset_password_view.dart';
 import 'presentation/pages/onboarding/onboarding_page.dart';
 
 final _appRouterKey = GlobalKey<NavigatorState>();
@@ -81,14 +80,9 @@ final class AppRouter {
             builder: (context, state) => ChangeNotifierProvider(
                   create: (context) => GetIt.instance<LoginNotifier>(),
                   child: const LoginPage(),
-                ),
-            routes: [
-              GoRoute(
-                path: AppRoutes.resetPassword.path,
-                name: AppRoutes.resetPassword.name,
-                builder: (context, state) => const ResetPassword(),
-              ),
-            ]),
+          ),
+        ),
+     
         GoRoute(
             path: AppRoutes.home.path,
             name: AppRoutes.home.name,
@@ -140,7 +134,12 @@ final class AppRouter {
                             },
                             icon: SvgPicture.asset(IconPath.arrowleft.toPathSvg)),
                         title: Text('Profil', style: context.typography.subtitle2Medium),
-                        actions: [IconButton(onPressed: () {}, icon: SvgPicture.asset(IconPath.menu.toPathSvg))],
+                        actions: [
+                          Padding(
+                            padding: const EdgeInsets.only(right: 16.0),
+                            child: IconButton(onPressed: () {}, icon: SvgPicture.asset(IconPath.menu.toPathSvg)),
+                          )
+                        ],
                       ),
                       body: const ProfileTab()),
                 ),

@@ -1,11 +1,10 @@
 import 'package:digi_task/bloc/auth/login/login_notifier.dart';
-import 'package:digi_task/core/constants/routes.dart';
 import 'package:digi_task/core/constants/theme/theme_ext.dart';
 import 'package:digi_task/presentation/components/button/login_button.dart';
 import 'package:digi_task/presentation/components/input/custom_form_filed.dart';
 import 'package:digi_task/presentation/components/logo_widget.dart';
+import 'package:digi_task/presentation/pages/login/view/reset_password_view.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../../bloc/auth/auth_notifier.dart';
@@ -106,7 +105,11 @@ class _LoginPageState extends State<LoginPage> {
               ),
               TextButton(
                 onPressed: () {
-                  context.goNamed(AppRoutes.resetPassword.name);
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) {
+                      return const ResetPassword();
+                    },
+                  ));
                 },
                 child: Text(
                   "Şifrəni unutmusunuz?",

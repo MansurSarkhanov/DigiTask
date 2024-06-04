@@ -3,10 +3,8 @@ enum AppRoutes {
   onboarding(path: '/onboarding', name: 'onboarding'),
   login(path: '/login', name: 'login'),
   home(path: '/home', name: 'home'),
-  resetPassword(path: 'resetPassword', name: 'resetPassword'),
   notification(path: 'notification', name: 'notification'),
   profile(path: 'profile', name: 'profile'),
-
   profileEdit(path: 'profileEdit', name: 'profileEdit');
 
 

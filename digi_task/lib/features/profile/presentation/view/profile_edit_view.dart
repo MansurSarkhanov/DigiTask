@@ -37,7 +37,12 @@ class _ProfileEditViewState extends State<ProfileEditView> {
             },
             icon: SvgPicture.asset(IconPath.arrowleft.toPathSvg)),
         title: Text('Profile edit', style: context.typography.subtitle2Medium),
-        actions: [IconButton(onPressed: () {}, icon: SvgPicture.asset(IconPath.menu.toPathSvg))],
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 16.0),
+            child: IconButton(onPressed: () {}, icon: SvgPicture.asset(IconPath.menu.toPathSvg)),
+          )
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24),

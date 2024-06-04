@@ -20,7 +20,7 @@ final getIt = GetIt.instance;
 
 Future<void> init() async {
 
-  getIt.registerLazySingleton(() => SharedPreferenceService());
+  getIt.registerFactory(() => SharedPreferenceService());
   getIt.registerFactory(() => SecureService(secureStorage: const FlutterSecureStorage()));
 
   getIt.registerLazySingleton(() => AuthService());
