@@ -38,7 +38,6 @@ class MyApp extends StatelessWidget {
       statusBarColor: Colors.transparent,
     ));
     return MaterialApp.router(
-      
       debugShowCheckedModeBanner: false,
       title: 'Digi Task',
       theme: ThemeData(

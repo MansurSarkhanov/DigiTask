@@ -2,7 +2,9 @@ import 'package:digi_task/core/constants/theme/theme_ext.dart';
 import 'package:digi_task/core/utility/extension/icon_path_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
+import '../../../../bloc/home/main/main_notifier.dart';
 import '../../../../core/constants/path/icon_path.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -61,6 +63,16 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 width: 22,
               ),
             ),
+            context.watch<MainNotifier>().isAdmin
+                ? Tab(
+                    text: "Digər",
+                    icon: SvgPicture.asset(
+                      widget.tabController.index == 3 ? IconPath.selectedother.toPathSvg : IconPath.other.toPathSvg,
+                      height: 22,
+                      width: 22,
+                    ),
+                  )
+                :
             Tab(
               text: "Profil",
               icon: SvgPicture.asset(

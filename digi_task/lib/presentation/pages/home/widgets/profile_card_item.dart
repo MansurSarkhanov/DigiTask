@@ -13,6 +13,7 @@ class ProfileCardItem extends StatelessWidget {
     required this.onPressed,
     this.isExit = false,
     this.onTap,
+    this.sytle,
   });
   final String title;
   final String? subtitle;
@@ -24,6 +25,7 @@ class ProfileCardItem extends StatelessWidget {
   final VoidCallback? onTap;
 
   final bool? isExit;
+  final TextStyle? sytle;
 
   @override
   Widget build(BuildContext context) {
@@ -34,14 +36,14 @@ class ProfileCardItem extends StatelessWidget {
         shape: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
         onTap: onPressed,
         contentPadding: subtitle != null
-            ? const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8)
-            : const EdgeInsets.only(left: 19, right: 19, top: 5, bottom: 5),
+            ? const EdgeInsets.only(left: 16, right: 4, top: 8, bottom: 8)
+            : const EdgeInsets.only(left: 19, right: 4, top: 5, bottom: 5),
         title: Text(
           title,
           style: subtitle != null
               ? context.typography.subtitle1SemiBold
-                  
-              : context.typography.subtitle2Medium
+              : sytle ??
+                  context.typography.subtitle2Medium
                   .copyWith(color: isExit == true ? context.colors.errorColor50 : context.colors.neutralColor50),
         ),
         subtitle: subtitle != null
@@ -53,7 +55,7 @@ class ProfileCardItem extends StatelessWidget {
         leading: subtitle != null ? null : SvgPicture.asset(leadingIcon!),
         trailing: trailingIcon != null
             ? (isNotification == false
-                ? InkWell(onTap: onTap, child: SvgPicture.asset(trailingIcon!))
+                ? IconButton(onPressed: onTap, icon: SvgPicture.asset(trailingIcon!))
                 : Theme(
                     data: ThemeData(useMaterial3: false),
                     child: Switch(

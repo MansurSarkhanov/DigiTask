@@ -1,10 +1,12 @@
-import 'package:digi_task/features/profile/data/repository/profile_repository_impl.dart';
 import 'package:digi_task/features/profile/presentation/bloc/profile_state.dart';
 import 'package:flutter/material.dart';
 
+import '../../domain/repository/profile_repository.dart';
+
 class ProfileNotifier extends ChangeNotifier {
+  ProfileNotifier(this._profileRepository);
   ProfileState state = ProfileInitial();
-  final _profileRepository = ProfileRepositoryImpl();
+  final ProfileRepository _profileRepository;
   Future<void> getUserInformation() async {
     state = ProfileProgress();
     notifyListeners();

@@ -2,6 +2,7 @@ import 'package:digi_task/bloc/home/main/main_notifier.dart';
 import 'package:digi_task/core/constants/path/icon_path.dart';
 import 'package:digi_task/core/constants/theme/theme_ext.dart';
 import 'package:digi_task/core/utility/extension/icon_path_ext.dart';
+import 'package:digi_task/features/profile/presentation/view/other_tab.dart';
 import 'package:digi_task/features/tasks/presentation/view/tasks_tab.dart';
 import 'package:digi_task/presentation/pages/home/widgets/bottom_navbar.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +49,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         case 2:
           return "Tapşırıq";
         case 3:
-          return "Profil";
+          return context.watch<MainNotifier>().isAdmin ? "Digər" : "Profil";
         default:
           return "Error";
       }
@@ -102,7 +103,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               ),
               const PerformanceTab(),
               const TasksTab(),
-              const ProfileTab(),
+              context.watch<MainNotifier>().isAdmin ? const OtherTab() : const ProfileTab(),
             ],
           );
         },

@@ -32,144 +32,147 @@ class _ProfileTabState extends State<ProfileTab> {
           const Center(
             child: Text("Error"),
           );
-        }
-        final userModel = (notifier.state as ProfileSuccess).userModel;
-        return Column(
-          children: [
-            ProfileCardItem(
-              onPressed: () {},
-              title: userModel.firstName ?? "User not found",
-              subtitle: userModel.email,
-              trailingIcon: IconPath.pencil.toPathSvg,
-              onTap: () {
-                context.goNamed(AppRoutes.profileEdit.name);
-              },
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            ProfileCardItem(
-              onPressed: () {},
-              title: "Bildirişlər",
-              isNotification: true,
-              leadingIcon: IconPath.profnoti.toPathSvg,
-              trailingIcon: IconPath.arrowright.toPathSvg,
-            ),
-            ProfileCardItem(
-              onPressed: () {},
-              title: "Dəstək",
-              leadingIcon: IconPath.more.toPathSvg,
-              trailingIcon: IconPath.arrowright.toPathSvg,
-            ),
-            ProfileCardItem(
-              onPressed: () {},
-              title: "Haqqında",
-              leadingIcon: IconPath.info.toPathSvg,
-              trailingIcon: IconPath.arrowright.toPathSvg,
-            ),
-            ProfileCardItem(
-              isExit: true,
-              title: "Çıxış et",
-              leadingIcon: IconPath.logout.toPathSvg,
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    return Dialog(
-                      insetPadding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Material(
-                        borderRadius: BorderRadius.circular(24),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(24),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 26.0, horizontal: 16),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Center(
-                                  child: Text(
-                                    "Çıxış",
-                                    style: context.typography.subtitle1Medium,
+        } else if (notifier.state is ProfileSuccess) {
+          final userModel = (notifier.state as ProfileSuccess).userModel;
+          return Column(
+            children: [
+              ProfileCardItem(
+                onPressed: () {},
+                title: userModel.firstName ?? "User not found",
+                subtitle: userModel.email,
+                trailingIcon: IconPath.pencil.toPathSvg,
+                onTap: () {
+                  context.goNamed(AppRoutes.profileEdit.name, extra: userModel);
+                },
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              ProfileCardItem(
+                onPressed: () {},
+                title: "Bildirişlər",
+                isNotification: true,
+                leadingIcon: IconPath.profnoti.toPathSvg,
+                trailingIcon: IconPath.arrowright.toPathSvg,
+              ),
+              ProfileCardItem(
+                onPressed: () {},
+                title: "Dəstək",
+                leadingIcon: IconPath.more.toPathSvg,
+                trailingIcon: IconPath.arrowright.toPathSvg,
+              ),
+              ProfileCardItem(
+                onPressed: () {},
+                title: "Haqqında",
+                leadingIcon: IconPath.info.toPathSvg,
+                trailingIcon: IconPath.arrowright.toPathSvg,
+              ),
+              ProfileCardItem(
+                isExit: true,
+                title: "Çıxış et",
+                leadingIcon: IconPath.logout.toPathSvg,
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return Dialog(
+                        insetPadding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Material(
+                          borderRadius: BorderRadius.circular(24),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(24),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 26.0, horizontal: 16),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Center(
+                                    child: Text(
+                                      "Çıxış",
+                                      style: context.typography.subtitle1Medium,
+                                    ),
                                   ),
-                                ),
-                                const SizedBox(
-                                  height: 4,
-                                ),
-                                Text(
-                                  'Çıxış etmək istədiyinizdən əminsiniz?',
-                                  style: context.typography.body2Regular.copyWith(color: context.colors.neutralColor50),
-                                ),
-                                const SizedBox(
-                                  height: 24,
-                                ),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: ElevatedButton(
-                                        style: ButtonStyle(
-                                          padding: WidgetStateProperty.all(const EdgeInsets.all(16)),
-                                          shape: WidgetStateProperty.all(
-                                            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                  const SizedBox(
+                                    height: 4,
+                                  ),
+                                  Text(
+                                    'Çıxış etmək istədiyinizdən əminsiniz?',
+                                    style:
+                                        context.typography.body2Regular.copyWith(color: context.colors.neutralColor50),
+                                  ),
+                                  const SizedBox(
+                                    height: 24,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: ElevatedButton(
+                                          style: ButtonStyle(
+                                            padding: WidgetStateProperty.all(const EdgeInsets.all(16)),
+                                            shape: WidgetStateProperty.all(
+                                              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                            ),
+                                            backgroundColor: WidgetStateProperty.all(Colors.white),
+                                            side: WidgetStateProperty.all(
+                                              BorderSide(color: context.colors.primaryColor50),
+                                            ),
                                           ),
-                                          backgroundColor: WidgetStateProperty.all(Colors.white),
-                                          side: WidgetStateProperty.all(
-                                            BorderSide(color: context.colors.primaryColor50),
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: Text(
+                                            'Ləğv et',
+                                            style: context.typography.body2SemiBold
+                                                .copyWith(color: context.colors.primaryColor50),
                                           ),
-                                        ),
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                        },
-                                        child: Text(
-                                          'Ləğv et',
-                                          style: context.typography.body2SemiBold
-                                              .copyWith(color: context.colors.primaryColor50),
                                         ),
                                       ),
-                                    ),
-                                    const SizedBox(
-                                      width: 16,
-                                    ),
-                                    Expanded(
-                                      child: ElevatedButton(
-                                        style: ButtonStyle(
-                                          padding: WidgetStateProperty.all(const EdgeInsets.all(16)),
-                                          shape: WidgetStateProperty.all(
-                                            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                      const SizedBox(
+                                        width: 16,
+                                      ),
+                                      Expanded(
+                                        child: ElevatedButton(
+                                          style: ButtonStyle(
+                                            padding: WidgetStateProperty.all(const EdgeInsets.all(16)),
+                                            shape: WidgetStateProperty.all(
+                                              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                            ),
+                                            backgroundColor: WidgetStateProperty.all(context.colors.errorColor50),
+                                            side: WidgetStateProperty.all(
+                                              BorderSide(color: context.colors.errorColor50),
+                                            ),
                                           ),
-                                          backgroundColor: WidgetStateProperty.all(context.colors.errorColor50),
-                                          side: WidgetStateProperty.all(
-                                            BorderSide(color: context.colors.errorColor50),
-                                          ),
-                                        ),
-                                        onPressed: context.read<AuthNotifier>().logOut,
-                                        child: context.watch<AuthNotifier>().authState == AuthState.progress
-                                            ? const Center(
-                                                child: CircularProgressIndicator(),
-                                              )
-                                            : Text(
-                                          'Çıxış et',
-                                          style: context.typography.body2SemiBold
-                                              .copyWith(color: context.colors.neutralColor100),
+                                          onPressed: context.read<AuthNotifier>().logOut,
+                                          child: context.watch<AuthNotifier>().authState == AuthState.progress
+                                              ? const Center(
+                                                  child: CircularProgressIndicator(),
+                                                )
+                                              : Text(
+                                                  'Çıxış et',
+                                                  style: context.typography.body2SemiBold
+                                                      .copyWith(color: context.colors.neutralColor100),
+                                                ),
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                )
-                              ],
+                                    ],
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    );
-                  },
-                );
-              },
-            ),
-          ],
-        );
+                      );
+                    },
+                  );
+                },
+              ),
+            ],
+          );
+        }
+        return const SizedBox.shrink();
       }),
     );
   }
