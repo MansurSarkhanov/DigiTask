@@ -64,7 +64,109 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 backgroundColor: context.colors.primaryColor50,
                 child: SvgPicture.asset(IconPath.add.toPathSvg),
                 onPressed: () {
-                  context.goNamed(AppRoutes.createTask.name);
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return Dialog(
+                        insetPadding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Material(
+                          borderRadius: BorderRadius.circular(16),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 16.0, right: 16),
+                                  child: Row(
+                                    children: [
+                                      const Icon(
+                                        Icons.close,
+                                        color: Colors.white,
+                                      ),
+                                      const Spacer(),
+                                      Center(
+                                        child: Text(
+                                          "Tapşırıq növü seç",
+                                          style: context.typography.subtitle1Medium,
+                                        ),
+                                      ),
+                                      const Spacer(),
+                                      InkWell(
+                                          onTap: () {
+                                            context.pop();
+                                          },
+                                          child: const Icon(Icons.close))
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 26.0, right: 26, bottom: 26),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        child: ElevatedButton(
+                                          style: ButtonStyle(
+                                            padding: WidgetStateProperty.all(const EdgeInsets.all(16)),
+                                            shape: WidgetStateProperty.all(
+                                              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                            ),
+                                            backgroundColor: WidgetStateProperty.all(context.colors.primaryColor50),
+                                            side: WidgetStateProperty.all(
+                                              BorderSide(color: context.colors.primaryColor50),
+                                            ),
+                                          ),
+                                          onPressed: () {
+                                            context.goNamed(AppRoutes.createTask.name, extra: 'connection');
+                                          },
+                                          child: Text(
+                                            'Yeni qoşulma',
+                                            style: context.typography.body2SemiBold
+                                                .copyWith(color: context.colors.neutralColor100),
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 24,
+                                      ),
+                                      Expanded(
+                                        child: ElevatedButton(
+                                          style: ButtonStyle(
+                                            padding: WidgetStateProperty.all(const EdgeInsets.all(16)),
+                                            shape: WidgetStateProperty.all(
+                                              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                                            ),
+                                            backgroundColor: WidgetStateProperty.all(Colors.white),
+                                            side: WidgetStateProperty.all(
+                                              BorderSide(color: context.colors.primaryColor50, width: 2),
+                                            ),
+                                          ),
+                                          onPressed: () {
+                                            context.goNamed(AppRoutes.createTask.name, extra: 'problem');
+                                          },
+                                          child: Text(
+                                            'Problem',
+                                            style: context.typography.body2SemiBold
+                                                .copyWith(color: context.colors.primaryColor50),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  );
                 },
               ),
             )

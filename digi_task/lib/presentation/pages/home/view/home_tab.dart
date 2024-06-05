@@ -102,6 +102,9 @@ class HomeTabView extends StatelessWidget {
                                 ? "Bu gün, ${notifier.userTaskModel?.ongoingTasks?.first.time ?? ''}"
                                 : "$formattedDate, ${notifier.userTaskModel?.ongoingTasks?.first.time ?? ''}",
                             notifier: notifier,
+                            group: (notifier.userTaskModel?.ongoingTasks?.first.group?.isNotEmpty ?? false)
+                                ? '${notifier.userTaskModel?.ongoingTasks?.first.group?.first.group}'
+                                : "Empty group",
                           );
                         }
                         return const SizedBox.shrink();
@@ -220,4 +223,3 @@ class HomeTabView extends StatelessWidget {
     );
   }
 }
-

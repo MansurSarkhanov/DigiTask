@@ -13,6 +13,7 @@ enum IconPath {
   selectperformance,
   selectedother,
   employers,
+  unemployer,
   anbar,
   adminprofile,
   voice,

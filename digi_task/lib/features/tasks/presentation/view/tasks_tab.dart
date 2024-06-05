@@ -116,36 +116,40 @@ class _TasksTabState extends State<TasksTab> with TickerProviderStateMixin {
                     return Padding(
                         padding: const EdgeInsets.only(left: 16, right: 16, bottom: 24),
                         child: UserTaskCard(
-                            iconRow: Row(
-                              children: [
-                                if (taskNotifier.tasks?[index].isInternet == true) ...[
-                                  ServiceType(
-                                    image: IconPath.internet.toPathSvg,
-                                    title: "Internet",
-                                  ),
-                                ],
-                                if (taskNotifier.tasks?[index].isTv == true) ...[
-                                  ServiceType(
-                                    image: IconPath.tv.toPathSvg,
-                                    title: "Tv",
-                                  ),
-                                ],
-                                if (taskNotifier.tasks?[index].isVoice == true) ...[
-                                  ServiceType(
-                                    image: IconPath.voice.toPathSvg,
-                                    title: "Voice",
-                                  ),
-                                ],
+                          iconRow: Row(
+                            children: [
+                              if (taskNotifier.tasks?[index].isInternet == true) ...[
+                                ServiceType(
+                                  image: IconPath.internet.toPathSvg,
+                                  title: "Internet",
+                                ),
                               ],
-                            ),
-                            name: taskNotifier.tasks?[index].firstName ?? 'Not found user',
-                            time: formattedDate == nowFormattedDate
-                                ? 'Bu gün, ${taskNotifier.tasks?[index].time}'
-                                : '$formattedDate, ${taskNotifier.tasks?[index].time}',
-                            location: taskNotifier.tasks?[index].location ?? '',
-                            number: taskNotifier.tasks?[index].contactNumber ?? '',
-                            status: taskNotifier.tasks?[index].status ?? '',
-                            notifier: notifier));
+                              if (taskNotifier.tasks?[index].isTv == true) ...[
+                                ServiceType(
+                                  image: IconPath.tv.toPathSvg,
+                                  title: "Tv",
+                                ),
+                              ],
+                              if (taskNotifier.tasks?[index].isVoice == true) ...[
+                                ServiceType(
+                                  image: IconPath.voice.toPathSvg,
+                                  title: "Voice",
+                                ),
+                              ],
+                            ],
+                          ),
+                          name: taskNotifier.tasks?[index].firstName ?? 'Not found user',
+                          time: formattedDate == nowFormattedDate
+                              ? 'Bu gün, ${taskNotifier.tasks?[index].time}'
+                              : '$formattedDate, ${taskNotifier.tasks?[index].time}',
+                          location: taskNotifier.tasks?[index].location ?? '',
+                          number: taskNotifier.tasks?[index].contactNumber ?? '',
+                          status: taskNotifier.tasks?[index].status ?? '',
+                          notifier: notifier,
+                          group: (taskNotifier.tasks?[index].group?.isNotEmpty ?? false)
+                              ? '${taskNotifier.tasks?[index].group?.first.group}'
+                              : "Empty group",
+                        ));
                   },
                 ),
               );
@@ -153,8 +157,6 @@ class _TasksTabState extends State<TasksTab> with TickerProviderStateMixin {
             return const SizedBox.shrink();
           },
         ),
-        
-        
       ],
     );
   }

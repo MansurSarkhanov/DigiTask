@@ -25,7 +25,6 @@ class _CreateTaskViewState extends State<CreateTaskView> {
   final TextEditingController contactController = TextEditingController();
   final TextEditingController adressController = TextEditingController();
   final TextEditingController regionController = TextEditingController();
-  final TextEditingController groupController = TextEditingController();
   final TextEditingController noteController = TextEditingController();
 
   bool isInternet = false;
@@ -34,6 +33,7 @@ class _CreateTaskViewState extends State<CreateTaskView> {
 
   @override
   Widget build(BuildContext context) {
+    final taskType = GoRouterState.of(context).extra as String;
     return Scaffold(
       backgroundColor: context.colors.neutralColor100,
       appBar: AppBar(
@@ -194,13 +194,13 @@ class _CreateTaskViewState extends State<CreateTaskView> {
               const SizedBox(
                 height: 16,
               ),
-              AppField(
-                title: 'Texniki Qrup',
-                controller: groupController,
-                filledColor: context.colors.backgroundColor,
-                isProfileView: false,
-                hintText: 'Qrup 1',
-              ),
+              // AppField(
+              //   title: 'Texniki Qrup',
+              //   controller: groupController,
+              //   filledColor: context.colors.backgroundColor,
+              //   isProfileView: false,
+              //   hintText: 'Qrup 1',
+              // ),
               const SizedBox(
                 height: 16,
               ),
@@ -219,7 +219,7 @@ class _CreateTaskViewState extends State<CreateTaskView> {
                 builder: (context, notifier, child) {
                   return ActionButton(
                     title: 'Əlavə et',
-                    onPressed: () {
+                    onPressed: () async {
                       final model = CreateTaskModel(
                           contactNumber: contactController.text.trim(),
                           registrationNumber: registrationController.text.trim(),
@@ -233,9 +233,15 @@ class _CreateTaskViewState extends State<CreateTaskView> {
                           note: noteController.text.trim(),
                           group: [1],
                           time: "15:00-18:00",
-                          taskType: "connection",
+                          taskType: taskType,
                           status: "inprogress");
-                      notifier.createTask(model);
+                      await notifier.createTask(model);
+
+                      context.pop();
+                      context.pop();
+
+
+                     
                     },
                   );
                 },
@@ -245,5 +251,15 @@ class _CreateTaskViewState extends State<CreateTaskView> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    nameController.dispose();
+    contactController.dispose();
+    noteController.dispose();
+    registrationController.dispose();
+    adressController.dispose();
   }
 }
