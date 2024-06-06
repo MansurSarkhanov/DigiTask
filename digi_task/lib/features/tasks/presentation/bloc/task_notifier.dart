@@ -31,10 +31,11 @@ class TaskNotifier extends ChangeNotifier {
 
   Future<void> createTask(CreateTaskModel model) async {
     createState = TaskCreateProgress();
+    notifyListeners();
+    await Future.delayed(const Duration(seconds: 1));
     final result = await taskRepository.createTask(model: model);
     if (result.isSuccess()) {
       createState = TaskCreateSuccess();
-
       notifyListeners();
     } else if (result.isError()) {
       createState = TaskCreateFailure();

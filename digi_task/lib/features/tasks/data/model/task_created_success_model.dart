@@ -1,4 +1,7 @@
-class CreateTaskModel {
+class TaskCreatedSuccessModel {
+  int? id;
+  String? createdAt;
+  String? updatedAt;
   String? fullName;
   String? taskType;
   String? registrationNumber;
@@ -14,8 +17,11 @@ class CreateTaskModel {
   int? user;
   List<int>? group;
 
-  CreateTaskModel(
-      {this.fullName,
+  TaskCreatedSuccessModel(
+      {this.id,
+      this.createdAt,
+      this.updatedAt,
+      this.fullName,
       this.taskType,
       this.registrationNumber,
       this.contactNumber,
@@ -30,7 +36,10 @@ class CreateTaskModel {
       this.user,
       this.group});
 
-  CreateTaskModel.fromJson(Map<String, dynamic> json) {
+  TaskCreatedSuccessModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
     fullName = json['full_name'];
     taskType = json['task_type'];
     registrationNumber = json['registration_number'];
@@ -44,16 +53,14 @@ class CreateTaskModel {
     isInternet = json['is_internet'];
     isTv = json['is_tv'];
     user = json['user'];
-    if (json['group'] != null) {
-      group = <int>[];
-      json['group'].forEach((v) {
-        group!.add(v);
-      });
-    }
+    group = json['group'].cast<int>();
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     data['full_name'] = fullName;
     data['task_type'] = taskType;
     data['registration_number'] = registrationNumber;
@@ -67,9 +74,7 @@ class CreateTaskModel {
     data['is_internet'] = isInternet;
     data['is_tv'] = isTv;
     data['user'] = user;
-    if (group != null) {
-      data['group'] = group!.map((v) => v).toList();
-    }
+    data['group'] = group;
     return data;
   }
 }

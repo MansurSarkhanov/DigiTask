@@ -1,3 +1,5 @@
+import 'package:digi_task/bloc/home/main/main_notifier.dart';
+import 'package:digi_task/data/repository/home_repository.dart';
 import 'package:digi_task/data/services/local/secure_service.dart';
 import 'package:digi_task/data/services/local/shared_service.dart';
 import 'package:digi_task/data/services/network/auth_service.dart';
@@ -43,17 +45,24 @@ Future<void> init() async {
 
     ),
   );
+
+  getIt.registerSingleton<IHomeRepository>(
+    HomeRepository(homeDataSource: getIt()),
+  );
+
   getIt.registerSingleton<ProfileRepository>(
     ProfileRepositoryImpl(profileService: getIt()),
   );
+  
   getIt.registerSingleton<ITaskRepository>(
     TaskRepositoryImpl(taskService: getIt()),
   );
 
   getIt.registerFactory(() => LoginNotifier(getIt()));
   getIt.registerFactory(() => TaskNotifier(getIt()));
-
   getIt.registerFactory(() => ProfileNotifier(getIt()));
+  getIt.registerFactory(() => MainNotifier(getIt()));
+
 
 
   getIt.registerSingleton(AuthNotifier(getIt())..checkAuth()); 

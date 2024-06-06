@@ -7,5 +7,5 @@ import '../../data/model/create_task_model.dart';
 abstract interface class ITaskRepository {
   Future<Result<List<TaskModel>?, EmptyTaskModel>> getTasks({String? query});
 
-  Future<Result<bool, Exception>> createTask({required CreateTaskModel model});
+  Future<Result<CreateTaskModel, Exception>> createTask({required CreateTaskModel model});
 }

@@ -5,7 +5,7 @@ import '../../../../data/services/jwt/dio_configuration.dart';
 
 abstract class ITaskNetworkService {
   Future<List<TaskModel>> getTasks();
-  Future<bool> createTask({required CreateTaskModel model});
+  Future<CreateTaskModel> createTask({required CreateTaskModel model});
 }
 
 final class TaskNetworkService implements ITaskNetworkService {
@@ -26,12 +26,13 @@ final class TaskNetworkService implements ITaskNetworkService {
   }
 
   @override
-  Future<bool> createTask({required CreateTaskModel model}) async {
+  Future<CreateTaskModel> createTask({required CreateTaskModel model}) async {
     try {
       final taskModel = model.toJson();
       final response = await baseDio.post('services/create_task/', data: taskModel);
       print(response);
-      return true;
+
+      return CreateTaskModel.fromJson(response.data);
     } catch (e, s) {
       return Error.throwWithStackTrace(e, s);
     }

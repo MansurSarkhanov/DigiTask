@@ -43,9 +43,13 @@ class UserTaskCard extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    name,
-                    style: context.typography.subtitle1SemiBold,
+                  Expanded(
+                    child: Text(
+                      name,
+                      maxLines: 1,
+                      style: context.typography.subtitle1SemiBold,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                   iconRow
                 ],

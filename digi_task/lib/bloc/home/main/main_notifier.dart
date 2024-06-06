@@ -7,8 +7,9 @@ import 'package:digi_task/injection.dart';
 import 'package:flutter/foundation.dart';
 
 class MainNotifier extends ChangeNotifier {
+  MainNotifier(this.homeRepository);
   MainState homeState = MainInitial();
-  final HomeRepository _homeRepository = HomeRepository();
+  final IHomeRepository homeRepository;
   final preference = getIt.get<SharedPreferenceService>();
   bool isAdmin = false;
   UserTaskModel? userTaskModel;
@@ -16,7 +17,7 @@ class MainNotifier extends ChangeNotifier {
   Future<void> fetchUserTask() async {
     homeState = MainLoading();
     notifyListeners();
-    final result = await _homeRepository.fetchUserTaskData();
+    final result = await homeRepository.fetchUserTaskData();
 
     if (result.isSuccess()) {
       userTaskModel = result.tryGetSuccess();

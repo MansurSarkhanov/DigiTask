@@ -1,3 +1,4 @@
+import 'package:digi_task/bloc/home/main/main_notifier.dart';
 import 'package:digi_task/core/constants/theme/theme_ext.dart';
 import 'package:digi_task/core/utility/extension/icon_path_ext.dart';
 import 'package:digi_task/features/tasks/data/model/create_task_model.dart';
@@ -45,7 +46,7 @@ class _CreateTaskViewState extends State<CreateTaskView> {
   @override
   void initState() {
     super.initState();
-    formattedDate = DateFormat('yy-MM-dd').format(date);
+    formattedDate = DateFormat('yyyy-MM-dd').format(date);
     startTimeFormatted = DateFormat.Hm().format(DateTime.now());
     endTimeFormatted = DateFormat.Hm().format(DateTime.now());
   }
@@ -89,6 +90,7 @@ class _CreateTaskViewState extends State<CreateTaskView> {
                 filledColor: context.colors.backgroundColor,
                 isProfileView: false,
                 hintText: '(555) 000-0000',
+                keyboardType: TextInputType.phone,
               ),
               const SizedBox(
                 height: 16,
@@ -99,6 +101,7 @@ class _CreateTaskViewState extends State<CreateTaskView> {
                 filledColor: context.colors.backgroundColor,
                 isProfileView: false,
                 hintText: '(555) 000-0000',
+                keyboardType: TextInputType.phone,
               ),
               const SizedBox(
                 height: 16,
@@ -132,7 +135,7 @@ class _CreateTaskViewState extends State<CreateTaskView> {
                           if (selectedDate != null) {
                             setState(() {
                               date = selectedDate;
-                              formattedDate = DateFormat('yy-MM-dd').format(selectedDate);
+                              formattedDate = DateFormat('yyyy-MM-dd').format(selectedDate);
                             });
                           }
                         });
@@ -318,7 +321,7 @@ class _CreateTaskViewState extends State<CreateTaskView> {
                 height: 32,
               ),
               Consumer<TaskNotifier>(
-                builder: (context, notifier, child) {
+                builder: (_, notifier, child) {
                   return ActionButton(
                     title: 'Əlavə et',
                     isLoading: notifier.createState is TaskCreateProgress ? true : false,
@@ -330,6 +333,7 @@ class _CreateTaskViewState extends State<CreateTaskView> {
                           noteController.text.trim().isNotEmpty &&
                           selectGroupList.isNotEmpty) {
                         final model = CreateTaskModel(
+                            fullName: nameController.text.trim(),
                             contactNumber: contactController.text.trim(),
                             registrationNumber: registrationController.text.trim(),
                             isInternet: isInternet,
@@ -338,17 +342,22 @@ class _CreateTaskViewState extends State<CreateTaskView> {
                             user: null,
                             date: formattedDate,
                             location: adressController.text.trim(),
-                            description: null,
                             note: noteController.text.trim(),
                             group: selectGroupList,
                             time: "$startTimeFormatted-$endTimeFormatted",
                             taskType: taskType,
                             status: "waiting");
                         await notifier.createTask(model);
-                        context.pop();
-                        context.pop();
+                        if (notifier.createState is TaskCreateSuccess && mounted) {
+                          context.pop();
+                          context.pop();
+                          context.read<MainNotifier>().fetchUserTask();
+                        } else if (notifier.createState is TaskCreateFailure) {
+                          openFlushbar(context, title: 'Uğursuz əməliyyat', color: context.colors.errorColor80);
+                        }
+                      } else {
+                        openFlushbar(context, title: 'Boşluqları doldurun', color: Colors.white);
                       }
-                      openFlushbar(context, title: 'Boşluqları doldurun', color: Colors.white);
                     },
                   );
                 },

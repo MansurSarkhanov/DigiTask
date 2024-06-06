@@ -1,4 +1,3 @@
-import 'package:digi_task/bloc/home/main/main_notifier.dart';
 import 'package:digi_task/core/constants/routes.dart';
 import 'package:digi_task/core/constants/theme/theme_ext.dart';
 import 'package:digi_task/core/utility/extension/icon_path_ext.dart';
@@ -89,11 +88,7 @@ final class AppRouter {
             name: AppRoutes.home.name,
             builder: (context, state) => MultiProvider(
                   providers: [
-                    ChangeNotifierProvider(
-                      create: (context) => MainNotifier()
-                        ..fetchUserTask()
-                        ..checkAdmin(),
-                    ),
+                  
                     ChangeNotifierProvider(
                       create: (context) => PerformanceNotifier()..fetchPerfomance(),
                     ),

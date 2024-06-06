@@ -19,6 +19,7 @@ class AppField extends StatelessWidget {
     this.onTap,
     this.onlyRead = false,
     this.centerText,
+    this.keyboardType = TextInputType.text,
   });
   final String title;
   final TextEditingController? controller;
@@ -32,6 +33,7 @@ class AppField extends StatelessWidget {
   final VoidCallback? onTap;
   final bool? onlyRead;
   final bool? centerText;
+  final TextInputType? keyboardType;
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +49,8 @@ class AppField extends StatelessWidget {
           height: 8,
         ),
         TextFormField(
+          keyboardType: keyboardType,
+          textInputAction: TextInputAction.done,
           textAlign: centerText == true ? TextAlign.center : TextAlign.start,
           readOnly: onlyRead ?? false,
           onTap: onTap,

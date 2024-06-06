@@ -20,7 +20,7 @@ final class TaskRepositoryImpl implements ITaskRepository {
   }
 
   @override
-  Future<Result<bool, Exception>> createTask({required CreateTaskModel model}) async {
+  Future<Result<CreateTaskModel, Exception>> createTask({required CreateTaskModel model}) async {
     try {
       final result = await taskService.createTask(model: model);
       return Result.success(result);
