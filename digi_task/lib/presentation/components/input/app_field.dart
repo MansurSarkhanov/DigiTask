@@ -8,22 +8,30 @@ class AppField extends StatelessWidget {
   const AppField({
     super.key,
     required this.title,
-    required this.controller,
+    this.controller,
     this.isWithIcon = false,
     this.iconPath,
     this.filledColor,
     this.isProfileView = true,
     this.hintText,
     this.minLine = 1,
+    this.maxLine = 1,
+    this.onTap,
+    this.onlyRead = false,
+    this.centerText,
   });
   final String title;
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final bool? isWithIcon;
   final String? iconPath;
   final Color? filledColor;
   final bool? isProfileView;
   final String? hintText;
   final int? minLine;
+  final int? maxLine;
+  final VoidCallback? onTap;
+  final bool? onlyRead;
+  final bool? centerText;
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +47,11 @@ class AppField extends StatelessWidget {
           height: 8,
         ),
         TextFormField(
+          textAlign: centerText == true ? TextAlign.center : TextAlign.start,
+          readOnly: onlyRead ?? false,
+          onTap: onTap,
           minLines: minLine,
-          maxLines: 3,
+          maxLines: maxLine,
           style: context.typography.body2Regular
               .copyWith(color: isProfileView == true ? context.colors.neutralColor40 : context.colors.neutralColor10),
           controller: controller,

@@ -38,7 +38,7 @@ class _LoginPageState extends State<LoginPage> {
         if (loginState is LoginSuccess) {
           context.read<AuthNotifier>().userLogged();
         } else if (loginState is LoginFailure) {
-          openFlushbar(context, state: loginState, username: emailController.text);
+          openFlushbar(context, message: loginState.message, title: "İstifadəçi tapılmadı", color: Colors.transparent);
         }
       },
     );

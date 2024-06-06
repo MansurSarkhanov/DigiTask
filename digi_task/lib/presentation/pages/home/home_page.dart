@@ -107,13 +107,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                   height: 20,
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(left: 26.0, right: 26, bottom: 26),
+                                  padding: const EdgeInsets.only(left: 24.0, right: 24, bottom: 24),
                                   child: Row(
                                     children: [
                                       Expanded(
                                         child: ElevatedButton(
                                           style: ButtonStyle(
-                                            padding: WidgetStateProperty.all(const EdgeInsets.all(16)),
+                                            padding: WidgetStateProperty.all(const EdgeInsets.symmetric(vertical: 14)),
                                             shape: WidgetStateProperty.all(
                                               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                                             ),
@@ -127,18 +127,19 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                           },
                                           child: Text(
                                             'Yeni qoşulma',
-                                            style: context.typography.body2SemiBold
+                                            style: context.typography.body1SemiBold
                                                 .copyWith(color: context.colors.neutralColor100),
                                           ),
                                         ),
                                       ),
                                       const SizedBox(
-                                        width: 24,
+                                        width: 12,
                                       ),
                                       Expanded(
                                         child: ElevatedButton(
                                           style: ButtonStyle(
-                                            padding: WidgetStateProperty.all(const EdgeInsets.all(16)),
+                                            padding: WidgetStateProperty.all(const EdgeInsets.symmetric(vertical: 14)),
+
                                             shape: WidgetStateProperty.all(
                                               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                                             ),
@@ -152,7 +153,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                           },
                                           child: Text(
                                             'Problem',
-                                            style: context.typography.body2SemiBold
+                                            style: context.typography.body1SemiBold
                                                 .copyWith(color: context.colors.primaryColor50),
                                           ),
                                         ),
