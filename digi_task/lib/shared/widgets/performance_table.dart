@@ -94,6 +94,7 @@ class PerformanceTable extends StatelessWidget {
                     )
                     .toList()),
           ],
-        ));
+      ),
+    );
   }
 }
