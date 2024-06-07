@@ -18,7 +18,8 @@ import '../widgets/organizations_card.dart';
 import '../widgets/user_task_card.dart';
 
 class HomeTabView extends StatelessWidget {
-  const HomeTabView({super.key, required this.state});
+  const HomeTabView({super.key, required this.state, required this.tabController});
+  final TabController tabController;
 
   final MainState state;
 
@@ -59,7 +60,9 @@ class HomeTabView extends StatelessWidget {
                     ),
                     ComponentTitle(
                       title: 'Davam edən tasklar',
-                      onPressed: () {},
+                      onPressed: () {
+                        tabController.index = 2;
+                      },
                     ),
                     const SizedBox(
                       height: 16,
@@ -76,10 +79,7 @@ class HomeTabView extends StatelessWidget {
                             iconRow: Row(
                               children: [
                                 if (notifier.userTaskModel?.ongoingTasks?.first.isInternet == true) ...[
-                                  ServiceType(
-                                    image: IconPath.internet.toPathSvg,
-                                    title: "Internet"
-                                  ),
+                                  ServiceType(image: IconPath.internet.toPathSvg, title: "Internet"),
                                 ],
                                 if (notifier.userTaskModel?.ongoingTasks?.first.isTv == true) ...[
                                   ServiceType(

@@ -183,7 +183,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         actions: [
           AppBarIcon(
             iconPath: IconPath.message.toPathSvg,
-            onTap: () {},
+            onTap: () => context.goNamed(AppRoutes.chat.name),
+
           ),
           const SizedBox(
             width: 14,
@@ -205,6 +206,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             children: [
               HomeTabView(
                 state: notifier.homeState,
+                tabController: tabController,
+
               ),
               const PerformanceTab(),
               const TasksTab(),

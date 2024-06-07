@@ -6,6 +6,7 @@ import 'package:digi_task/features/profile/presentation/bloc/profile_notifier.da
 import 'package:digi_task/features/profile/presentation/view/profile_edit_view.dart';
 import 'package:digi_task/features/tasks/presentation/bloc/task_notifier.dart';
 import 'package:digi_task/features/tasks/presentation/view/create_task_view.dart';
+import 'package:digi_task/presentation/pages/chat/chat_page.dart';
 import 'package:digi_task/presentation/pages/login/login_page.dart';
 import 'package:digi_task/presentation/pages/notification/notification_page.dart';
 import 'package:digi_task/presentation/pages/splash/splash_page.dart';
@@ -111,6 +112,11 @@ final class AppRouter {
                 path: AppRoutes.notification.path,
                 name: AppRoutes.notification.name,
                 builder: (context, state) => const NotificationPage(),
+              ),
+              GoRoute(
+                path: AppRoutes.chat.path,
+                name: AppRoutes.chat.name,
+                builder: (context, state) => const ChatPage(),
               ),
               GoRoute(
                 path: AppRoutes.createTask.path,

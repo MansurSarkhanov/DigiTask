@@ -155,7 +155,7 @@ class UserTaskCard extends StatelessWidget {
                             ],
                           ),
                           const Spacer(),
-                          Text(task_type ?? ''),
+                          // Text(task_type ?? ''),
                           Container(
                             decoration: BoxDecoration(
                                 color: context.colors.primaryColor50,
