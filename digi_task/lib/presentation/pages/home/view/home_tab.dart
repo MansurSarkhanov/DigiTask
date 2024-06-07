@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../features/performance/presentation/bloc/performance_notifier.dart';
 import '../../../../features/performance/presentation/bloc/performance_state.dart';
+import '../../../../shared/widgets/performance_table.dart';
 import '../../../components/custom_progress_indicator.dart';
 import '../../../components/service_type.dart';
 import '../widgets/component_title.dart';
@@ -77,7 +78,7 @@ class HomeTabView extends StatelessWidget {
                                 if (notifier.userTaskModel?.ongoingTasks?.first.isInternet == true) ...[
                                   ServiceType(
                                     image: IconPath.internet.toPathSvg,
-                                    title: "Internet",
+                                    title: "Internet"
                                   ),
                                 ],
                                 if (notifier.userTaskModel?.ongoingTasks?.first.isTv == true) ...[
@@ -105,6 +106,7 @@ class HomeTabView extends StatelessWidget {
                             group: (notifier.userTaskModel?.ongoingTasks?.first.group?.isNotEmpty ?? false)
                                 ? '${notifier.userTaskModel?.ongoingTasks?.first.group?.first.group}'
                                 : "Empty group",
+                            task_type: '',
                           );
                         }
                         return const SizedBox.shrink();
@@ -138,76 +140,7 @@ class HomeTabView extends StatelessWidget {
                             return const Center(child: CircularProgressIndicator());
                           } else if (notifier.state is PerformanceSuccess) {
                             final performance = (notifier.state as PerformanceSuccess).performanceList;
-                            return Container(
-                                margin: const EdgeInsets.only(bottom: 24),
-                                color: Colors.white,
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                          color: context.colors.primaryColor50,
-                                          borderRadius: const BorderRadius.only(
-                                              topLeft: Radius.circular(16), topRight: Radius.circular(16))),
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text('Ad     ',
-                                                style:
-                                                    context.typography.subtitle2SemiBold.copyWith(color: Colors.white)),
-                                            Text('Qrup   ',
-                                                style:
-                                                    context.typography.subtitle2SemiBold.copyWith(color: Colors.white)),
-                                            Text('Tasklar',
-                                                style:
-                                                    context.typography.subtitle2SemiBold.copyWith(color: Colors.white)),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    Column(
-                                        children: performance!
-                                            .map(
-                                              (e) => Column(
-                                                children: [
-                                                  Padding(
-                                                    padding: const EdgeInsets.only(left: 16.0, right: 40, top: 10),
-                                                    child: Row(
-                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                      children: [
-                                                        Expanded(
-                                                          child: Text(
-                                                            "${e.firstName}",
-                                                            maxLines: 1,
-                                                            style: context.typography.subtitle2Regular
-                                                                .copyWith(color: context.colors.primaryColor50),
-                                                          ),
-                                                        ),
-                                                        Expanded(
-                                                          child: Text(
-                                                            "${e.group?.group}",
-                                                            style: context.typography.subtitle2Regular,
-                                                          ),
-                                                        ),
-                                                        Text(
-                                                          "${e.taskCount?.total}",
-                                                          style: context.typography.subtitle2SemiBold
-                                                              .copyWith(color: context.colors.primaryColor50),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  Divider(
-                                                    color: context.colors.neutralColor90,
-                                                    height: 12,
-                                                  )
-                                                ],
-                                              ),
-                                            )
-                                            .toList()),
-                                  ],
-                                ));
+                            return PerformanceTable(performance: performance);
                           }
                           return const SizedBox.shrink();
                         },

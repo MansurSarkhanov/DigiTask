@@ -16,7 +16,8 @@ class UserTaskCard extends StatelessWidget {
       required this.status,
       required this.notifier,
       required this.iconRow,
-      required this.group});
+      required this.group,
+      required this.task_type});
   final String name;
   final String time;
   final String location;
@@ -25,7 +26,7 @@ class UserTaskCard extends StatelessWidget {
   final dynamic notifier;
   final Widget iconRow;
   final String? group;
-
+  final String? task_type;
 
   @override
   Widget build(BuildContext context) {
@@ -154,6 +155,7 @@ class UserTaskCard extends StatelessWidget {
                             ],
                           ),
                           const Spacer(),
+                          Text(task_type ?? ''),
                           Container(
                             decoration: BoxDecoration(
                                 color: context.colors.primaryColor50,
@@ -204,7 +206,7 @@ class UserTaskCard extends StatelessWidget {
                         )
                       ],
                     ),
-            )
+                  )
           ],
         ),
       ),

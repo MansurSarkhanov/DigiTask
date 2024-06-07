@@ -34,6 +34,13 @@ class _TasksTabState extends State<TasksTab> with TickerProviderStateMixin {
         Container(
           color: Colors.white,
           child: TabBar(
+            onTap: (value) {
+              if (value == 1) {
+                context.read<TaskNotifier>().fetchTasks(queryType: "problem");
+              } else {
+                context.read<TaskNotifier>().fetchTasks(queryType: "connection");
+              }
+            },
             labelColor: context.colors.primaryColor50,
             labelStyle: context.typography.subtitle2Medium,
             controller: tabController,
@@ -44,7 +51,9 @@ class _TasksTabState extends State<TasksTab> with TickerProviderStateMixin {
               Tab(
                 text: "Qoşulmalar",
               ),
-              Tab(text: "Problemlər"),
+              Tab(
+                text: "Problemlər",
+              ),
             ],
           ),
         ),
@@ -66,20 +75,39 @@ class _TasksTabState extends State<TasksTab> with TickerProviderStateMixin {
                       setState(() {
                         selecteIndex = index;
                       });
-                      switch (index) {
+                      if (tabController.index == 0) {
+                        switch (index) {
+                          case 0:
+                            context.read<TaskNotifier>().fetchTasks(queryType: "connection");
+                            break;
+                          case 1:
+                            context.read<TaskNotifier>().fetchTasks(queryStatus: "waiting", queryType: "connection");
+                            break;
+                          case 2:
+                            context.read<TaskNotifier>().fetchTasks(queryStatus: "inprogress", queryType: "connection");
+                            break;
+                          case 3:
+                            context.read<TaskNotifier>().fetchTasks(queryStatus: "completed", queryType: "connection");
+                            break;
+                        }
+                      }
+                      if (tabController.index == 1) {
+                        switch (index) {
                         case 0:
-                          context.read<TaskNotifier>().fetchTasks();
+                            context.read<TaskNotifier>().fetchTasks(queryType: "problem");
                           break;
                         case 1:
-                          context.read<TaskNotifier>().fetchTasks(query: "waiting");
+                            context.read<TaskNotifier>().fetchTasks(queryStatus: "waiting", queryType: "problem");
                           break;
                         case 2:
-                          context.read<TaskNotifier>().fetchTasks(query: "inprogress");
+                            context.read<TaskNotifier>().fetchTasks(queryStatus: "inprogress", queryType: "problem");
                           break;
                         case 3:
-                          context.read<TaskNotifier>().fetchTasks(query: "completed");
+                            context.read<TaskNotifier>().fetchTasks(queryStatus: "completed", queryType: "problem");
                           break;
                       }
+                      }
+                     
                     },
                     showCheckmark: false,
                     label: Text(texts[index]),
@@ -109,6 +137,7 @@ class _TasksTabState extends State<TasksTab> with TickerProviderStateMixin {
                 child: ListView.builder(
                   itemCount: taskNotifier.tasks?.length,
                   itemBuilder: (context, index) {
+                    print(taskNotifier.tasks?.length);
                     final nowDateTime = DateTime.now();
                     final dateTime = DateTime.parse(taskNotifier.tasks?[index].date ?? '');
                     String formattedDate = DateFormat('MMM d').format(dateTime);
@@ -149,6 +178,7 @@ class _TasksTabState extends State<TasksTab> with TickerProviderStateMixin {
                           group: (taskNotifier.tasks?[index].group?.isNotEmpty ?? false)
                               ? '${taskNotifier.tasks?[index].group?.first.group}'
                               : "Empty group",
+                          task_type: taskNotifier.tasks?[index].taskType,
                         ));
                   },
                 ),

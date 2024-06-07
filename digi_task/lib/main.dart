@@ -7,7 +7,6 @@ import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 
-import 'bloc/home/main/main_notifier.dart';
 import 'injection.dart';
 
 Future<void> main() async {
@@ -19,11 +18,7 @@ Future<void> main() async {
         ChangeNotifierProvider(
           create: (context) => GetIt.instance<AuthNotifier>(),
         ),
-        ChangeNotifierProvider(
-          create: (context) => GetIt.instance<MainNotifier>()
-            ..fetchUserTask()
-            ..checkAdmin(),
-        )
+        
       ],
       child: const ThemeScopeWidget(
         child: MyApp(),

@@ -4,17 +4,22 @@ import 'package:digi_task/features/tasks/data/model/task_model.dart';
 import '../../../../data/services/jwt/dio_configuration.dart';
 
 abstract class ITaskNetworkService {
-  Future<List<TaskModel>> getTasks();
+  Future<List<TaskModel>> getTasks({String? queryStatus, String? queryType});
   Future<CreateTaskModel> createTask({required CreateTaskModel model});
 }
 
 final class TaskNetworkService implements ITaskNetworkService {
   @override
-  Future<List<TaskModel>> getTasks({String? query}) async {
+  Future<List<TaskModel>> getTasks({
+    String? queryStatus,
+    String? queryType,
+  }) async {
     try {
-      final response = query != null
-          ? await baseDio.get('services/status/', queryParameters: {"status": query})
-          : await baseDio.get('services/status/');
+      final response = queryStatus != null
+          ? await baseDio.get('services/status/', queryParameters: {'task_type': queryType, "status": queryStatus})
+          : await baseDio.get('services/status/', queryParameters: {
+              'task_type': queryType,
+            });
       final tasks = response.data as List;
       print(tasks);
 

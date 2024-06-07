@@ -10,9 +10,9 @@ final class TaskRepositoryImpl implements ITaskRepository {
   TaskRepositoryImpl({required this.taskService});
   final TaskNetworkService taskService;
   @override
-  Future<Result<List<TaskModel>?, EmptyTaskModel>> getTasks({String? query}) async {
+  Future<Result<List<TaskModel>?, EmptyTaskModel>> getTasks({String? queryStatus, String? queryType}) async {
     try {
-      final result = await taskService.getTasks(query: query);
+      final result = await taskService.getTasks(queryStatus: queryStatus, queryType: queryType);
       return Result.success(result);
     } catch (e) {
       return Result.error(EmptyTaskModel(message: e.toString()));

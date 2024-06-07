@@ -1,4 +1,3 @@
-import 'package:digi_task/bloc/home/main/main_notifier.dart';
 import 'package:digi_task/core/constants/theme/theme_ext.dart';
 import 'package:digi_task/core/utility/extension/icon_path_ext.dart';
 import 'package:digi_task/features/tasks/data/model/create_task_model.dart';
@@ -351,7 +350,6 @@ class _CreateTaskViewState extends State<CreateTaskView> {
                         if (notifier.createState is TaskCreateSuccess && mounted) {
                           context.pop();
                           context.pop();
-                          context.read<MainNotifier>().fetchUserTask();
                         } else if (notifier.createState is TaskCreateFailure) {
                           openFlushbar(context, title: 'Uğursuz əməliyyat', color: context.colors.errorColor80);
                         }

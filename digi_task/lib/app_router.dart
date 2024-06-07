@@ -17,6 +17,7 @@ import 'package:provider/provider.dart';
 
 import 'bloc/auth/auth_notifier.dart';
 import 'bloc/auth/login/login_notifier.dart';
+import 'bloc/home/main/main_notifier.dart';
 import 'core/constants/path/icon_path.dart';
 import 'features/profile/presentation/view/profile_tab.dart';
 import 'presentation/pages/home/home_page.dart';
@@ -88,12 +89,16 @@ final class AppRouter {
             name: AppRoutes.home.name,
             builder: (context, state) => MultiProvider(
                   providers: [
-                  
+                    ChangeNotifierProvider(
+                      create: (context) => GetIt.instance<MainNotifier>()
+                        ..fetchUserTask()
+                        ..checkAdmin(),
+                    ),
                     ChangeNotifierProvider(
                       create: (context) => PerformanceNotifier()..fetchPerfomance(),
                     ),
                     ChangeNotifierProvider(
-                      create: (context) => GetIt.instance<TaskNotifier>()..fetchTasks(),
+                      create: (context) => GetIt.instance<TaskNotifier>()..fetchTasks(queryType: 'connection'),
                     ),
                     ChangeNotifierProvider(
                       create: (context) => GetIt.instance<ProfileNotifier>()..getUserInformation(),
@@ -110,8 +115,10 @@ final class AppRouter {
               GoRoute(
                 path: AppRoutes.createTask.path,
                 name: AppRoutes.createTask.name,
-                builder: (context, state) => ChangeNotifierProvider(
-                    create: (context) => GetIt.instance<TaskNotifier>(), child: const CreateTaskView()),
+                builder: (context, state) => MultiProvider(providers: [
+                  ChangeNotifierProvider(create: (context) => GetIt.instance<TaskNotifier>()),
+                  ChangeNotifierProvider(create: (context) => GetIt.instance<MainNotifier>()),
+                ], child: const CreateTaskView()),
               ),
               GoRoute(
                 path: AppRoutes.profileEdit.path,
