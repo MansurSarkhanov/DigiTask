@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import '../../domain/repository/profile_repository.dart';
 
 class ProfileNotifier extends ChangeNotifier {
-  ProfileNotifier(this._profileRepository);
+  ProfileNotifier(this.profileRepository);
   ProfileState state = ProfileInitial();
-  final ProfileRepository _profileRepository;
+  final ProfileRepository profileRepository;
   Future<void> getUserInformation() async {
     state = ProfileProgress();
     notifyListeners();
-    final result = await _profileRepository.getUserInformation();
+    final result = await profileRepository.getUserInformation();
     if (result.isSuccess()) {
       final userModel = result.tryGetSuccess();
 

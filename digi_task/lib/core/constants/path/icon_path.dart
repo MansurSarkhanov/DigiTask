@@ -36,5 +36,9 @@ enum IconPath {
   menu,
   arrowleft,
   arrowright,
+  export,
+  import,
+  search,
+  filter
 
 }

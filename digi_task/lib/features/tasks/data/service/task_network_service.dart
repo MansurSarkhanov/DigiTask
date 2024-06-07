@@ -8,7 +8,7 @@ abstract class ITaskNetworkService {
   Future<CreateTaskModel> createTask({required CreateTaskModel model});
 }
 
-final class TaskNetworkService implements ITaskNetworkService {
+final class TaskNetworkServiceImpl implements ITaskNetworkService {
   @override
   Future<List<TaskModel>> getTasks({
     String? queryStatus,

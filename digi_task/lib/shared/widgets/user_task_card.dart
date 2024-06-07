@@ -7,17 +7,17 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 class UserTaskCard extends StatelessWidget {
-  const UserTaskCard(
-      {super.key,
-      required this.name,
-      required this.time,
-      required this.location,
-      required this.number,
-      required this.status,
-      required this.notifier,
-      required this.iconRow,
-      required this.group,
-      required this.task_type});
+  const UserTaskCard({
+    super.key,
+    required this.name,
+    required this.time,
+    required this.location,
+    required this.number,
+    required this.status,
+    required this.notifier,
+    required this.iconRow,
+    required this.group,
+  });
   final String name;
   final String time;
   final String location;
@@ -26,7 +26,6 @@ class UserTaskCard extends StatelessWidget {
   final dynamic notifier;
   final Widget iconRow;
   final String? group;
-  final String? task_type;
 
   @override
   Widget build(BuildContext context) {
@@ -114,7 +113,7 @@ class UserTaskCard extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 12.0),
                         child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             SvgPicture.asset(
                               IconPath.phonegreen.toPathSvg,
@@ -138,7 +137,7 @@ class UserTaskCard extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 12.0),
                         child: Row(children: [
                           Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               SvgPicture.asset(
                                 IconPath.unemployer.toPathSvg,
@@ -158,14 +157,17 @@ class UserTaskCard extends StatelessWidget {
                           // Text(task_type ?? ''),
                           Container(
                             decoration: BoxDecoration(
-                                color: context.colors.primaryColor50,
+                                color: status == 'waiting'
+                                    ? context.colors.secondaryColor50
+                                    : context.colors.primaryColor50,
                                 borderRadius: const BorderRadius.only(
                                     topLeft: Radius.circular(8), bottomLeft: Radius.circular(8))),
                             child: Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
                               child: Text(
                                 status,
-                                style: context.typography.overlineSemiBold.copyWith(color: Colors.white),
+                                style: context.typography.overlineSemiBold.copyWith(
+                                    color: status == 'waiting' ? context.colors.neutralColor40 : Colors.white),
                               ),
                             ),
                           )

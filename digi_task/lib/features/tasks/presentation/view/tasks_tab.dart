@@ -3,7 +3,7 @@ import 'package:digi_task/core/constants/theme/theme_ext.dart';
 import 'package:digi_task/core/utility/extension/icon_path_ext.dart';
 import 'package:digi_task/features/tasks/presentation/bloc/task_notifier.dart';
 import 'package:digi_task/features/tasks/presentation/bloc/task_state.dart';
-import 'package:digi_task/presentation/pages/home/widgets/user_task_card.dart';
+import 'package:digi_task/shared/widgets/user_task_card.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -178,7 +178,6 @@ class _TasksTabState extends State<TasksTab> with TickerProviderStateMixin {
                           group: (taskNotifier.tasks?[index].group?.isNotEmpty ?? false)
                               ? '${taskNotifier.tasks?[index].group?.first.group}'
                               : "Empty group",
-                          task_type: taskNotifier.tasks?[index].taskType,
                         ));
                   },
                 ),

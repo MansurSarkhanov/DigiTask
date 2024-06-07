@@ -6,6 +6,7 @@ import 'package:digi_task/features/profile/presentation/bloc/profile_notifier.da
 import 'package:digi_task/features/profile/presentation/bloc/profile_state.dart';
 import 'package:digi_task/presentation/components/custom_progress_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
@@ -22,7 +23,24 @@ class ProfileTab extends StatefulWidget {
 class _ProfileTabState extends State<ProfileTab> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          centerTitle: true,
+          leading: IconButton(
+              onPressed: () {
+                context.pop();
+              },
+              icon: SvgPicture.asset(IconPath.arrowleft.toPathSvg)),
+          title: Text('Profil', style: context.typography.subtitle2Medium),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 16.0),
+              child: IconButton(onPressed: () {}, icon: SvgPicture.asset(IconPath.menu.toPathSvg)),
+            )
+          ],
+        ),
+        body: Padding(
       padding: const EdgeInsets.only(left: 16.0, right: 16, top: 24),
       child: Consumer<ProfileNotifier>(builder: (context, notifier, child) {
         if (notifier.state is ProfileProgress) {
@@ -175,6 +193,7 @@ class _ProfileTabState extends State<ProfileTab> {
         }
         return const SizedBox.shrink();
       }),
-    );
+        ));
+    
   }
 }

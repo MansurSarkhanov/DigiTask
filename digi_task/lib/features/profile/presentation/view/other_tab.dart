@@ -29,7 +29,9 @@ class OtherTab extends StatelessWidget {
             height: 8,
           ),
           ProfileCardItem(
-            onPressed: () {},
+            onPressed: () {
+              context.goNamed(AppRoutes.anbar.name);
+            },
             title: "Anbar",
             leadingIcon: IconPath.anbar.toPathSvg,
             trailingIcon: IconPath.arrowright.toPathSvg,

@@ -11,11 +11,11 @@ import 'package:provider/provider.dart';
 import '../../../../features/performance/presentation/bloc/performance_notifier.dart';
 import '../../../../features/performance/presentation/bloc/performance_state.dart';
 import '../../../../shared/widgets/performance_table.dart';
+import '../../../../shared/widgets/user_task_card.dart';
 import '../../../components/custom_progress_indicator.dart';
 import '../../../components/service_type.dart';
 import '../widgets/component_title.dart';
 import '../widgets/organizations_card.dart';
-import '../widgets/user_task_card.dart';
 
 class HomeTabView extends StatelessWidget {
   const HomeTabView({super.key, required this.state, required this.tabController});
@@ -106,7 +106,6 @@ class HomeTabView extends StatelessWidget {
                             group: (notifier.userTaskModel?.ongoingTasks?.first.group?.isNotEmpty ?? false)
                                 ? '${notifier.userTaskModel?.ongoingTasks?.first.group?.first.group}'
                                 : "Empty group",
-                            task_type: '',
                           );
                         }
                         return const SizedBox.shrink();

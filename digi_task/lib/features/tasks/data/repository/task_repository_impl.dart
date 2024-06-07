@@ -8,7 +8,7 @@ import '../../domain/repository/task_repository.dart';
 
 final class TaskRepositoryImpl implements ITaskRepository {
   TaskRepositoryImpl({required this.taskService});
-  final TaskNetworkService taskService;
+  final TaskNetworkServiceImpl taskService;
   @override
   Future<Result<List<TaskModel>?, EmptyTaskModel>> getTasks({String? queryStatus, String? queryType}) async {
     try {

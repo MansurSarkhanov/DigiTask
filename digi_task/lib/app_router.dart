@@ -1,6 +1,6 @@
 import 'package:digi_task/core/constants/routes.dart';
-import 'package:digi_task/core/constants/theme/theme_ext.dart';
-import 'package:digi_task/core/utility/extension/icon_path_ext.dart';
+import 'package:digi_task/features/anbar/presentation/bloc/anbar_notifier.dart';
+import 'package:digi_task/features/anbar/presentation/view/anbar_view.dart';
 import 'package:digi_task/features/performance/presentation/bloc/performance_notifier.dart';
 import 'package:digi_task/features/profile/presentation/bloc/profile_notifier.dart';
 import 'package:digi_task/features/profile/presentation/view/profile_edit_view.dart';
@@ -11,7 +11,6 @@ import 'package:digi_task/presentation/pages/login/login_page.dart';
 import 'package:digi_task/presentation/pages/notification/notification_page.dart';
 import 'package:digi_task/presentation/pages/splash/splash_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +18,6 @@ import 'package:provider/provider.dart';
 import 'bloc/auth/auth_notifier.dart';
 import 'bloc/auth/login/login_notifier.dart';
 import 'bloc/home/main/main_notifier.dart';
-import 'core/constants/path/icon_path.dart';
 import 'features/profile/presentation/view/profile_tab.dart';
 import 'presentation/pages/home/home_page.dart';
 import 'presentation/pages/onboarding/onboarding_page.dart';
@@ -96,7 +94,7 @@ final class AppRouter {
                         ..checkAdmin(),
                     ),
                     ChangeNotifierProvider(
-                      create: (context) => PerformanceNotifier()..fetchPerfomance(),
+                create: (context) => GetIt.instance<PerformanceNotifier>()..fetchPerfomance(),
                     ),
                     ChangeNotifierProvider(
                       create: (context) => GetIt.instance<TaskNotifier>()..fetchTasks(queryType: 'connection'),
@@ -104,6 +102,9 @@ final class AppRouter {
                     ChangeNotifierProvider(
                       create: (context) => GetIt.instance<ProfileNotifier>()..getUserInformation(),
                     ),
+              // ChangeNotifierProvider(
+              //   create: (context) => GetIt.instance<AnbarNotifier>()..getAnbarItemList(),
+              // ),
                   ],
                   child: const HomePage(),
                 ),
@@ -139,27 +140,20 @@ final class AppRouter {
                 name: AppRoutes.profile.name,
                 builder: (context, state) => ChangeNotifierProvider(
                   create: (context) => GetIt.instance<ProfileNotifier>()..getUserInformation(),
-                  child: Scaffold(
-                      appBar: AppBar(
-                        backgroundColor: Colors.white,
-                        centerTitle: true,
-                        leading: IconButton(
-                            onPressed: () {
-                              context.pop();
-                            },
-                            icon: SvgPicture.asset(IconPath.arrowleft.toPathSvg)),
-                        title: Text('Profil', style: context.typography.subtitle2Medium),
-                        actions: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 16.0),
-                            child: IconButton(onPressed: () {}, icon: SvgPicture.asset(IconPath.menu.toPathSvg)),
-                          )
-                        ],
-                      ),
-                      body: const ProfileTab()),
+                  child: const ProfileTab()
                 ),
               ),
-            ]),
+            GoRoute(
+              path: AppRoutes.anbar.path,
+              name: AppRoutes.anbar.name,
+              builder: (context, state) => ChangeNotifierProvider(
+                create: (context) => GetIt.instance<AnbarNotifier>()..getAnbarItemList(),
+                child: const AnbarView(),
+              ),
+            ),
+          ],
+        ),
+       
       ],
     );
   }
