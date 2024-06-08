@@ -1,7 +1,7 @@
 import 'package:digi_task/core/constants/routes.dart';
-import 'package:digi_task/core/constants/strings/onboarding_strings.dart';
 import 'package:digi_task/core/constants/theme/theme_ext.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../components/button/login_button.dart';
@@ -12,6 +12,7 @@ class OnboardingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocalizations = AppLocalizations.of(context)!;
     return Scaffold(
       backgroundColor: context.colors.neutralColor100,
       body: Center(
@@ -45,7 +46,7 @@ class OnboardingPage extends StatelessWidget {
               ),
               Center(
                 child: Text(
-                  OnboardingStrings.onboardingSubtitle,
+                  appLocalizations.onboarddingSubtitle,
                   textAlign: TextAlign.center,
                   style: context.typography.body1Regular.copyWith(color: context.colors.neutralColor50),
                 ),

@@ -1,7 +1,7 @@
-import 'package:digi_task/bloc/home/main/main_notifier.dart';
 import 'package:digi_task/core/constants/path/icon_path.dart';
 import 'package:digi_task/core/constants/theme/theme_ext.dart';
 import 'package:digi_task/core/utility/extension/icon_path_ext.dart';
+import 'package:digi_task/notifier/home/main/main_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';

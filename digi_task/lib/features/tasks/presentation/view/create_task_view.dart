@@ -1,7 +1,7 @@
 import 'package:digi_task/core/constants/theme/theme_ext.dart';
 import 'package:digi_task/core/utility/extension/icon_path_ext.dart';
 import 'package:digi_task/features/tasks/data/model/create_task_model.dart';
-import 'package:digi_task/features/tasks/presentation/bloc/task_notifier.dart';
+import 'package:digi_task/features/tasks/presentation/notifier/task_notifier.dart';
 import 'package:digi_task/features/tasks/presentation/view/widgets/select_service_card.dart';
 import 'package:digi_task/presentation/components/button/login_button.dart';
 import 'package:digi_task/presentation/components/flushbar.dart';
@@ -14,7 +14,7 @@ import 'package:multi_dropdown/multiselect_dropdown.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/constants/path/icon_path.dart';
-import '../bloc/task_create_state.dart';
+import '../notifier/task_create_state.dart';
 
 class CreateTaskView extends StatefulWidget {
   const CreateTaskView({super.key});

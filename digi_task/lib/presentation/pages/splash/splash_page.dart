@@ -1,5 +1,4 @@
 import 'package:digi_task/core/constants/path/image_paths.dart';
-import 'package:digi_task/core/constants/strings/splash_strings.dart';
 import 'package:digi_task/core/constants/theme/theme_ext.dart';
 import 'package:digi_task/core/utility/extension/image_path_ext.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +27,7 @@ class _SplashPageState extends State<SplashPage> {
             ),
             const SizedBox(height: 24),
             Text(
-              SplashStrings.splashTitle,
+              "Digi Task",
               style: context.typography.h4Medium.copyWith(color: Colors.white),
             ),
           ],

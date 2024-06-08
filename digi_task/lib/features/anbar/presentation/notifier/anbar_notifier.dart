@@ -1,5 +1,5 @@
 import 'package:digi_task/features/anbar/domain/repository/anbar_item_repository.dart';
-import 'package:digi_task/features/anbar/presentation/bloc/anbar_state.dart';
+import 'package:digi_task/features/anbar/presentation/notifier/anbar_state.dart';
 import 'package:flutter/material.dart';
 
 class AnbarNotifier extends ChangeNotifier {

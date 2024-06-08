@@ -1,4 +1,4 @@
-import 'package:digi_task/features/profile/presentation/bloc/profile_state.dart';
+import 'package:digi_task/features/profile/presentation/notifier/profile_state.dart';
 import 'package:flutter/material.dart';
 
 import '../../domain/repository/profile_repository.dart';

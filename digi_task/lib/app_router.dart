@@ -1,10 +1,10 @@
 import 'package:digi_task/core/constants/routes.dart';
-import 'package:digi_task/features/anbar/presentation/bloc/anbar_notifier.dart';
+import 'package:digi_task/features/anbar/presentation/notifier/anbar_notifier.dart';
 import 'package:digi_task/features/anbar/presentation/view/anbar_view.dart';
-import 'package:digi_task/features/performance/presentation/bloc/performance_notifier.dart';
-import 'package:digi_task/features/profile/presentation/bloc/profile_notifier.dart';
+import 'package:digi_task/features/performance/presentation/notifier/performance_notifier.dart';
+import 'package:digi_task/features/profile/presentation/notifier/profile_notifier.dart';
 import 'package:digi_task/features/profile/presentation/view/profile_edit_view.dart';
-import 'package:digi_task/features/tasks/presentation/bloc/task_notifier.dart';
+import 'package:digi_task/features/tasks/presentation/notifier/task_notifier.dart';
 import 'package:digi_task/features/tasks/presentation/view/create_task_view.dart';
 import 'package:digi_task/presentation/pages/chat/chat_page.dart';
 import 'package:digi_task/presentation/pages/login/login_page.dart';
@@ -15,10 +15,10 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import 'bloc/auth/auth_notifier.dart';
-import 'bloc/auth/login/login_notifier.dart';
-import 'bloc/home/main/main_notifier.dart';
 import 'features/profile/presentation/view/profile_tab.dart';
+import 'notifier/auth/auth_notifier.dart';
+import 'notifier/auth/login/login_notifier.dart';
+import 'notifier/home/main/main_notifier.dart';
 import 'presentation/pages/home/home_page.dart';
 import 'presentation/pages/onboarding/onboarding_page.dart';
 

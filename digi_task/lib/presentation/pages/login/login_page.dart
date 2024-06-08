@@ -1,5 +1,5 @@
-import 'package:digi_task/bloc/auth/login/login_notifier.dart';
 import 'package:digi_task/core/constants/theme/theme_ext.dart';
+import 'package:digi_task/notifier/auth/login/login_notifier.dart';
 import 'package:digi_task/presentation/components/button/login_button.dart';
 import 'package:digi_task/presentation/components/input/custom_form_filed.dart';
 import 'package:digi_task/presentation/components/logo_widget.dart';
@@ -7,8 +7,8 @@ import 'package:digi_task/presentation/pages/login/view/reset_password_view.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../bloc/auth/auth_notifier.dart';
-import '../../../bloc/auth/login/login_state.dart';
+import '../../../notifier/auth/auth_notifier.dart';
+import '../../../notifier/auth/login/login_state.dart';
 import '../../components/flushbar.dart';
 
 class LoginPage extends StatefulWidget {

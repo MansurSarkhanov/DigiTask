@@ -1,8 +1,8 @@
 import 'package:digi_task/core/constants/path/icon_path.dart';
 import 'package:digi_task/core/constants/theme/theme_ext.dart';
 import 'package:digi_task/core/utility/extension/icon_path_ext.dart';
-import 'package:digi_task/features/tasks/presentation/bloc/task_notifier.dart';
-import 'package:digi_task/features/tasks/presentation/bloc/task_state.dart';
+import 'package:digi_task/features/tasks/presentation/notifier/task_notifier.dart';
+import 'package:digi_task/features/tasks/presentation/notifier/task_state.dart';
 import 'package:digi_task/shared/widgets/user_task_card.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';

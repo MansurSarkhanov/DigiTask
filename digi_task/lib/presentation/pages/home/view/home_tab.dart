@@ -1,15 +1,15 @@
-import 'package:digi_task/bloc/home/main/main_notifier.dart';
-import 'package:digi_task/bloc/home/main/main_state.dart';
 import 'package:digi_task/core/constants/path/icon_path.dart';
 import 'package:digi_task/core/constants/theme/theme_ext.dart';
 import 'package:digi_task/core/utility/extension/icon_path_ext.dart';
+import 'package:digi_task/notifier/home/main/main_notifier.dart';
+import 'package:digi_task/notifier/home/main/main_state.dart';
 import 'package:digi_task/presentation/pages/home/widgets/tasks_card.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../features/performance/presentation/bloc/performance_notifier.dart';
-import '../../../../features/performance/presentation/bloc/performance_state.dart';
+import '../../../../features/performance/presentation/notifier/performance_notifier.dart';
+import '../../../../features/performance/presentation/notifier/performance_state.dart';
 import '../../../../shared/widgets/performance_table.dart';
 import '../../../../shared/widgets/user_task_card.dart';
 import '../../../components/custom_progress_indicator.dart';

@@ -1,11 +1,11 @@
-import 'package:digi_task/features/performance/presentation/bloc/performance_notifier.dart';
+import 'package:digi_task/features/performance/presentation/notifier/performance_notifier.dart';
 import 'package:digi_task/presentation/components/custom_progress_indicator.dart';
 import 'package:digi_task/presentation/pages/home/widgets/select_time_card.dart';
 import 'package:digi_task/shared/widgets/performance_table.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../bloc/performance_state.dart';
+import '../notifier/performance_state.dart';
 
 class PerformanceTab extends StatefulWidget {
   const PerformanceTab({super.key});

@@ -1,4 +1,4 @@
-import 'package:digi_task/features/tasks/presentation/bloc/task_create_state.dart';
+import 'package:digi_task/features/tasks/presentation/notifier/task_create_state.dart';
 import 'package:flutter/material.dart';
 
 import '../../data/model/create_task_model.dart';

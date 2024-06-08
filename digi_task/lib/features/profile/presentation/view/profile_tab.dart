@@ -2,15 +2,15 @@ import 'package:digi_task/core/constants/path/icon_path.dart';
 import 'package:digi_task/core/constants/routes.dart';
 import 'package:digi_task/core/constants/theme/theme_ext.dart';
 import 'package:digi_task/core/utility/extension/icon_path_ext.dart';
-import 'package:digi_task/features/profile/presentation/bloc/profile_notifier.dart';
-import 'package:digi_task/features/profile/presentation/bloc/profile_state.dart';
+import 'package:digi_task/features/profile/presentation/notifier/profile_notifier.dart';
+import 'package:digi_task/features/profile/presentation/notifier/profile_state.dart';
 import 'package:digi_task/presentation/components/custom_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../bloc/auth/auth_notifier.dart';
+import '../../../../notifier/auth/auth_notifier.dart';
 import '../../../../presentation/pages/home/widgets/profile_card_item.dart';
 
 class ProfileTab extends StatefulWidget {
@@ -24,6 +24,7 @@ class _ProfileTabState extends State<ProfileTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: context.colors.backgroundColor,
         appBar: AppBar(
           backgroundColor: Colors.white,
           centerTitle: true,

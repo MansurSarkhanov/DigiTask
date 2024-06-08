@@ -1,5 +1,5 @@
 import 'package:digi_task/features/performance/domain/repository/performance_repository.dart';
-import 'package:digi_task/features/performance/presentation/bloc/performance_state.dart';
+import 'package:digi_task/features/performance/presentation/notifier/performance_state.dart';
 import 'package:flutter/material.dart';
 
 class PerformanceNotifier extends ChangeNotifier {

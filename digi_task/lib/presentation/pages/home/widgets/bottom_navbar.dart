@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../bloc/home/main/main_notifier.dart';
 import '../../../../core/constants/path/icon_path.dart';
+import '../../../../notifier/home/main/main_notifier.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({

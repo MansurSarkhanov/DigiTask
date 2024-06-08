@@ -1,9 +1,10 @@
 import 'package:digi_task/app_router.dart';
-import 'package:digi_task/bloc/auth/auth_notifier.dart';
-import 'package:digi_task/bloc/theme/theme_scope.dart';
-import 'package:digi_task/bloc/theme/theme_scope_widget.dart';
+import 'package:digi_task/notifier/auth/auth_notifier.dart';
+import 'package:digi_task/notifier/theme/theme_scope.dart';
+import 'package:digi_task/notifier/theme/theme_scope_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 
@@ -39,6 +40,9 @@ class MyApp extends StatelessWidget {
       statusBarColor: Colors.transparent,
     ));
     return MaterialApp.router(
+      locale: const Locale('az'),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       debugShowCheckedModeBanner: false,
       title: 'Digi Task',
       theme: ThemeData(

@@ -1,4 +1,4 @@
-import 'package:digi_task/bloc/theme/theme_scope.dart';
+import 'package:digi_task/notifier/theme/theme_scope.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/constants/theme/app_colors.dart';
@@ -26,7 +26,7 @@ class ThemeScopeWidgetState extends State<ThemeScopeWidget> {
   @override
   Widget build(BuildContext context) {
     final appColors = AppLightColors();
-    
+
     final appTypography = AppTypography(
         body1Light: TextStyle(
           fontFamily: nunitoFontFamily,
@@ -287,12 +287,11 @@ class ThemeScopeWidgetState extends State<ThemeScopeWidget> {
           fontWeight: FontWeight.w500,
         ),
         subtitle1SemiBold: TextStyle(
-          fontFamily: montserratFontFamily,
-          fontSize: 22,
-          height: 28 / 22,
-          fontWeight: FontWeight.w700,
-            color: Colors.black
-        ),
+            fontFamily: montserratFontFamily,
+            fontSize: 22,
+            height: 28 / 22,
+            fontWeight: FontWeight.w700,
+            color: Colors.black),
         subtitle2Light: TextStyle(
           fontFamily: montserratFontFamily,
           fontSize: 20,
@@ -306,12 +305,11 @@ class ThemeScopeWidgetState extends State<ThemeScopeWidget> {
           fontWeight: FontWeight.w400,
         ),
         subtitle2Medium: TextStyle(
-          fontFamily: montserratFontFamily,
-          fontSize: 20,
-          height: 26 / 20,
-          fontWeight: FontWeight.w500,
-            color: appColors.neutralColor10
-        ),
+            fontFamily: montserratFontFamily,
+            fontSize: 20,
+            height: 26 / 20,
+            fontWeight: FontWeight.w500,
+            color: appColors.neutralColor10),
         subtitle2SemiBold: TextStyle(
           fontFamily: montserratFontFamily,
           fontSize: 20,

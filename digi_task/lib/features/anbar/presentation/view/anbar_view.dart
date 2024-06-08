@@ -1,6 +1,6 @@
 import 'package:digi_task/core/constants/theme/theme_ext.dart';
 import 'package:digi_task/core/utility/extension/icon_path_ext.dart';
-import 'package:digi_task/features/anbar/presentation/bloc/anbar_notifier.dart';
+import 'package:digi_task/features/anbar/presentation/notifier/anbar_notifier.dart';
 import 'package:digi_task/shared/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../core/constants/path/icon_path.dart';
 import '../../../../presentation/components/custom_progress_indicator.dart';
-import '../bloc/anbar_state.dart';
+import '../notifier/anbar_state.dart';
 import 'widgets/select_dropdown_field.dart';
 
 class AnbarView extends StatelessWidget {
@@ -78,28 +78,33 @@ class AnbarView extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Flexible(
-                      flex: 2,
+                    Expanded(
+                      flex: 3,
                       child: Text(
                         'Avadanlıq',
+                        maxLines: 1,
                         style: context.typography.body1SemiBold.copyWith(color: context.colors.neutralColor20),
                       ),
                     ),
-                    Flexible(
-                      child: Center(
-                          child: Text(
+                    Expanded(
+                      flex: 2,
+                      child: Text(
                         'Marka',
                         style: context.typography.body1SemiBold.copyWith(color: context.colors.neutralColor20),
-                      )),
+                      ),
                     ),
-                    Flexible(
+                    Expanded(
+                      flex: 2,
+
                       child: Center(
                           child: Text(
                         'Model',
                         style: context.typography.body1SemiBold.copyWith(color: context.colors.neutralColor20),
                       )),
                     ),
-                    Flexible(
+                    Expanded(
+                      flex: 2,
+
                       child: Center(
                           child: Text(
                         'Sayı',
@@ -119,64 +124,86 @@ class AnbarView extends StatelessWidget {
                 } else if (notifier.state is AnbarSuccess) {
                   final state = notifier.state as AnbarSuccess;
                   return Expanded(
-                    child: ListView.builder(
-                      itemCount: state.anbarList.length,
-                      itemBuilder: (context, index) {
-                        return Column(
-                          children: [
-                            Divider(
-                              color: context.colors.neutralColor90,
-                              height: 0,
-                            ),
-                            const SizedBox(
-                              height: 7,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 16.0, right: 16, top: 10),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Flexible(
-                                    child: Text(
-                                      "${state.anbarList[index].warehouse?.name}",
-                                      maxLines: 1,
-                                      style: context.typography.body2SemiBold
-                                          .copyWith(color: context.colors.primaryColor50),
-                                    ),
-                                  ),
-                                  Flexible(
-                                    child: Text(
-                                      "${state.anbarList[index].brand}",
-                                      style: context.typography.body2SemiBold,
-                                    ),
-                                  ),
-                                  Flexible(
-                                    child: Center(
-                                      child: Text(
-                                        "${state.anbarList[index].model}",
-                                        style: context.typography.body2SemiBold
-                                            .copyWith(color: context.colors.primaryColor50),
-                                      ),
-                                    ),
-                                  ),
-                                  Flexible(
-                                    child: Center(
-                                      child: Text(
-                                        "${state.anbarList[index].number}",
-                                        style: context.typography.body2SemiBold
-                                            .copyWith(color: context.colors.primaryColor50),
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: context.colors.neutralColor100,
+                          borderRadius: const BorderRadius.only(
+                              bottomLeft: Radius.circular(12), bottomRight: Radius.circular(12))),
+                      child: ListView.builder(
+                        itemCount: state.anbarList.length,
+                        itemBuilder: (context, index) {
+                          return Column(
+                            children: [
+                              Divider(
+                                color: context.colors.neutralColor90,
+                                height: 0,
                               ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            )
-                          ],
-                        );
-                      },
+                              const SizedBox(
+                                height: 7,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 16.0, right: 16, top: 10),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Expanded(
+                                      flex: 3,
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(right: 12.0),
+                                        child: Text(
+                                          "${state.anbarList[index].warehouse?.name}",
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: context.typography.body2SemiBold
+                                              .copyWith(color: context.colors.primaryColor50),
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 2,
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(right: 12.0),
+                                        child: Text(
+                                          "${state.anbarList[index].brand}",
+                                          style: context.typography.body2SemiBold,
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 1,
+                                        
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 2,
+                                      child: Center(
+                                        child: Text(
+                                          "${state.anbarList[index].model}",
+                                          maxLines: 1,
+                      
+                                          style: context.typography.body2SemiBold
+                                              .copyWith(color: context.colors.primaryColor50),
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 2,
+                                      child: Center(
+                                        child: Text(
+                                          "${state.anbarList[index].number}",
+                                          style: context.typography.body2SemiBold
+                                              .copyWith(color: context.colors.primaryColor50),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              )
+                            ],
+                          );
+                        },
+                      ),
                     ),
                   );
 
